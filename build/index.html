@@ -2,6 +2,11 @@
 <!doctype html>
 <html>
   <head>
+
+    <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script>
+    <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
+    
+
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -279,7 +284,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-90ed7636.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-40f6d81d.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-1361b384.js"></script>
 
@@ -288,7 +293,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;html&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -297,10 +302,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo-fc17a05f.svg" class="logo" alt="" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="html">html</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -310,21 +311,80 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#installation" class="toc-h1 toc-link" data-title="Installation">Installation</a>
-          </li>
-          <li>
-            <a href="#usage" class="toc-h1 toc-link" data-title="Usage">Usage</a>
-          </li>
-          <li>
             <a href="#executable-html" class="toc-h1 toc-link" data-title="executable HTML">executable HTML</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#aa-session" class="toc-h2 toc-link" data-title="aa-session">aa-session</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                          <li>
+                            <a href="#methods" class="toc-h3 toc-link" data-title="methods">methods</a>
+                          </li>
+                          <li>
+                            <a href="#events" class="toc-h3 toc-link" data-title="events">events</a>
+                          </li>
+                      </ul>
                   </li>
                   <li>
                     <a href="#aa-sequence" class="toc-h2 toc-link" data-title="aa-sequence">aa-sequence</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-2" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                          <li>
+                            <a href="#methods-2" class="toc-h3 toc-link" data-title="methods">methods</a>
+                          </li>
+                          <li>
+                            <a href="#events-2" class="toc-h3 toc-link" data-title="events">events</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-variable" class="toc-h2 toc-link" data-title="aa-variable">aa-variable</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-3" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-function" class="toc-h2 toc-link" data-title="aa-function- *">aa-function- *</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#aa-function-random" class="toc-h3 toc-link" data-title="aa-function-random">aa-function-random</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#attributes-4" class="toc-h4 toc-link" data-title="attributes">attributes</a>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-choose-aa-when-aa-otherwise" class="toc-h2 toc-link" data-title="aa-choose, aa-when, aa-otherwise">aa-choose, aa-when, aa-otherwise</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#aa-when-attributes" class="toc-h3 toc-link" data-title="aa-when attributes">aa-when attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-screen" class="toc-h2 toc-link" data-title="aa-screen">aa-screen</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-5" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                          <li>
+                            <a href="#events-3" class="toc-h3 toc-link" data-title="events">events</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#widget-components" class="toc-h1 toc-link" data-title="Widget Components">Widget Components</a>
           </li>
           <li>
             <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
@@ -375,34 +435,224 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Ambulatory Assessment Components Reference! Ambulatory Assessment Components consist of two parts, executable HTML Components and Ambulatory Assessment Widget Components.</p>
 
-<p>Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.
-Ambulatory Assessment Widget Components help the author construct interfaces for response items in questionnaires</p>
-<h1 id='installation'>Installation</h1><h1 id='usage'>Usage</h1><h1 id='executable-html'>executable HTML</h1><h2 id='aa-session'>aa-session</h2>
-<p><code>aa-session</code> is the container element for the whole ambulatory assessment protocol. It should always have a <code>template</code> as an immediate child. <code>template</code> allows the browser to ignore the protocol content, so that <code>aa-session</code> can parse
- it and initalize it appropriately, for example where components like <code>aa-sequence</code> and <code>aa-choose</code> are used.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>    &lt;script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"&gt;&lt;/script&gt;
-   &lt;script&gt; console.log("skata") &lt;/script&gt;
-</code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
+<p>Ambulatory Assessment Widget Components help the author construct interfaces for response items in questionnaires</p>
+<h1 id='executable-html'>executable HTML</h1>
+<p>Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.</p>
+<h2 id='aa-session'>aa-session</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
   <span class="nt">&lt;template&gt;</span>
 
-  all content goes here
+  <span class="c">&lt;!-- all content goes here !--&gt;</span>
 
   <span class="nt">&lt;/template&gt;</span>
-<span class="nt">&lt;/aa-sesison&gt;</span>
-</code></pre></div><h2 id='aa-sequence'>aa-sequence</h2>
-<p>aa-sequence description</p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p><code>aa-session</code> is the container element for the whole ambulatory assessment protocol. It should always have a <code>template</code> as an immediate child. <code>template</code> allows the browser to ignore the protocol content, so that <code>aa-session</code> can parse
+ it and initalize it appropriately, for example where components like <code>aa-sequence</code> and <code>aa-choose</code> are used.</p>
+
+<p><code>aa-session</code> dispatches the <code>sessionReady</code> event to signal that its initialization is complete. Then, children of <code>aa-session</code> have also been initialized and have been inserted in the document. This is illustrated in the following example,that discussess our next element, <code>aa-sequence</code></p>
+<h4 id='attributes'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element</p>
+
+<p><strong><code>diagram</code></strong>: <code>boolean</code> : Set it to <code>true</code> to generate a drawing of the session&#39;s contents, instead of running the session</p>
+
+<p><strong><code>should-run</code></strong>: <code>boolean</code> : Set it to <code>false</code> to prevent the session from initializing automatically when the page is loaded</p>
+<h4 id='methods'>methods</h4>
+<p><strong><code>.run()</code></strong>:  If <code>should-run</code> has been set to <code>false</code>, call this method to get the session started.</p>
+<h4 id='events'>events</h4>
+<p><strong><code>sessionReady</code></strong>:  Dispatched when <code>aa-session</code> has finished initializing. </p>
+<h2 id='aa-sequence'>aa-sequence</h2>
+<!-- ``aa-sequence`` is an element that implements sequential execution. -->
+
+<p><code>aa-sequence</code> implements sequential insertion of each of its children into the document. Insertion of the next child can be triggered either by an event, or manually by calling its member method <code>.next()</code>. </p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
+<span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;aa-sequence</span> <span class="na">id=</span><span class="s">"sequence1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div&gt;</span> item 1 <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span> item 2 <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span> item 3 <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/aa-sequence&gt;</span>
+
+  <span class="nt">&lt;paper-button</span> <span class="na">id=</span><span class="s">'button1'</span> <span class="na">style=</span><span class="s">"margin-top:20px"</span><span class="nt">&gt;</span> next <span class="nt">&lt;/paper-button&gt;</span>
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+
+<span class="nt">&lt;script&gt;</span> 
+  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">sessionReady</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">button1</span><span class="dl">'</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">sequence1</span><span class="dl">'</span><span class="p">).</span><span class="nx">next</span><span class="p">();</span> <span class="p">})</span>
+  <span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+
+</code></pre></div>
+<p id="container1">This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1</code> has been inserted in the document, and set a click event listener, that calls the <code>.next()</code> member function of <code>#sequence1</code>. Pressing the next" button adds content as per the sequence.</p>
+
+<!-- The following is a live example of a working sequence, which I want to be part of the natural
+flow of the documentation, appearing next to its corresponding source, so I have to place it
+in the same container, #container1, manually
+  -->
+
+<script> 
+let src1=`
+
+<aa-session id="session1">
+<template>
+
+
+  <aa-sequence id="sequence1">
+
+    <div> item 1 </div>
+    <div> item 2 </div>
+    <div> item 3 </div>
+  </aa-sequence>
+
+  <paper-button id='button1' style="margin-top:20px"> next </paper-button>
+</template>
+</aa-session>`
+
+setTimeout(function(){
+  let d = document.createElement('p');
+  d.style.marginTop="20px";
+  
+  document.querySelector('#container1').appendChild(d);
+  d.innerHTML = src1;
+  let b = document.getElementById("button1").addEventListener("click", function(){
+    let s = document.getElementById("sequence1").next();
+
+  })
+},100);
+</script>
+
+<p>The sequence can also listen for an event called <code>endEvent</code>, which its children can dispatch to let it know that it should insert its next element.</p>
+
+<p><code>aa-screen</code> is an element that simplifies managing <code>aa-sequence</code> in user interactions.</p>
+<h4 id='attributes-2'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element</p>
+
+<p><strong><code>diagram</code></strong>: <code>boolean</code> : Set it to true to generate a drawing of the session&#39;s contents, instead of running the session</p>
+
+<p><strong><code>should-run</code></strong>: <code>boolean</code> : Set it to <code>false</code> to prevent the sequence from executing once it is added to the document</p>
+<h4 id='methods-2'>methods</h4>
+<p><strong><code>.next()</code></strong>: Calling it will cause the sequence to progress by one step, and insert the next child element in line, into the document</p>
+<h4 id='events-2'>events</h4>
+<p><strong><code>endEvent</code></strong> : Dispatched when <code>aa-sequence</code>` has reched the end.</p>
+<h2 id='aa-variable'>aa-variable</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
+  <span class="nt">&lt;template&gt;</span>
+
+    <span class="nt">&lt;aa-variable</span> <span class="na">name=</span><span class="s">"myVariable"</span> <span class="na">value=</span><span class="s">"myValue"</span><span class="nt">&gt;&lt;/aa-variable&gt;</span>
+
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p><code>aa-variable</code> allows the html author to declare named variables and assign values to them. Each variable and its value is stored in LocalStorage, and is available to all other aa-elements as well.</p>
+<h4 id='attributes-3'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element</p>
+
+<p><strong><code>diagram</code></strong>: <code>boolean</code> : Set it to true to generate a drawing of the session&#39;s contents, instead of running the session</p>
+
+<p><strong><code>value</code></strong>: <code>string | number | boolean</code> : The value that the variable holds</p>
+<h2 id='aa-function'>aa-function- *</h2>
+<p>A set of functions allow the author to assign the result of a function to a named variable.</p>
+<h3 id='aa-function-random'>aa-function-random</h3><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
+  <span class="nt">&lt;template&gt;</span>
+
+    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myRandomVariable"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">100</span><span class="nt">&gt;&lt;/aa-variable&gt;</span>
+
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p><code>aa-fuction-random</code> generates a random integer between its <code>min</code> and <code>max</code> attributes and assigns it to a variable with the name of its <code>name</code> attribute</p>
+<h4 id='attributes-4'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element</p>
+
+<p><strong><code>diagram</code></strong>: <code>boolean</code> : Set it to true to generate a drawing of the session&#39;s contents, instead of running the session</p>
+
+<p><strong><code>min</code></strong>: <code>number</code> : The lower boundary of the random number to be generated</p>
+
+<p><strong><code>max</code></strong>: <code>number</code> : The upper boundary of the random number to be generated</p>
+<h2 id='aa-choose-aa-when-aa-otherwise'>aa-choose, aa-when, aa-otherwise</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
+  <span class="nt">&lt;/template&gt;</span>
+
+    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myVar"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">10</span><span class="nt">&gt;&lt;/aa-fuction-random&gt;</span>
+
+    <span class="nt">&lt;aa-choose&gt;</span>
+      <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"myVar==1"</span><span class="nt">&gt;</span>
+        content to insert when myVar equals 1
+      <span class="nt">&lt;/aa-when&gt;</span>
+
+      <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"myVar==2"</span><span class="nt">&gt;</span>
+        content to insert when myVar equals 2
+      <span class="nt">&lt;/aa-when&gt;</span>
+
+      <span class="nt">&lt;aa-otherwise&gt;</span>
+        content to insert if none of the aa-when conditions are true
+      <span class="nt">&lt;/aa-otherwise&gt;</span>
+    <span class="nt">&lt;/aa-choose&gt;</span>
+
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p><code>aa-choose</code> alongside, <code>aa-when</code> and <code>aa-otherwise</code> implement conditional execution. </p>
+
+<p><code>aa-choose` is the container element for `aa-when</code> and <code>aa-otherwise</code>. There is no limit to the number of <code>aa-when</code> children it can contain, but it should only have <code>aa-otherwise</code> child element.</p>
+
+<p>Each <code>aa-when</code> has a conditional statement in its <code>test</code> attribute, which evaluates to either true or false. All <code>aa-when</code> nodes which have a <code>test</code> condition that evaluates to true are inserted into the document.</p>
+
+<p>In the example on the right, a random number between 1 and 10 is generated and stored in variable <code>myVar</code>. The <code>aa-choose</code> node contains 2 <code>aa-when</code> children. If <code>myVar</code> equals 1, the first  one will be inserted. If <code>myVar</code> equals 2, the second one will be inserted. In all other cases, the <code>aa-otherwise</code> child will be inserted</p>
+<h4 id='aa-when-attributes'>aa-when attributes</h4>
+<p><strong><code>test</code></strong>: <code>string</code> : A conditional statement that is evaluated by the <code>aa-choose</code> parent node. Conditional statements can include logical operators, numbers and strings, and also variable names that have already been declared.</p>
+<h2 id='aa-screen'>aa-screen</h2>
+<p><code>aa-screen</code> is a container that can group multiple elements. It includes a &quot;next&quot; button, which, when clicked, dispatches an <code>endEvent</code> so that a sequence can insert its next element.</p>
+<div class="highlight"><pre class="highlight html tab-html"><code> <span class="nt">&lt;aa-session&gt;</span>
+  <span class="nt">&lt;template&gt;</span>
+
+    <span class="nt">&lt;aa-sequence&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span><span class="nt">&gt;</span> screen1<span class="nt">&lt;/aa-screen&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span><span class="nt">&gt;</span> screen2<span class="nt">&lt;/aa-screen&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span><span class="nt">&gt;</span> screen3<span class="nt">&lt;/aa-screen&gt;</span>
+    <span class="nt">&lt;/aa-sequence&gt;</span>
+
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p id="container2">This example illustrates a sequence with 3 screens</p>
+
+<script>
+ let src2=`<aa-session>
+  <template>
+
+    <aa-sequence>
+      <aa-screen submit-button-text="next"> screen1</aa-screen>
+      <aa-screen submit-button-text="next"> screen2</aa-screen>
+      <aa-screen submit-button-text="next"> screen3</aa-screen>
+    </aa-sequence>
+
+  </template>
+</aa-session>`
+
+setTimeout(function(){
+  let d = document.createElement('p');
+  d.style.marginTop="20px";
+  
+  document.querySelector('#container2').appendChild(d);
+  d.innerHTML = src2;
+},100);
+</script>
+
+<p><code>aa-screen</code> will also collect values from all child elements, and dispatch them in a <code>valueSubmit</code> event</p>
+<h4 id='attributes-5'>attributes</h4>
+<p><strong><code>submit-button-text</code></strong>: <code>string</code> : The label for the <code>aa-screen</code>` button, that causes it to progress by one step. Its default label is &quot;submit&quot; (derived from the action of submitting the response), but it can be set to any other prompt fro the user.</p>
+
+<p><strong><code>submit-button-hidden</code></strong>: <code>boolean</code> : Set it to true to cause the <code>aa-screen</code> button to not be diplayed. Useful for <code>aa-screen</code> nodes at the end of a sequence.</p>
+<h4 id='events-3'>events</h4>
+<p><strong><code>valueSubmit</code></strong> : Dispatched when the <code>aa-screen</code>` button has been clicked. </p>
+<h1 id='widget-components'>Widget Components</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>
 <aside class="notice">
 testYou must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
@@ -602,10 +852,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="html">html</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
