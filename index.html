@@ -3,8 +3,10 @@
 <html>
   <head>
 
-    <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script>
-    <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
+    <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script> 
+    <!-- <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> !-->
+    <script type="module" src="http://127.0.0.1:59249/src/index.js"></script>
+    
     
 
     <meta charset="utf-8">
@@ -411,12 +413,81 @@
             <a href="#widget-components" class="toc-h1 toc-link" data-title="Widget Components">Widget Components</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#aa" class="toc-h2 toc-link" data-title="aa -">aa -</a>
+                    <a href="#aa-affect-grid" class="toc-h2 toc-link" data-title="aa-affect-grid">aa-affect-grid</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-6" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-checkboxes" class="toc-h2 toc-link" data-title="aa-checkboxes">aa-checkboxes</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-7" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-choice-item" class="toc-h2 toc-link" data-title="aa-choice-item">aa-choice-item</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-8" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-geolocation" class="toc-h2 toc-link" data-title="aa-geolocation">aa-geolocation</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-9" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-label" class="toc-h2 toc-link" data-title="aa-label">aa-label</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-10" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-likert-scale" class="toc-h2 toc-link" data-title="aa-likert-scale">aa-likert-scale</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-11" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-multiple-choice" class="toc-h2 toc-link" data-title="aa-multiple-choice">aa-multiple-choice</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-12" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-slider" class="toc-h2 toc-link" data-title="aa-slider">aa-slider</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-13" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#aa-text-answer" class="toc-h2 toc-link" data-title="aa-text-answer">aa-text-answer</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#attributes-14" class="toc-h3 toc-link" data-title="attributes">attributes</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#putting-it-all-together" class="toc-h1 toc-link" data-title="Putting it all together">Putting it all together</a>
           </li>
       </ul>
     </div>
@@ -506,14 +577,19 @@ __Paragraph ``<p>`` :  ``<> -->
     <span class="nt">&lt;div&gt;</span> item 3 <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/aa-sequence&gt;</span>
 
-  <span class="nt">&lt;paper-button</span> <span class="na">id=</span><span class="s">'button1'</span> <span class="na">style=</span><span class="s">"margin-top:20px"</span><span class="nt">&gt;</span> next <span class="nt">&lt;/paper-button&gt;</span>
+  <span class="nt">&lt;paper-button</span> <span class="na">id=</span><span class="s">'button1'</span><span class="nt">&gt;</span>
+    next
+  <span class="nt">&lt;/paper-button&gt;</span>
+
   <span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;/aa-session&gt;</span>
 
 <span class="nt">&lt;script&gt;</span> 
   <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">sessionReady</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
     <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">button1</span><span class="dl">'</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">sequence1</span><span class="dl">'</span><span class="p">).</span><span class="nx">next</span><span class="p">();</span> <span class="p">})</span>
+            <span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span> 
+              <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">sequence1</span><span class="dl">'</span><span class="p">).</span><span class="nx">next</span><span class="p">();</span>
+            <span class="p">})</span>
   <span class="p">})</span>
 <span class="nt">&lt;/script&gt;</span>
 
@@ -579,7 +655,8 @@ setTimeout(function(){
 <h2 id='aa-variable'>aa-variable</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
   <span class="nt">&lt;template&gt;</span>
 
-    <span class="nt">&lt;aa-variable</span> <span class="na">name=</span><span class="s">"myVariable"</span> <span class="na">value=</span><span class="s">"myValue"</span><span class="nt">&gt;&lt;/aa-variable&gt;</span>
+    <span class="nt">&lt;aa-variable</span> <span class="na">name=</span><span class="s">"myVariable"</span> <span class="na">value=</span><span class="s">"myValue"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/aa-variable&gt;</span>
 
   <span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;/aa-session&gt;</span>
@@ -596,7 +673,8 @@ setTimeout(function(){
 <h3 id='aa-function-random'>aa-function-random</h3><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
   <span class="nt">&lt;template&gt;</span>
 
-    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myRandomVariable"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">100</span><span class="nt">&gt;&lt;/aa-variable&gt;</span>
+    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myRandomVariable"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">100</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/aa-function-random&gt;</span>
 
   <span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;/aa-session&gt;</span>
@@ -613,7 +691,8 @@ setTimeout(function(){
 <h2 id='aa-choose-aa-when-aa-otherwise'>aa-choose, aa-when, aa-otherwise</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
   <span class="nt">&lt;/template&gt;</span>
 
-    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myVar"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">10</span><span class="nt">&gt;&lt;/aa-fuction-random&gt;</span>
+    <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"myVar"</span> <span class="na">min=</span><span class="s">1</span> <span class="na">max=</span><span class="s">10</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/aa-fuction-random&gt;</span>
 
     <span class="nt">&lt;aa-choose&gt;</span>
       <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"myVar==1"</span><span class="nt">&gt;</span>
@@ -625,7 +704,8 @@ setTimeout(function(){
       <span class="nt">&lt;/aa-when&gt;</span>
 
       <span class="nt">&lt;aa-otherwise&gt;</span>
-        content to insert if none of the aa-when conditions are true
+        content to insert 
+        if none of the aa-when conditions are true
       <span class="nt">&lt;/aa-otherwise&gt;</span>
     <span class="nt">&lt;/aa-choose&gt;</span>
 
@@ -681,69 +761,137 @@ setTimeout(function(){
 
 <p><code>aa-screen</code> will also collect values from all child elements, and dispatch them in a <code>valueSubmit</code> event</p>
 <h4 id='attributes-5'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element.</p>
+
+<p><strong><code>diagram</code></strong>: <code>boolean</code> : Set it to true to generate a drawn representation of the screen.</p>
+
 <p><strong><code>submit-button-text</code></strong>: <code>string</code> : The label for the <code>aa-screen</code>` button, that causes it to progress by one step. Its default label is &quot;submit&quot; (derived from the action of submitting the response), but it can be set to any other prompt fro the user.</p>
 
 <p><strong><code>submit-button-hidden</code></strong>: <code>boolean</code> : Set it to true to cause the <code>aa-screen</code> button to not be diplayed. Useful for <code>aa-screen</code> nodes at the end of a sequence.</p>
 <h4 id='events-3'>events</h4>
 <p><strong><code>valueSubmit</code></strong> : Dispatched when the <code>aa-screen</code>` button has been clicked. </p>
-<h1 id='widget-components'>Widget Components</h1><h2 id='aa'>aa -</h2><h1 id='errors'>Errors</h1>
+<h1 id='widget-components'>Widget Components</h1><h2 id='aa-affect-grid'>aa-affect-grid</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-affect-grid</span> 
+  <span class="na">top-left-label=</span><span class="s">"top-left-label"</span> 
+  <span class="na">top-label=</span><span class="s">"top-label"</span> 
+  <span class="na">top-right-label=</span><span class="s">"top-right-label"</span> 
+
+  <span class="na">left-top-label=</span><span class="s">"left-top-label"</span> 
+  <span class="na">right-top-label=</span><span class="s">"right-top-label"</span> 
+
+  <span class="na">left-label=</span><span class="s">"left-label"</span> 
+  <span class="na">right-label=</span><span class="s">"right-label"</span> 
+
+  <span class="na">left-bottom-label=</span><span class="s">"left-bottom-label"</span> 
+  <span class="na">right-bottom-label=</span><span class="s">"right-bottom-label"</span> 
+
+  <span class="na">bottom-left-label=</span><span class="s">"bottom-left-label"</span> 
+  <span class="na">bottom-label=</span><span class="s">"bottom-label"</span> 
+  <span class="na">bottom-right-label=</span><span class="s">"bottom-right-label"</span>
+
+  <span class="na">rows=</span><span class="s">"11"</span>
+  <span class="na">columns=</span><span class="s">"11"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/aa-affect-grid&gt;</span>
+</code></pre></div>
+<p>The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as <code>&lt;aa-affect-grid&gt;</code> allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. <code>&lt;aa-affect-grid&gt;</code> scales to the width of its container.</p>
+
+<p style="max-width:500px">
+<aa-affect-grid top-left-label="top-left-label" top-label="top-label" top-right-label="top-right-label" left-top-label="left-top-label" right-top-label="right-top-label" left-label="left-label" center-label="center-label" right-label="right-label" left-bottom-label="left-bottom-label" right-bottom-label="right-bottom-label" bottom-left-label="bottom-left-label" bottom-label="bottom-label" bottom-right-label="bottom-right-label"></aa-affect-grid>
+</p>
+<h4 id='attributes-6'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element.</p>
+
+<p><strong><code>top-left-label</code></strong>, <strong><code>top-label</code></strong>,   <strong><code>top-right-label</code></strong>,<br> 
+<strong><code>left-top-label</code></strong>, <strong><code>right-top-label</code></strong>,<br>
+<strong><code>left-label</code></strong>,  <strong><code>right-label</code></strong>,<br>
+<strong><code>left-bottom-label</code> __<code>right-bottom-label</code></strong><br>,
+<strong><code>bottom-left-label</code></strong>,  <strong><code>bottom-label</code></strong>, <strong><code>bottom-right-label</code></strong>  : <code>string</code> : Labels for various parts of the grid.</p>
+
+<p><strong><code>rows</code></strong>: <code>number</code> : Number of grid rows. Default value is 11</p>
+
+<p><strong><code>columns</code></strong>: <code>number</code> : Number of grid columns. Default value is 11</p>
+
+<p><strong>value</strong>: <code>object</code> : The x,y coordinates of the grid selection.</p>
+<h2 id='aa-checkboxes'>aa-checkboxes</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-checkboxes&gt;</span>
+  <span class="nt">&lt;aa-choice-item&gt;</span> choice 1 <span class="nt">&lt;/aa-choice-item&gt;</span>
+  <span class="nt">&lt;aa-choice-item&gt;</span> choice 2 <span class="nt">&lt;/aa-choice-item&gt;</span>
+  <span class="nt">&lt;aa-choice-item&gt;</span> choice 3 <span class="nt">&lt;/aa-choice-item&gt;</span>
+<span class="nt">&lt;/aa-checkboxes&gt;</span>
+</code></pre></div>
+<p><code>&lt;aa-checkboxes&gt;</code> implements a multiple response item, where each available choice is specified as a <code>&lt;aa-choice-item&gt;</code></p>
+
+<p><aa-checkboxes>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-checkboxes></p>
+<h4 id='attributes-7'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element.</p>
+
+<p><strong><code>value</code></strong>: <code>any</code> : An array of the values of the checkboxes that were ticked.</p>
+<h2 id='aa-choice-item'>aa-choice-item</h2>
+<p><aa-choice-item></aa-choice-item></p>
+
+<p><code>&lt;aa-choice-item&gt;</code> is an element that implements an available choice for <code>&lt;aa-checkboxes&gt;</code> and <code>&lt;aa-multiple-choice&gt;</code>. The value corresponding to the chosen item is specified by the <code>value</code> attribute. If no <code>value</code> attribute is supplied, the content of the element is taken as its value.</p>
+<h4 id='attributes-8'>attributes</h4>
+<p><strong><code>value</code></strong>: <code>any</code> : A value that corresponds to choosing this element. If no value is provided, its content is taken as its value.</p>
+<h2 id='aa-geolocation'>aa-geolocation</h2>
+<p><code>&lt;aa-geolocation&gt;</code> queries the browser for the user&#39;s GPS location. As a result, a permission request might be triggered to access the user&#39;s location.</p>
+
+<p><aa-geolocation></aa-geolocation></p>
+<h4 id='attributes-9'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the values generated from the element.</p>
+
+<p><strong><code>value</code></strong>: <code>any</code> : The user&#39;s longitude and latitude as provided by the browser.</p>
+<h2 id='aa-label'>aa-label</h2>
+<p><aa-label></aa-label></p>
+<h4 id='attributes-10'>attributes</h4>
+<p><strong><code>submit-button-text</code></strong>: <code>string</code> : The label for the <code>aa-screen</code>` button, that causes it to progress by one step. Its default label is &quot;submit&quot; (derived from the action of submitting the response), but it can be set to any other prompt fro the user.</p>
+<h2 id='aa-likert-scale'>aa-likert-scale</h2>
+<!-- <aa-likert-scale></aa-likert-scale> -->
+<h4 id='attributes-11'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the value generated from the element.</p>
+
+<p><strong><code>submit-button-text</code></strong>: <code>string</code> : The label for the <code>aa-screen</code>` button, that causes it to progress by one step. Its default label is &quot;submit&quot; (derived from the action of submitting the response), but it can be set to any other prompt fro the user.</p>
+<h2 id='aa-multiple-choice'>aa-multiple-choice</h2>
+<p><aa-multiple-choice>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-multiple-choice></p>
+<h4 id='attributes-12'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the value generated from the element.</p>
+<h2 id='aa-slider'>aa-slider</h2>
+<p><aa-slider></aa-slider></p>
+<h4 id='attributes-13'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the value generated from the element.</p>
+<h2 id='aa-text-answer'>aa-text-answer</h2>
+<p><aa-text-answer></aa-text-answer></p>
+<h4 id='attributes-14'>attributes</h4>
+<p><strong><code>name</code></strong>: <code>string</code> : A name to represent the value generated from the element.</p>
+
+<p><strong><code>submit-button-text</code></strong>: <code>string</code> : The label for the <code>aa-screen</code>` button, that causes it to progress by one step. Its default label is &quot;submit&quot; (derived from the action of submitting the response), but it can be set to any other prompt fro the user.</p>
+<h1 id='putting-it-all-together'>Putting it all together</h1><!-- # Errors
+
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+The Kittn API uses the following error codes:
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
+
+Error Code | Meaning
+---------- | -------
+400 | Bad Request -- Your request is invalid.
+401 | Unauthorized -- Your API key is wrong.
+403 | Forbidden -- The kitten requested is hidden for administrators only.
+404 | Not Found -- The specified kitten could not be found.
+405 | Method Not Allowed -- You tried to access a kitten with an invalid method.
+406 | Not Acceptable -- You requested a format that isn't json.
+410 | Gone -- The kitten requested has been removed from our servers.
+418 | I'm a teapot.
+429 | Too Many Requests -- You're requesting too many kittens! Slow down!
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. -->
 
       </div>
       <div class="dark-box">
