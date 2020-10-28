@@ -82,15 +82,10 @@ An opening tag can also contain __attributes__. Attributes further define detail
 
 
 
-#### structural markup
+<!-- #### Further examples
 
 
-HTML provides several elements that tell the computer (in this case, the Web Browser), how to display blocks of text.
-
-#### Paragraph
-
-__``<p>``__
-
+__Paragraph ``<p>`` :  ``<> -->
 
 
 # executable HTML
