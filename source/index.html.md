@@ -181,14 +181,19 @@ __``sessionReady``__:  Dispatched when ``aa-session`` has finished initializing.
     <div> item 3 </div>
   </aa-sequence>
 
-  <paper-button id='button1' style="margin-top:20px"> next </paper-button>
+  <paper-button id='button1'>
+    next
+  </paper-button>
+
   </template>
 </aa-session>
 
 <script> 
   window.addEventListener("sessionReady", ()=>{
     document.getElementById('button1')
-            .addEventListener('click', ()=>{ document.getElementById('sequence1').next(); })
+            .addEventListener('click', ()=>{ 
+              document.getElementById('sequence1').next();
+            })
   })
 </script>
 
@@ -272,6 +277,7 @@ The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to i
 
 
 
+
 ## aa-variable
 
 
@@ -279,7 +285,8 @@ The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to i
 <aa-session>
   <template>
 
-    <aa-variable name="myVariable" value="myValue"></aa-variable>
+    <aa-variable name="myVariable" value="myValue">
+    </aa-variable>
 
   </template>
 </aa-session>
@@ -319,7 +326,8 @@ A set of functions allow the author to assign the result of a function to a name
 <aa-session>
   <template>
 
-    <aa-function-random name="myRandomVariable" min=1 max=100></aa-variable>
+    <aa-function-random name="myRandomVariable" min=1 max=100>
+    </aa-function-random>
 
   </template>
 </aa-session>
@@ -353,7 +361,8 @@ __``max``__: ``number`` : The upper boundary of the random number to be generate
 <aa-session>
   </template>
 
-    <aa-function-random name="myVar" min=1 max=10></aa-fuction-random>
+    <aa-function-random name="myVar" min=1 max=10>
+    </aa-fuction-random>
     
     <aa-choose>
       <aa-when test="myVar==1">
@@ -365,7 +374,8 @@ __``max``__: ``number`` : The upper boundary of the random number to be generate
       </aa-when>
 
       <aa-otherwise>
-        content to insert if none of the aa-when conditions are true
+        content to insert 
+        if none of the aa-when conditions are true
       </aa-otherwise>
     </aa-choose>
   
@@ -448,6 +458,10 @@ setTimeout(function(){
 
 #### attributes
 
+__``name``__: ``string`` : A name to represent the values generated from the element.
+
+__``diagram``__: ``boolean`` : Set it to true to generate a drawn representation of the screen.
+
 __``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
 
 __``submit-button-hidden``__: ``boolean`` : Set it to true to cause the ``aa-screen`` button to not be diplayed. Useful for ``aa-screen`` nodes at the end of a sequence.
@@ -470,11 +484,221 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 
 # Widget Components
 
-## aa -
+
+
+
+## aa-affect-grid
 
 
 
 
+```html
+<aa-affect-grid 
+  top-left-label="top-left-label" 
+  top-label="top-label" 
+  top-right-label="top-right-label" 
+  
+  left-top-label="left-top-label" 
+  right-top-label="right-top-label" 
+  
+  left-label="left-label" 
+  right-label="right-label" 
+
+  left-bottom-label="left-bottom-label" 
+  right-bottom-label="right-bottom-label" 
+  
+  bottom-left-label="bottom-left-label" 
+  bottom-label="bottom-label" 
+  bottom-right-label="bottom-right-label"
+  
+  rows="11"
+  columns="11">
+  </aa-affect-grid>
+```
+
+The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
+
+<p style="max-width:500px">
+<aa-affect-grid top-left-label="top-left-label" top-label="top-label" top-right-label="top-right-label" left-top-label="left-top-label" right-top-label="right-top-label" left-label="left-label" center-label="center-label" right-label="right-label" left-bottom-label="left-bottom-label" right-bottom-label="right-bottom-label" bottom-left-label="bottom-left-label" bottom-label="bottom-label" bottom-right-label="bottom-right-label"></aa-affect-grid>
+</p>
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the values generated from the element.
+
+__``top-left-label``__, __``top-label``__,   __``top-right-label``__,<br> 
+__``left-top-label``__, __``right-top-label``__,<br>
+__``left-label``__,  __``right-label``__,<br>
+__``left-bottom-label`` __``right-bottom-label``__<br>,
+__``bottom-left-label``__,  __``bottom-label``__, __``bottom-right-label``__  : ``string`` : Labels for various parts of the grid.
+            
+  
+__``rows``__: ``number`` : Number of grid rows. Default value is 11
+            
+__``columns``__: ``number`` : Number of grid columns. Default value is 11
+
+__value__: ``object`` : The x,y coordinates of the grid selection.
+
+
+
+
+
+
+## aa-checkboxes
+
+```html
+<aa-checkboxes>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-checkboxes>
+```
+
+``<aa-checkboxes>`` implements a multiple response item, where each available choice is specified as a ``<aa-choice-item>``
+
+<aa-checkboxes>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-checkboxes>
+
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the values generated from the element.
+
+__``value``__: ``any`` : An array of the values of the checkboxes that were ticked.
+
+
+
+
+
+
+## aa-choice-item
+
+<aa-choice-item></aa-choice-item>
+
+``<aa-choice-item>`` is an element that implements an available choice for ``<aa-checkboxes>`` and ``<aa-multiple-choice>``. The value corresponding to the chosen item is specified by the ``value`` attribute. If no ``value`` attribute is supplied, the content of the element is taken as its value.
+
+
+
+#### attributes
+
+__``value``__: ``any`` : A value that corresponds to choosing this element. If no value is provided, its content is taken as its value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+## aa-geolocation
+
+``<aa-geolocation>`` queries the browser for the user's GPS location. As a result, a permission request might be triggered to access the user's location.
+
+<aa-geolocation></aa-geolocation>
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the values generated from the element.
+
+__``value``__: ``any`` : The user's longitude and latitude as provided by the browser.
+
+
+
+
+
+
+
+## aa-label
+
+<aa-label></aa-label>
+
+#### attributes
+
+
+__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
+
+
+
+
+
+
+
+
+
+## aa-likert-scale
+
+<!-- <aa-likert-scale></aa-likert-scale> -->
+
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the value generated from the element.
+
+__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
+
+
+
+
+
+
+
+## aa-multiple-choice
+
+<aa-multiple-choice>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-multiple-choice>
+
+
+
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the value generated from the element.
+
+
+
+
+
+
+
+
+## aa-slider
+
+
+<aa-slider></aa-slider>
+
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the value generated from the element.
+
+
+
+## aa-text-answer
+
+
+<aa-text-answer></aa-text-answer>
+
+#### attributes
+
+__``name``__: ``string`` : A name to represent the value generated from the element.
+
+__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
+
+
+
+
+# Putting it all together
 
 
 
