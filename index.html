@@ -548,11 +548,13 @@ setTimeout(function(){
   d.style.marginTop="20px";
   
   document.querySelector('#container1').appendChild(d);
+
   d.innerHTML = src1;
-  window.addEventListener("sesssionReady", function(){
+  d.addEventListener("sessionReady", function(){
     let b = document.getElementById("button1").addEventListener("click", function(){
-    let s = document.getElementById("sequence1").next();
+      let s = document.getElementById("sequence1").next();
   })
+  
   
 
   })
