@@ -24,8 +24,73 @@ code_clipboard: true
 
 Welcome to the Ambulatory Assessment Components Reference! Ambulatory Assessment Components consist of two parts, executable HTML Components and Ambulatory Assessment Widget Components.
 
+Ambulatory Assessment Widget Components help the author construct interfaces for response items in questionnaires.
 
-Ambulatory Assessment Widget Components help the author construct interfaces for response items in questionnaires
+
+## What is Ambulatory Assessment
+
+Ambulatory Assessment is a general term that refers to a class of methods used in clinical psychology (and other fields), to collect data from a group of people (participants in the study). These methods share the following characteristics:
+ 
+ - They take place over a period of time
+ - The same type of data are collected repeatedly, sometimes several times a day
+ - Types of data can be either questionnaires that participants answer directly, or they can be measurements captured automatically via sensors (e.g, a heart-rate sensor on a wearable device)
+ - The data collection takes place within the regular daily life of participants, as opposed to a laboratory setting.
+
+Nowadays, there is great interest in conducting and monitoring such studies with software, on mobile devices, such as smartphones and smartwatches. The Web is a useful medium for implementing a significant part of the work involved in building such software, so a small HTML primer follows.
+
+
+
+
+## HTML primer
+
+HTML stands for __Hyper-Text Markup Language__. 
+
+__Hyper-Text__ stands for text displayed on computers, which contains links to other text. Such is the nature of the Web pages that we all know. 
+
+__Markup__ means a way to annotate parts of the text, so that the computer knows that they should be displayed in a particular way. 
+
+__Language__ means that there exists a specific set of HTML elements to choose from,
+and that a certain syntax is used to represent them. 
+
+
+
+### HyperText Markup
+
+
+For example, Take a look at these two lines of text.
+
+<p><code style="white-space:normal; background-color:rgba(0, 0, 0, 0.05); display: block; padding:10px">Wikipedia is at www.wikipedia.org</code></p>
+<p><code style="white-space:normal; background-color:rgba(0, 0, 0, 0.05); display: block; padding:10px">Wikipedia is <span style="color:magenta">&lta href="http://www.wikipedia.org"&gt</span>here<span style="color:magenta">&lt/a&gt</span></code></p>
+
+#### Anchor markup
+
+The first line contains a simple mention of a url. The second one contains themarkup ``<a href="...">here</a>`` that tells the computer to display the content( the word ``here`` ) of that markup (``<a>``) as a clickable link, that links to the url contained in the attribute ``href``.  ``a`` stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.
+
+The lines above are each displayed as:
+
+<p><code style="display:block; background-color:rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 3px;">Wikipedia is at www.wikipedia.org</code></p>
+
+<p><code style="background-color:rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 3px;">Wikipedia is  <a href="www.wikipedia.org">here</a></code></p>
+
+
+#### Tags, Attributes, Elements
+
+In HTML, the syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
+
+An opening tag can also contain __attributes__. Attributes further define details about the element, e.g. in ``<a href="htttp://www.wikipedia.org>here</a>``, the attribute ``href`` defines the url, which this anchor element links to.
+
+
+
+
+#### structural markup
+
+
+HTML provides several elements that tell the computer (in this case, the Web Browser), how to display blocks of text.
+
+#### Paragraph
+
+__``<p>``__
+
 
 
 # executable HTML
@@ -196,6 +261,11 @@ __``.next()``__: Calling it will cause the sequence to progress by one step, and
 __``endEvent``__ : Dispatched when `aa-sequence`` has reched the end.
 
 
+
+
+## aa-jump
+
+The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to instruct the sequence to continue its execution from a specific child. 
 
 
 
@@ -400,6 +470,7 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 
 # Widget Components
 
+## aa -
 
 
 
@@ -423,183 +494,4 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 
 
 
-
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-
-<aside class="notice">
-testYou must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
