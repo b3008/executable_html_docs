@@ -227,8 +227,11 @@ setTimeout(function(){
   
   document.querySelector('#container1').appendChild(d);
   d.innerHTML = src1;
-  let b = document.getElementById("button1").addEventListener("click", function(){
+  window.addEventListener("sesssionReady", function(){
+    let b = document.getElementById("button1").addEventListener("click", function(){
     let s = document.getElementById("sequence1").next();
+  })
+  
 
   })
 },100);
