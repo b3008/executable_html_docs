@@ -325,12 +325,6 @@
                                   <li>
                                     <a href="#tags-attributes-elements" class="toc-h4 toc-link" data-title="Tags, Attributes, Elements">Tags, Attributes, Elements</a>
                                   </li>
-                                  <li>
-                                    <a href="#structural-markup" class="toc-h4 toc-link" data-title="structural markup">structural markup</a>
-                                  </li>
-                                  <li>
-                                    <a href="#paragraph" class="toc-h4 toc-link" data-title="Paragraph">Paragraph</a>
-                                  </li>
                               </ul>
                           </li>
                       </ul>
@@ -471,10 +465,11 @@ and that a certain syntax is used to represent them. </p>
 <p>In HTML, the syntax is called <strong>HTML tag</strong>, which consists of two parts; an <strong><em>opening tag</em></strong>, e.g., <strong><code>&lt;a&gt;</code></strong>  and a corresponding <strong><em>closing tag</em></strong>, e.g, <strong><code>&lt;/a&gt;</code></strong>. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an <strong>HTML element</strong>. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.</p>
 
 <p>An opening tag can also contain <strong>attributes</strong>. Attributes further define details about the element, e.g. in <code>&lt;a href=&quot;htttp://www.wikipedia.org&gt;here&lt;/a&gt;</code>, the attribute <code>href</code> defines the url, which this anchor element links to.</p>
-<h4 id='structural-markup'>structural markup</h4>
-<p>HTML provides several elements that tell the computer (in this case, the Web Browser), how to display blocks of text.</p>
-<h4 id='paragraph'>Paragraph</h4>
-<p><strong><code>&lt;p&gt;</code></strong></p>
+
+<!-- #### Further examples
+
+
+__Paragraph ``<p>`` :  ``<> -->
 <h1 id='executable-html'>executable HTML</h1>
 <p>Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.</p>
 <h2 id='aa-session'>aa-session</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
@@ -554,8 +549,11 @@ setTimeout(function(){
   
   document.querySelector('#container1').appendChild(d);
   d.innerHTML = src1;
-  let b = document.getElementById("button1").addEventListener("click", function(){
+  window.addEventListener("sesssionReady", function(){
+    let b = document.getElementById("button1").addEventListener("click", function(){
     let s = document.getElementById("sequence1").next();
+  })
+  
 
   })
 },100);
