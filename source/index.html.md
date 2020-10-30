@@ -519,9 +519,23 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
 
 <p style="max-width:500px">
-<aa-affect-grid top-left-label="top-left-label" top-label="top-label" top-right-label="top-right-label" left-top-label="left-top-label" right-top-label="right-top-label" left-label="left-label" center-label="center-label" right-label="right-label" left-bottom-label="left-bottom-label" right-bottom-label="right-bottom-label" bottom-left-label="bottom-left-label" bottom-label="bottom-label" bottom-right-label="bottom-right-label"></aa-affect-grid>
+<aa-affect-grid id="grid1" top-left-label="top-left-label" top-label="top-label" top-right-label="top-right-label" left-top-label="left-top-label" right-top-label="right-top-label" left-label="left-label" center-label="center-label" right-label="right-label" left-bottom-label="left-bottom-label" right-bottom-label="right-bottom-label" bottom-left-label="bottom-left-label" bottom-label="bottom-label" bottom-right-label="bottom-right-label"></aa-affect-grid>
 </p>
 
+
+__current aa-affect-grid value__ : <span id="grid1value"></span>
+
+
+
+<script>
+  let grid = document.getElementById("grid1");
+  let v = document.getElementById("grid1value");
+  v.innerHTML = grid.value;  
+  grid.addEventListener("change", function(e){
+    v.innerHTML = grid.value;
+  })
+
+</script>
 #### attributes
 
 __``name``__: ``string`` : A name to represent the values generated from the element.
@@ -618,12 +632,12 @@ __``value``__: ``any`` : The user's longitude and latitude as provided by the br
 
 ## aa-label
 
-<aa-label></aa-label>
-
-#### attributes
+The question the user is answering with the response item is oftentimes called "label". Though it is not necessary for the author to use this element, it is provided as a way to annotate the text that specifically serves this purpose, so an author might write for example:``<aa-label>How do you feel?</aa-label>`` to let others that process the html protocol, know that ``How do you feel`` is a label.
 
 
-__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
+
+
+
 
 
 
@@ -641,11 +655,6 @@ __``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, 
 #### attributes
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
-
-__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
-
-
-
 
 
 
