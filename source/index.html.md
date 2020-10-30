@@ -75,7 +75,7 @@ The lines above are each displayed as:
 
 #### Tags, Attributes, Elements
 
-In HTML, the syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
+In HTML, the annotation syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
 
 An opening tag can also contain __attributes__. Attributes further define details about the element, e.g. in ``<a href="htttp://www.wikipedia.org>here</a>``, the attribute ``href`` defines the url, which this anchor element links to.
 
@@ -88,7 +88,7 @@ An opening tag can also contain __attributes__. Attributes further define detail
 __Paragraph ``<p>`` :  ``<> -->
 
 
-# executable HTML
+# Executable HTML
 
 Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.
 
@@ -228,6 +228,7 @@ let src1=`
 
 setTimeout(function(){
   let d = document.createElement('p');
+  d.style.maxWidth="500px";
   d.style.marginTop="20px";
   
   document.querySelector('#container1').appendChild(d);
@@ -263,7 +264,7 @@ __``.next()``__: Calling it will cause the sequence to progress by one step, and
 
 #### events
 
-__``endEvent``__ : Dispatched when `aa-sequence`` has reched the end.
+__``endEvent``__ : Dispatched when `aa-sequence`` has reached the end.
 
 
 
@@ -272,7 +273,11 @@ __``endEvent``__ : Dispatched when `aa-sequence`` has reched the end.
 
 The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to instruct the sequence to continue its execution from a specific child. 
 
+#### attributes
 
+__``name``__: ``string`` : A name to represent the element
+
+__``goto``__: ``string`` : The name of the child of the ``aa-sequence`` that will be next.
 
 
 
@@ -417,9 +422,9 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
   <template>
 
     <aa-sequence>
-      <aa-screen submit-button-text="next"> screen1</aa-screen>
-      <aa-screen submit-button-text="next"> screen2</aa-screen>
-      <aa-screen submit-button-text="next"> screen3</aa-screen>
+      <aa-screen submit-button-text="next"> This is a first screen. Press next to go to the second one.</aa-screen>
+      <aa-screen submit-button-text="next"> This is a second screen. Press next to go to the third and final one.</aa-screen>
+      <aa-screen submit-button-hidden> This is the third and final screen. Note that the button is now hidden.</aa-screen>
     </aa-sequence>
 
   </template>
@@ -434,9 +439,9 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
   <template>
 
     <aa-sequence>
-      <aa-screen submit-button-text="next"> screen1</aa-screen>
-      <aa-screen submit-button-text="next"> screen2</aa-screen>
-      <aa-screen submit-button-text="next"> screen3</aa-screen>
+       <aa-screen submit-button-text="next"> This is a first screen. Press next to go to the second one.</aa-screen>
+      <aa-screen submit-button-text="next"> This is a second screen. Press next to go to the third and final one.</aa-screen>
+      <aa-screen submit-button-hidden> This is the third and final screen. Note that the button is now hidden.</aa-screen>
     </aa-sequence>
 
   </template>
@@ -444,6 +449,7 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
 
 setTimeout(function(){
   let d = document.createElement('p');
+  d.style.maxWidth="500px";
   d.style.marginTop="20px";
   
   document.querySelector('#container2').appendChild(d);
@@ -702,8 +708,7 @@ __``name``__: ``string`` : A name to represent the value generated from the elem
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
 
-__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
-
+#### events
 
 
 
