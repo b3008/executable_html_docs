@@ -73,13 +73,15 @@ The lines above are each displayed as:
 <p><code style="background-color:rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 3px;">Wikipedia is  <a href="www.wikipedia.org">here</a></code></p>
 
 
-#### Tags, Attributes, Elements
+### Tags, Attributes, Elements
 
 In HTML, the annotation syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
 
 An opening tag can also contain __attributes__. Attributes further define details about the element, e.g. in ``<a href="htttp://www.wikipedia.org>here</a>``, the attribute ``href`` defines the url, which this anchor element links to.
 
 
+
+### Parents and Children
 
 
 <!-- #### Further examples
