@@ -417,21 +417,32 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
 ## aa-screen
 
 
- ``aa-screen`` is a container that can group multiple elements. It includes a "next" button, which, when clicked, dispatches an ``endEvent`` so that a sequence can insert its next element.
+
  
  ```html
  <aa-session>
   <template>
 
     <aa-sequence>
-      <aa-screen submit-button-text="next"> This is a first screen. Press next to go to the second one.</aa-screen>
-      <aa-screen submit-button-text="next"> This is a second screen. Press next to go to the third and final one.</aa-screen>
-      <aa-screen submit-button-hidden> This is the third and final screen. Note that the button is now hidden.</aa-screen>
+      <aa-screen submit-button-text="next"> 
+        This is a first screen. 
+        Press next to go to the second one.
+      </aa-screen>
+      <aa-screen submit-button-text="next"> 
+        This is a second screen. 
+        Press next to go to the third and final one.
+      </aa-screen>
+      <aa-screen submit-button-hidden>
+        This is the third and final screen. 
+        Note that the button is now hidden.
+      </aa-screen>
     </aa-sequence>
 
   </template>
 </aa-session>
 ```
+
+ ``aa-screen`` is a container that can group multiple elements. It includes a "next" button, which, when clicked, dispatches an ``endEvent`` so that a sequence can insert its next element. ``aa-screen`` will also collect values from all child elements, and dispatch them in a ``valueSubmit`` event
 
 <p id="container2">This example illustrates a sequence with 3 screens</p>
 
@@ -460,7 +471,7 @@ setTimeout(function(){
 </script>
 
 
-``aa-screen`` will also collect values from all child elements, and dispatch them in a ``valueSubmit`` event
+
 
 
 
@@ -502,32 +513,32 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 
 ```html
 <aa-affect-grid 
-  top-left-label="top-left-label" 
-  top-label="top-label" 
-  top-right-label="top-right-label" 
+  top-left-label="top-left" 
+  top-label="top" 
+  top-right-label="top-right" 
   
-  left-top-label="left-top-label" 
-  right-top-label="right-top-label" 
+  left-top-label="left-top" 
+  right-top-label="right-top" 
   
-  left-label="left-label" 
-  right-label="right-label" 
+  left-label="left" 
+  right-label="right" 
 
-  left-bottom-label="left-bottom-label" 
-  right-bottom-label="right-bottom-label" 
+  left-bottom-label="left-bottom" 
+  right-bottom-label="right-bottom" 
   
-  bottom-left-label="bottom-left-label" 
-  bottom-label="bottom-label" 
-  bottom-right-label="bottom-right-label"
+  bottom-left-label="bottom-left" 
+  bottom-label="bottom" 
+  bottom-right-label="bottom-right"
   
   rows="11"
   columns="11">
-  </aa-affect-grid>
+</aa-affect-grid>
 ```
 
 The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
 
 <p style="max-width:500px">
-<aa-affect-grid id="grid1" top-left-label="top-left-label" top-label="top-label" top-right-label="top-right-label" left-top-label="left-top-label" right-top-label="right-top-label" left-label="left-label" center-label="center-label" right-label="right-label" left-bottom-label="left-bottom-label" right-bottom-label="right-bottom-label" bottom-left-label="bottom-left-label" bottom-label="bottom-label" bottom-right-label="bottom-right-label"></aa-affect-grid>
+<aa-affect-grid id="grid1" top-left-label="top-left" top-label="top" top-right-label="top-right" left-top-label="left-top" right-top-label="right-top" left-label="left" center-label="center" right-label="right" left-bottom-label="left-bottom" right-bottom-label="right-bottom" bottom-left-label="bottom-left" bottom-label="bottom" bottom-right-label="bottom-right"></aa-affect-grid>
 </p>
 
 
@@ -537,10 +548,10 @@ __current aa-affect-grid value__ : <span id="grid1value"></span>
 
 <script>
   let grid = document.getElementById("grid1");
-  let v = document.getElementById("grid1value");
-  v.innerHTML = grid.value;  
+  let vgrid1 = document.getElementById("grid1value");
+  vgrid1.innerHTML = grid.value;  
   grid.addEventListener("change", function(e){
-    v.innerHTML = grid.value;
+    vgrid1.innerText = JSON.stringify(grid.value);
   })
 
 </script>
@@ -562,6 +573,26 @@ __``columns``__: ``number`` : Number of grid columns. Default value is 11
 __value__: ``object`` : The x,y coordinates of the grid selection.
 
 
+#### events
+
+__``change``__: Dispatched when a different selection is made in ``aa-affect-grid``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -578,18 +609,46 @@ __value__: ``object`` : The x,y coordinates of the grid selection.
 
 ``<aa-checkboxes>`` implements a multiple response item, where each available choice is specified as a ``<aa-choice-item>``
 
-<aa-checkboxes>
+
+<aa-checkboxes id="checkboxes1">
   <aa-choice-item> choice 1 </aa-choice-item>
   <aa-choice-item> choice 2 </aa-choice-item>
   <aa-choice-item> choice 3 </aa-choice-item>
 </aa-checkboxes>
 
 
+__current checkboxes value__ : <span id="checkboxes1value"></span>
+
+<script>
+
+  let checkboxes1 = document.getElementById("checkboxes1");
+  let vcheckboxes1 = document.getElementById("checkboxes1value");
+  vcheckboxes1.innerHTML = checkboxes1.value;
+  checkboxes1.addEventListener("change", function(e){
+    console.log(checkboxes1.value);
+    vcheckboxes1.innerText = JSON.stringify(checkboxes1.value);
+  })
+</script>
+
 #### attributes
 
 __``name``__: ``string`` : A name to represent the values generated from the element.
 
-__``value``__: ``any`` : An array of the values of the checkboxes that were ticked.
+__``value``__: ``any`` : An array of the values of the checkboxes that were ticked. Unticked checkboxes are represented by null values.
+
+#### events
+
+__``change``__ : Dispatched when a selection in the group of choices changes.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -598,9 +657,36 @@ __``value``__: ``any`` : An array of the values of the checkboxes that were tick
 
 ## aa-choice-item
 
-<aa-choice-item></aa-choice-item>
-
 ``<aa-choice-item>`` is an element that implements an available choice for ``<aa-checkboxes>`` and ``<aa-multiple-choice>``. The value corresponding to the chosen item is specified by the ``value`` attribute. If no ``value`` attribute is supplied, the content of the element is taken as its value.
+
+
+```html
+<aa-checkboxes>
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item value="2"> choice 2 </aa-choice-item>
+</aa-checkboxes>
+```
+
+
+This example demonstrates the use of the ``value`` attribute vs no ``value`` specified. The first ``aa-choice-item`` emits its content as a value, because no ``value`` attribute is specified. The second one, emits the specified ``value`` attribute as its value.
+
+<aa-checkboxes id="checkboxes2">
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item value="2"> choice 2 </aa-choice-item>
+</aa-checkboxes>
+
+__current checkboxes value__ : <span id="checkboxes2value"></span>
+
+<script>
+
+  let checkboxes2 = document.getElementById("checkboxes2");
+  let vcheckboxes2 = document.getElementById("checkboxes2value");
+  vcheckboxes2.innerHTML = checkboxes2.value;
+  checkboxes2.addEventListener("change", function(e){
+    console.log(checkboxes2.value);
+    vcheckboxes2.innerText = JSON.stringify(checkboxes2.value);
+  })
+</script>
 
 
 
@@ -664,6 +750,7 @@ The question the user is answering with the response item is oftentimes called "
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
 
+__``value``__: ``number`` : The value that was chosen on the scale.
 
 
 
@@ -682,7 +769,7 @@ __``name``__: ``string`` : A name to represent the value generated from the elem
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
 
-
+__``value``__: ``string`` : The value of the item that was chosen.
 
 
 
@@ -699,6 +786,13 @@ __``name``__: ``string`` : A name to represent the value generated from the elem
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
 
+__``value``__: ``number`` : The value of the slider's position.
+
+
+
+
+
+
 
 
 ## aa-text-answer
@@ -709,6 +803,8 @@ __``name``__: ``string`` : A name to represent the value generated from the elem
 #### attributes
 
 __``name``__: ``string`` : A name to represent the value generated from the element.
+
+__``value``__: ``string`` : The contents of the textfield
 
 #### events
 
