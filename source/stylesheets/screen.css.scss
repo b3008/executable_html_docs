@@ -282,14 +282,14 @@ html, body {
   // transparent background.
   // I know, it's hackish, but it's the simplist way to make the left
   // half of the content always this background color.
-  .dark-box {
-    width: $examples-width;
-    background-color: $examples-bg;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
+  // .dark-box {
+  //   width: $examples-width;
+  //   background-color: $examples-bg;
+  //   position: absolute;
+  //   right: 0;
+  //   top: 0;
+  //   bottom: 0;
+  // }
 
   .lang-selector {
     position: fixed;
@@ -349,7 +349,7 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: $examples-width;
+    // margin-right: $examples-width;
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
@@ -565,7 +565,8 @@ html, body {
     color: #fff;
 
     margin: 0;
-    width: $examples-width;
+    // width: $examples-width;
+    width: 100%;
 
     float:right;
     clear:right;
