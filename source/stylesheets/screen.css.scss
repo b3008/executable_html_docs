@@ -282,6 +282,8 @@ html, body {
   // transparent background.
   // I know, it's hackish, but it's the simplist way to make the left
   // half of the content always this background color.
+
+  //commented out by nikos
   // .dark-box {
   //   width: $examples-width;
   //   background-color: $examples-bg;
@@ -349,6 +351,7 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+    //commented out by nikos
     // margin-right: $examples-width;
     padding: 0 $main-padding;
     box-sizing: border-box;
@@ -359,6 +362,11 @@ html, body {
 
   &>ul, &>ol {
     padding-left: $main-padding + 15px;
+  }
+
+  //added by nikos
+  &>p, &>ul {
+    width:800px
   }
 
 // the div is the tocify hidden div for placeholding stuff
@@ -499,11 +507,14 @@ html, body {
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
+
+
   }
 
   pre>code {
     background-color: transparent;
     padding: 0;
+    
   }
 
   aside {
@@ -555,20 +566,38 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 // This is all the stuff that appears in the right half of the page
 
+p.myexample{
+  background-color: rgba(0,0,0,0.1);
+  margin:20px;
+  max-width:740px;
+  border-radius:10px;
+  border:solid thin rgba(0,0,0,0.05);
+  padding:24px;
+}
+
+.content table{
+  max-width:780px;
+  padding:20px;
+}
+
 .content {
   &>div.highlight {
     clear:none;
   }
 
+  
   pre, blockquote {
-    background-color: $code-bg;
+    // background-color: $code-bg;
     color: #fff;
 
-    margin: 0;
+    // margin: 0;
+
+    //commented out by nikos
     // width: $examples-width;
+    //added by nikos
     width: 100%;
 
-    float:right;
+    // float:right;
     clear:right;
 
     box-sizing: border-box;
@@ -662,6 +691,9 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+  max-width:720px;
+  border-radius:10px;
+  margin:20px;
 }
 
 .copy-clipboard {

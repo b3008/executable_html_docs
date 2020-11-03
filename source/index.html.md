@@ -1,5 +1,5 @@
 ---
-title: Ambulatory Assessment Components Reference
+title: Executable HTML and Ambulatory Assessment Components Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
 
@@ -20,14 +20,16 @@ code_clipboard: true
 
 
 
-# Introduction
 
-Welcome to the Ambulatory Assessment Components Reference! Ambulatory Assessment Components consist of two parts, executable HTML Components and Ambulatory Assessment Widget Components.
+<br><br>
+Welcome to the Ambulatory Assessment Components Reference! 
+
+Ambulatory Assessment Components consist of two parts, executable HTML Components and Ambulatory Assessment Widget Components.
 
 Ambulatory Assessment Widget Components help the author construct interfaces for response items in questionnaires.
 
 
-## What is Ambulatory Assessment
+# Ambulatory Assessment
 
 Ambulatory Assessment is a general term that refers to a class of methods used in clinical psychology (and other fields), to collect data from a group of people (participants in the study). These methods share the following characteristics:
  
@@ -41,7 +43,7 @@ Nowadays, there is great interest in conducting and monitoring such studies with
 
 
 
-## HTML primer
+# HTML primer
 
 HTML stands for __Hyper-Text Markup Language__. 
 
@@ -54,26 +56,30 @@ and that a certain syntax is used to represent them.
 
 
 
-### HyperText Markup
+## HyperText Markup
 
 
 For example, Take a look at these two lines of text.
 
-<p><code style="white-space:normal; background-color:rgba(0, 0, 0, 0.05); display: block; padding:10px">Wikipedia is at www.wikipedia.org</code></p>
-<p><code style="white-space:normal; background-color:rgba(0, 0, 0, 0.05); display: block; padding:10px">Wikipedia is <span style="color:magenta">&lta href="http://www.wikipedia.org"&gt</span>here<span style="color:magenta">&lt/a&gt</span></code></p>
+```html
+Wikipedia is at www.wikipedia.org
 
-#### Anchor markup
+Wikipedia is <a href="http://www.wikipedia.org">here</a>
+```
+
 
 The first line contains a simple mention of a url. The second one contains themarkup ``<a href="...">here</a>`` that tells the computer to display the content( the word ``here`` ) of that markup (``<a>``) as a clickable link, that links to the url contained in the attribute ``href``.  ``a`` stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.
 
 The lines above are each displayed as:
 
-<p><code style="display:block; background-color:rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 3px;">Wikipedia is at www.wikipedia.org</code></p>
+<p class="myexample">
+  Wikipedia is at www.wikipedia.org
+  <br><br>
+  Wikipedia is  <a href="www.wikipedia.org">here</a>
+</p>
 
-<p><code style="background-color:rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 3px;">Wikipedia is  <a href="www.wikipedia.org">here</a></code></p>
 
-
-### Tags, Attributes, Elements
+## Tags, Attributes, Elements
 
 In HTML, the annotation syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
 
@@ -81,7 +87,7 @@ An opening tag can also contain __attributes__. Attributes further define detail
 
 
 
-### Parents and Children
+## Parents and Children
 
 
 <!-- #### Further examples
@@ -115,6 +121,13 @@ Executable HTML Components help the author of HTML content prescribe the way pie
 
 ## aa-session
 
+
+ ``aa-session`` is the container element for the whole ambulatory assessment protocol. It should always have a ``template`` as an immediate child. ``template`` allows the browser to ignore the protocol content, so that ``aa-session`` can parse
+ it and initalize it appropriately, for example where components like ```aa-sequence``` and ```aa-choose``` are used.
+
+``aa-session`` dispatches the ``sessionReady`` event to signal that its initialization is complete. Then, children of ``aa-session`` have also been initialized and have been inserted in the document. This is illustrated in the following example,that discussess our next element, ``aa-sequence``
+
+
 ```html
 <aa-session>
   <template>
@@ -125,28 +138,24 @@ Executable HTML Components help the author of HTML content prescribe the way pie
 </aa-session>
 ```
 
- ``aa-session`` is the container element for the whole ambulatory assessment protocol. It should always have a ``template`` as an immediate child. ``template`` allows the browser to ignore the protocol content, so that ``aa-session`` can parse
- it and initalize it appropriately, for example where components like ```aa-sequence``` and ```aa-choose``` are used.
-
-``aa-session`` dispatches the ``sessionReady`` event to signal that its initialization is complete. Then, children of ``aa-session`` have also been initialized and have been inserted in the document. This is illustrated in the following example,that discussess our next element, ``aa-sequence``
-
-#### attributes
-
-__``name``__: ``string`` : A name to represent the values generated from the element
-
-__``diagram``__: ``boolean`` : Set it to ``true`` to generate a drawing of the session's contents, instead of running the session
-
-__``should-run``__: ``boolean`` : Set it to ``false`` to prevent the session from initializing automatically when the page is loaded
 
 
-#### methods
 
-__``.run()``__:  If ``should-run`` has been set to ``false``, call this method to get the session started.
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the values generated from the element
+__``diagram``__| ``boolean`` | Set it to ``true`` to generate a drawing of the session's contents, instead of running the session
+__``should-run``__| ``boolean`` | Set it to ``false`` to prevent the session from initializing automatically when the page is loaded
 
 
-#### events
+ method | returns   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``.run()``__| ``undefined`` |  If ``should-run`` has been set to ``false``, call this method to get the session started.
 
-__``sessionReady``__:  Dispatched when ``aa-session`` has finished initializing. 
+
+ event |   |
+|--------------|:-------------|:----------------------------------------------------------|
+__``sessionReady``__|  Dispatched when ``aa-session`` has finished initializing. 
 
 
 
@@ -174,22 +183,26 @@ __``sessionReady``__:  Dispatched when ``aa-session`` has finished initializing.
 
 
 
+
+
 ```html
 <aa-session>
-<template>
-  <aa-sequence id="sequence1">
-    <div> item 1 </div>
-    <div> item 2 </div>
-    <div> item 3 </div>
-  </aa-sequence>
+  <template>
 
-  <paper-button id='button1'>
-    next
-  </paper-button>
+    <aa-sequence id="sequence1">
+      <div> item 1 </div>
+      <div> item 2 </div>
+      <div> item 3 </div>
+    </aa-sequence>
+
+    <paper-button id='button1'>
+      next
+    </paper-button>
 
   </template>
 </aa-session>
 
+<!-- lets make the button move aa-sequence forward -->
 <script> 
   window.addEventListener("sessionReady", ()=>{
     document.getElementById('button1')
@@ -198,11 +211,12 @@ __``sessionReady``__:  Dispatched when ``aa-session`` has finished initializing.
             })
   })
 </script>
-
 ```
 
+This example illustrates triggering a sequence through a button. We listen for the ``sessionReady`` event to make sure ``#button1 has been inserted in the document, and set a click event listener, that calls the ``.next()`` member function of ``#sequence1``. Pressing the next" button adds content as per the sequence.
 
-<p id="container1">This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1</code> has been inserted in the document, and set a click event listener, that calls the <code>.next()</code> member function of <code>#sequence1</code>. Pressing the next" button adds content as per the sequence.</p>
+
+<p id="container1" class="myexample"></p>
 
 
 <!-- The following is a live example of a working sequence, which I want to be part of the natural
@@ -213,7 +227,7 @@ in the same container, #container1, manually
 <script> 
 let src1=`
 
-<aa-session id="session1">
+<aa-session id="session1" class="myexample">
 <template>
 
 
@@ -250,23 +264,24 @@ setTimeout(function(){
 
 The sequence can also listen for an event called ``endEvent``, which its children can dispatch to let it know that it should insert its next element.
 
-``aa-screen`` is an element that simplifies managing ``aa-sequence`` in user interactions.
+[``aa-screen``](#aa-screen), discussed below, is an element that simplifies managing ``aa-sequence`` in user interactions.
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the values generated from the element
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the values generated from the element
+__``diagram``__| ``boolean`` | Set it to true to generate a drawing of the session's contents, instead of running the session
+__``should-run``__| ``boolean`` | Set it to ``false`` to prevent the sequence from executing once it is added to the document
 
-__``diagram``__: ``boolean`` : Set it to true to generate a drawing of the session's contents, instead of running the session
 
-__``should-run``__: ``boolean`` : Set it to ``false`` to prevent the sequence from executing once it is added to the document
+ method | returns   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``.next()``__ | ``undefined`` | Calling it will cause the sequence to progress by one step, and insert the next child element in line, into the document
 
-#### methods
 
-__``.next()``__: Calling it will cause the sequence to progress by one step, and insert the next child element in line, into the document
-
-#### events
-
-__``endEvent``__ : Dispatched when `aa-sequence`` has reached the end.
+ event |   |
+|--------------|:----------------------------------------------------------|
+__``endEvent``__ | Dispatched when `aa-sequence`` has reached the end.
 
 
 
@@ -275,11 +290,11 @@ __``endEvent``__ : Dispatched when `aa-sequence`` has reached the end.
 
 The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to instruct the sequence to continue its execution from a specific child. 
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the element
-
-__``goto``__: ``string`` : The name of the child of the ``aa-sequence`` that will be next.
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the element 
+__``goto``__| ``string`` | The name of the child of the ``aa-sequence`` that will be next.
 
 
 
@@ -287,6 +302,7 @@ __``goto``__: ``string`` : The name of the child of the ``aa-sequence`` that wil
 
 ## aa-variable
 
+``aa-variable`` allows the html author to declare named variables and assign values to them. Each variable and its value is stored in LocalStorage, and is available to all other aa-elements as well.
 
 ```html
 <aa-session>
@@ -300,15 +316,15 @@ __``goto``__: ``string`` : The name of the child of the ``aa-sequence`` that wil
 ```
 
 
-``aa-variable`` allows the html author to declare named variables and assign values to them. Each variable and its value is stored in LocalStorage, and is available to all other aa-elements as well.
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the values generated from the element
 
-__``diagram``__: ``boolean`` : Set it to true to generate a drawing of the session's contents, instead of running the session
 
-__``value``__: ``string | number | boolean`` : The value that the variable holds
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__ | ``string`` | A name to represent the values generated from the element |
+__``diagram``__ | ``boolean`` | Set it to true to generate a drawing of the session's contents, instead of running the session |
+__``value``__ | ``string``  ``number``  ``boolean`` | The value that the variable holds |
 
 
 
@@ -325,9 +341,12 @@ __``value``__: ``string | number | boolean`` : The value that the variable holds
 ## aa-function- *
 
 
-A set of functions allow the author to assign the result of a function to a named variable.
+A set of functions allow the author to assign the result of a function to a named variable. For now, only ``aa-function-random`` exists.
+
 
 ### aa-function-random
+
+``aa-fuction-random`` generates a random integer between its ``min`` and ``max`` attributes and assigns it to a variable with the name of its ``name`` attribute
 
 ```html
 <aa-session>
@@ -340,18 +359,20 @@ A set of functions allow the author to assign the result of a function to a name
 </aa-session>
 ```
 
-``aa-fuction-random`` generates a random integer between its ``min`` and ``max`` attributes and assigns it to a variable with the name of its ``name`` attribute
 
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the values generated from the element
 
-__``diagram``__: ``boolean`` : Set it to true to generate a drawing of the session's contents, instead of running the session
 
-__``min``__: ``number`` : The lower boundary of the random number to be generated
 
-__``max``__: ``number`` : The upper boundary of the random number to be generated
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__ | ``string``   | A name to represent the values generated from the element |
+__``diagram``__ | ``boolean``   | Set it to true to generate a drawing of the session's contents, instead of running the session |
+__``min``__ | ``number`` | The lower boundary of the random number to be generated |
+__``max``__ | ``number`` | The upper boundary of the random number to be generated |
+
+
 
 
 
@@ -399,9 +420,9 @@ Each ``aa-when`` has a conditional statement in its ``test`` attribute, which ev
 In the example on the right, a random number between 1 and 10 is generated and stored in variable ``myVar``. The ``aa-choose`` node contains 2 ``aa-when`` children. If ``myVar`` equals 1, the first  one will be inserted. If ``myVar`` equals 2, the second one will be inserted. In all other cases, the ``aa-otherwise`` child will be inserted
 
 
-#### aa-when attributes
-
-__``test``__: ``string`` : A conditional statement that is evaluated by the ``aa-choose`` parent node. Conditional statements can include logical operators, numbers and strings, and also variable names that have already been declared.
+aa-when attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``test``__| ``string`` | A conditional statement that is evaluated by the ``aa-choose`` parent node. Conditional statements can include logical operators, numbers and strings, and also variable names that have already been declared.
 
 
 
@@ -418,6 +439,7 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
 
 
 
+ ``aa-screen`` is a container that can group multiple elements. It includes a "next" button, which, when clicked, dispatches an ``endEvent`` so that a sequence can insert its next element. ``aa-screen`` will also collect values from all child elements, and dispatch them in a ``valueSubmit`` event
  
  ```html
  <aa-session>
@@ -442,9 +464,8 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
 </aa-session>
 ```
 
- ``aa-screen`` is a container that can group multiple elements. It includes a "next" button, which, when clicked, dispatches an ``endEvent`` so that a sequence can insert its next element. ``aa-screen`` will also collect values from all child elements, and dispatch them in a ``valueSubmit`` event
 
-<p id="container2">This example illustrates a sequence with 3 screens</p>
+<p id="container2" class="myexample">This example illustrates a sequence with 3 screens:</p>
 
 
 <script>
@@ -462,7 +483,7 @@ __``test``__: ``string`` : A conditional statement that is evaluated by the ``aa
 
 setTimeout(function(){
   let d = document.createElement('p');
-  d.style.maxWidth="500px";
+  // d.style.maxWidth="500px";
   d.style.marginTop="20px";
   
   document.querySelector('#container2').appendChild(d);
@@ -475,19 +496,17 @@ setTimeout(function(){
 
 
 
-#### attributes
+ attribute | type   |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the values generated from the element.
+__``diagram``__| ``boolean`` | Set it to true to generate a drawn representation of the screen.
+__``submit-button-text``__| ``string`` | The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
+__``submit-button-hidden``__| ``boolean`` | Set it to true to cause the ``aa-screen`` button to not be diplayed. Useful for ``aa-screen`` nodes at the end of a sequence.
 
-__``name``__: ``string`` : A name to represent the values generated from the element.
 
-__``diagram``__: ``boolean`` : Set it to true to generate a drawn representation of the screen.
-
-__``submit-button-text``__: ``string`` : The label for the `aa-screen`` button, that causes it to progress by one step. Its default label is "submit" (derived from the action of submitting the response), but it can be set to any other prompt fro the user.
-
-__``submit-button-hidden``__: ``boolean`` : Set it to true to cause the ``aa-screen`` button to not be diplayed. Useful for ``aa-screen`` nodes at the end of a sequence.
-
-#### events
-
-__``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked. 
+ event |   |
+|--------------|:-------------|:----------------------------------------------------------|
+__``valueSubmit``__ |Dispatched when the `aa-screen`` button has been clicked. 
 
 
 
@@ -509,6 +528,7 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 ## aa-affect-grid
 
 
+The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
 
 
 ```html
@@ -535,14 +555,19 @@ __``valueSubmit``__ : Dispatched when the `aa-screen`` button has been clicked.
 </aa-affect-grid>
 ```
 
-The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
 
-<p style="max-width:500px">
+
+<p  class="myexample">
+click on the grid to see how the value of the response item changes:
+<br><br>
 <aa-affect-grid id="grid1" top-left-label="top-left" top-label="top" top-right-label="top-right" left-top-label="left-top" right-top-label="right-top" left-label="left" center-label="center" right-label="right" left-bottom-label="left-bottom" right-bottom-label="right-bottom" bottom-left-label="bottom-left" bottom-label="bottom" bottom-right-label="bottom-right"></aa-affect-grid>
+
+<br>
+<b>current aa-affect-grid value</b>: <span id="grid1value"></span>
 </p>
 
 
-__current aa-affect-grid value__ : <span id="grid1value"></span>
+
 
 
 
@@ -555,27 +580,20 @@ __current aa-affect-grid value__ : <span id="grid1value"></span>
   })
 
 </script>
-#### attributes
-
-__``name``__: ``string`` : A name to represent the values generated from the element.
-
-__``top-left-label``__, __``top-label``__,   __``top-right-label``__,<br> 
-__``left-top-label``__, __``right-top-label``__,<br>
-__``left-label``__,  __``right-label``__,<br>
-__``left-bottom-label`` __``right-bottom-label``__<br>,
-__``bottom-left-label``__,  __``bottom-label``__, __``bottom-right-label``__  : ``string`` : Labels for various parts of the grid.
-            
-  
-__``rows``__: ``number`` : Number of grid rows. Default value is 11
-            
-__``columns``__: ``number`` : Number of grid columns. Default value is 11
-
-__value__: ``object`` : The x,y coordinates of the grid selection.
 
 
-#### events
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the values generated from the element.
+__``top-left-label``__ __``top-label``__   __``top-right-label``__ __``left-top-label``__, __``right-top-label``__ __``left-label``__  __``right-label``__ __``left-bottom-label``__ __``right-bottom-label``__ __``bottom-left-label``__,  __``bottom-label``__, __``bottom-right-label``__  | ``string`` | Labels for various parts of the grid.
+__``rows``__| ``number`` | Number of grid rows. Default value is 11   
+__``columns``__| ``number`` | Number of grid columns. Default value is 11
+__value__| ``object`` | The x,y coordinates of the grid selection.
 
-__``change``__: Dispatched when a different selection is made in ``aa-affect-grid``
+
+ event |   |  
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__| Dispatched when a different selection is made in ``aa-affect-grid``
 
 
 
@@ -599,26 +617,51 @@ __``change``__: Dispatched when a different selection is made in ``aa-affect-gri
 
 ## aa-checkboxes
 
+__``aa-checkboxes``__ implements a multiple response item, where each available choice is specified as a [``aa-choice-item``](#aa-choice-item).
+
+In the following configuration, the text inside each available choice is used as the value that each `aa-choice-item` corresponds to.
+
 ```html
-<aa-checkboxes>
+<aa-checkboxes name="checkboxes1">
   <aa-choice-item> choice 1 </aa-choice-item>
   <aa-choice-item> choice 2 </aa-choice-item>
   <aa-choice-item> choice 3 </aa-choice-item>
 </aa-checkboxes>
 ```
 
-``<aa-checkboxes>`` implements a multiple response item, where each available choice is specified as a ``<aa-choice-item>``
-
-
+<p class="myexample">
+click on checkboxes to see how the response item behaves
 <aa-checkboxes id="checkboxes1">
   <aa-choice-item> choice 1 </aa-choice-item>
   <aa-choice-item> choice 2 </aa-choice-item>
   <aa-choice-item> choice 3 </aa-choice-item>
 </aa-checkboxes>
 
+<br>
+<b>current checkboxes value</b> : <span id="checkboxes1value"></span>
+</p>
 
-__current checkboxes value__ : <span id="checkboxes1value"></span>
+It is possible to also specify the value that each [``aa-choice-item``](#aa-choice-item) corresponds to. The following example shows a set of
+checkboxes where values for each `aa-choice-item`` have been set. It also shows how the ``horizontal`` attribute is used.
 
+```html
+<aa-checkboxes name="checkboxes2" horizontal>
+  <aa-choice-item value="A"> choice 1 </aa-choice-item>
+  <aa-choice-item value="B"> choice 2 </aa-choice-item>
+  <aa-choice-item value="C"> choice 3 </aa-choice-item>
+</aa-checkboxes>
+```
+
+<p class="myexample">
+<aa-checkboxes id="checkboxes2" horizontal>
+    <aa-choice-item value="A"> choice 1 </aa-choice-item>
+  <aa-choice-item value="B"> choice 2 </aa-choice-item>
+  <aa-choice-item value="C"> choice 3 </aa-choice-item>
+</aa-checkboxes>
+
+<br>
+
+</p>
 <script>
 
   let checkboxes1 = document.getElementById("checkboxes1");
@@ -630,15 +673,16 @@ __current checkboxes value__ : <span id="checkboxes1value"></span>
   })
 </script>
 
-#### attributes
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``horizontal``__ | ``boolean`` | Places the checkboxes in a horizontal layout
+__``name``__ | ``string`` | A name to represent the values generated from the element.
+__``value``__ | ``any`` | An array of the values of the checkboxes that were ticked. Unticked checkboxes are represented by null values.
 
-__``name``__: ``string`` : A name to represent the values generated from the element.
 
-__``value``__: ``any`` : An array of the values of the checkboxes that were ticked. Unticked checkboxes are represented by null values.
-
-#### events
-
-__``change``__ : Dispatched when a selection in the group of choices changes.
+ event |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__ | Dispatched when a selection in the group of choices changes.
 
 
 
@@ -660,6 +704,9 @@ __``change``__ : Dispatched when a selection in the group of choices changes.
 ``<aa-choice-item>`` is an element that implements an available choice for ``<aa-checkboxes>`` and ``<aa-multiple-choice>``. The value corresponding to the chosen item is specified by the ``value`` attribute. If no ``value`` attribute is supplied, the content of the element is taken as its value.
 
 
+
+This example demonstrates the use of the ``value`` attribute vs no ``value`` specified. The first ``aa-choice-item`` emits its content as a value, because no ``value`` attribute is specified. The second one, emits the specified ``value`` attribute as its value.
+
 ```html
 <aa-checkboxes>
   <aa-choice-item> choice 1 </aa-choice-item>
@@ -668,14 +715,17 @@ __``change``__ : Dispatched when a selection in the group of choices changes.
 ```
 
 
-This example demonstrates the use of the ``value`` attribute vs no ``value`` specified. The first ``aa-choice-item`` emits its content as a value, because no ``value`` attribute is specified. The second one, emits the specified ``value`` attribute as its value.
 
+<p class="myexample">
+click on checkboxes to see how the value of the response item changes:
 <aa-checkboxes id="checkboxes2">
   <aa-choice-item> choice 1 </aa-choice-item>
   <aa-choice-item value="2"> choice 2 </aa-choice-item>
 </aa-checkboxes>
+<br>
+<b>current checkboxes value</b> : <span id="checkboxes2value"></span>
+</p>
 
-__current checkboxes value__ : <span id="checkboxes2value"></span>
 
 <script>
 
@@ -690,9 +740,9 @@ __current checkboxes value__ : <span id="checkboxes2value"></span>
 
 
 
-#### attributes
-
-__``value``__: ``any`` : A value that corresponds to choosing this element. If no value is provided, its content is taken as its value.
+ attribute | type  |  |
+|--------------|-------------|----------------------------------------------------------|
+__``value``__| ``any`` | A value that corresponds to choosing this element. If no value is provided, its content is taken as its value.
 
 
 
@@ -710,13 +760,19 @@ __``value``__: ``any`` : A value that corresponds to choosing this element. If n
 
 ``<aa-geolocation>`` queries the browser for the user's GPS location. As a result, a permission request might be triggered to access the user's location.
 
-<aa-geolocation></aa-geolocation>
+To use it, place it in an [``aa-screen``](#aa-screen) element, as any other widget. The user will be asked for their permission to get their location. 
 
-#### attributes
+```html
+<aa-geolocation name="mylocation"></aa-geolocation>
+```
 
-__``name``__: ``string`` : A name to represent the values generated from the element.
 
-__``value``__: ``any`` : The user's longitude and latitude as provided by the browser.
+
+
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the values generated from the element.
+__``value``__| ``any`` | The user's longitude and latitude as provided by the browser.
 
 
 
@@ -726,13 +782,25 @@ __``value``__: ``any`` : The user's longitude and latitude as provided by the br
 
 ## aa-label
 
-The question the user is answering with the response item is oftentimes called "label". Though it is not necessary for the author to use this element, it is provided as a way to annotate the text that specifically serves this purpose, so an author might write for example:``<aa-label>How do you feel?</aa-label>`` to let others that process the html protocol, know that ``How do you feel`` is a label.
+The question the user is answering with the response item is oftentimes called "label". Though it is not necessary for the author to use this element, it is provided as a way to annotate the text that specifically serves this purpose, so an author might write for example:``<aa-label>How do you feel?</aa-label>`` to let others that process the html protocol, know that ``How do you feel`` is a label. It styles its content as bold.
 
+```html
+<aa-label>How do you feel?</aa-label>
+<aa-multiple-choice name="feeling">
+  <aa-choice-item value="1">not okay</aa-choice-item>
+  <aa-choice-item value="2">just okay</aa-choice-item>
+  <aa-choice-item value="3">very okay</aa-choice-item>
+</aa-multiple-choice>
+```
 
-
-
-
-
+<p class="myexample">
+<aa-label>How do you feel?</aa-label>
+<aa-multiple-choice name="feeling">
+  <aa-choice-item value="1">not okay</aa-choice-item>
+  <aa-choice-item value="2">just okay</aa-choice-item>
+  <aa-choice-item value="3">very okay</aa-choice-item>
+</aa-multiple-choice>
+</p>
 
 
 
@@ -743,34 +811,137 @@ The question the user is answering with the response item is oftentimes called "
 
 ## aa-likert-scale
 
-<!-- <aa-likert-scale></aa-likert-scale> -->
+``aa-likert-scale`` is a preconfigured [``aa-multiple-choice``](#aa-multiple-choice) item that implements a 5-item or 7-item rating scale. It also supports labels at start, middle and end.
+
+```html
+<aa-label>scale 1:</aa-label>
+<aa-likert-scale name="my5itemScale" items="5"
+  start-label="start" 
+  middle-label="middle" 
+  end-label="end" 
+  ></aa-likert-scale>
+
+<aa-label>scale 2:</aa-label>
+<aa-likert-scale items="my7itemScale"></aa-likert-scale>
+```
+<p class="myexample" id="aaLikertScaleContainer">
+<aa-label>scale1:</aa-label>
+  <aa-likert-scale id="likert1" name="my5itemScale" start-label="start" middle-label="middle" end-label="end" items="5"></aa-likert-scale>
+  <br>
+  <aa-label>scale 2:</aa-label>
+  <aa-likert-scale id="likert2" items="7"></aa-likert-scale>
+
+  <br>
+  <b>value of scale 1:</b> <span id="likert1value"></span>
+  <br>
+<b>value of scale 2:</b> <span id="likert2value"></span>
+</p>
+
+<script>
+  let likert1 = document.getElementById("likert1");
+  let likert2 = document.getElementById("likert2");
+  let likert1value = document.getElementById("likert1value");
+  let likert2value = document.getElementById("likert2value");
+
+  likert1.addEventListener("change", function(){
+    likert1value.innerText = likert1.value;
+  })
+  likert2.addEventListener("change", function(){
+    likert2value.innerText = likert2.value;
+  })
+</script>
+
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``start-label``__, __``middle-label``__, __``end-label``__ | ``string`` | Labels for the start, middle and end of the likert scale array.
+__``name``__| ``string`` | A name to represent the value generated from the element.
+__``value``__| ``number`` | The value that was chosen on the scale.
+
+ event |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__ | Dispatched when a selection in the group of choices changes.
 
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the value generated from the element.
 
-__``value``__: ``number`` : The value that was chosen on the scale.
+
 
 
 
 ## aa-multiple-choice
 
-<aa-multiple-choice>
+__``aa-checkboxes``__ implements a single response item, where each available choice is specified as a [``aa-choice-item``](#aa-choice-item).
+In the following configuration, the text inside each available choice is used as the value that each `aa-choice-item` corresponds to.
+
+```html
+<aa-multiple-choice name="choices">
   <aa-choice-item> choice 1 </aa-choice-item>
   <aa-choice-item> choice 2 </aa-choice-item>
   <aa-choice-item> choice 3 </aa-choice-item>
 </aa-multiple-choice>
+```
+
+<p class="myexample">
+<aa-multiple-choice id="mchoice1">
+  <aa-choice-item> choice 1 </aa-choice-item>
+  <aa-choice-item> choice 2 </aa-choice-item>
+  <aa-choice-item> choice 3 </aa-choice-item>
+</aa-multiple-choice>
+<br>
+
+<b>current value:</b> <span id="mchoice1value"></span> 
+</p>
+
+<script>
+  let mchoice1 = document.getElementById("mchoice1");
+  let mchoice1value = document.getElementById("mchoice1value");
+  mchoice1.addEventListener("change", function(){
+    mchoice1value.innerText = mchoice1.value;
+  })
+</script>
+
+
+As is the case with [__``aa-checkboxes``__](#aa-checkboxes), ``aa-multiple-choice`` features a ``horizontal`` attribute, and will report ``value`` attributes of ``aa-choice-item`` when specified.
+
+```html
+<aa-multiple-choice name="choices" horizontal>
+  <aa-choice-item value="1"> choice 1 </aa-choice-item>
+  <aa-choice-item value="2"> choice 2 </aa-choice-item>
+  <aa-choice-item value="3"> choice 3 </aa-choice-item>
+</aa-multiple-choice>
+```
+
+<p class="myexample">
+<aa-multiple-choice id="mchoice2" horizontal>
+  <aa-choice-item value="1"> choice 1 </aa-choice-item>
+  <aa-choice-item value="2"> choice 2 </aa-choice-item>
+  <aa-choice-item value="3"> choice 3 </aa-choice-item>
+</aa-multiple-choice>
+<br>
+
+<b>current value:</b> <span id="mchoice2value"></span> 
+</p>
+
+<script>
+  let mchoice2 = document.getElementById("mchoice2");
+  let mchoice2value = document.getElementById("mchoice2value");
+  mchoice2.addEventListener("change", function(){
+    mchoice2value.innerText = mchoice2.value;
+  })
+</script>
 
 
 
 
-#### attributes
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``horizontal``__ | ``boolean`` | Places the available choices in a horizontal layout
+__``name``__| ``string`` | A name to represent the value generated from the element.
+__``value``__| ``string`` | The value of the item that was chosen.
 
-__``name``__: ``string`` : A name to represent the value generated from the element.
-
-__``value``__: ``string`` : The value of the item that was chosen.
-
+ event |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__ | Dispatched when a selection in the group of choices changes.
 
 
 
@@ -782,11 +953,10 @@ __``value``__: ``string`` : The value of the item that was chosen.
 <aa-slider></aa-slider>
 
 
-#### attributes
-
-__``name``__: ``string`` : A name to represent the value generated from the element.
-
-__``value``__: ``number`` : The value of the slider's position.
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the value generated from the element.
+__``value``__| ``number`` | The value of the slider's position.
 
 
 
@@ -800,13 +970,17 @@ __``value``__: ``number`` : The value of the slider's position.
 
 <aa-text-answer></aa-text-answer>
 
-#### attributes
 
-__``name``__: ``string`` : A name to represent the value generated from the element.
 
-__``value``__: ``string`` : The contents of the textfield
+ attribute | type  |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``name``__| ``string`` | A name to represent the value generated from the element.
+__``value``__| ``string`` | The contents of the textfield
 
-#### events
+ event |   |
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__|  Dispatched when the value of the component changes.
+
 
 
 
