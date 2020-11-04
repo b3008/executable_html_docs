@@ -21,7 +21,7 @@
 
     <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
      <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> 
-     <!-- <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  -->
+     <!--  <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  -->
     
     
 
@@ -409,6 +409,11 @@
           </li>
           <li>
             <a href="#putting-it-all-together" class="toc-h1 toc-link" data-title="Putting it all together">Putting it all together</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#example-of-execution" class="toc-h2 toc-link" data-title="example of execution">example of execution</a>
+                  </li>
+              </ul>
           </li>
       </ul>
     </div>
@@ -1310,7 +1315,22 @@ In the following configuration, the text inside each available choice is used as
 </tr>
 </tbody></table>
 <h2 id='aa-slider'>aa-slider</h2>
-<p><aa-slider></aa-slider></p>
+<p><code>aa-slider</code> implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.</p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-slider</span> <span class="na">name=</span><span class="s">"slider"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"100"</span> <span class="na">min-label=</span><span class="s">"min"</span> <span class="na">max-label=</span><span class="s">"max"</span> <span class="na">value=</span><span class="s">"50"</span> <span class="nt">&gt;&lt;/aa-slider&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-slider id="slider1" min="0" max="100" min-label="min" max-label="max" value="50"></aa-slider>
+<br>
+<b>current slider value:</b> <span id="slider1value"></span>
+</p>
+
+<script>
+let slider1 = document.getElementById("slider1");
+let slider1value = document.getElementById("slider1value");
+slider1.addEventListener("change", function(){
+  slider1value.innerText = slider1.value;
+})
+</script>
 
 <table><thead>
 <tr>
@@ -1320,6 +1340,16 @@ In the following configuration, the text inside each available choice is used as
 </tr>
 </thead><tbody>
 <tr>
+<td><strong><code>min-label</code></strong>,  <strong><code>max-label</code></strong></td>
+<td style="text-align: left"><code>string</code></td>
+<td style="text-align: left">Labels for the minimum and maximum values of the slider.</td>
+</tr>
+<tr>
+<td><strong><code>min</code></strong>,  <strong><code>max</code></strong></td>
+<td style="text-align: left"><code>number</code></td>
+<td style="text-align: left">The minimum and maximum numeric values of the range the slider covers.</td>
+</tr>
+<tr>
 <td><strong><code>name</code></strong></td>
 <td style="text-align: left"><code>string</code></td>
 <td style="text-align: left">A name to represent the value generated from the element.</td>
@@ -1327,11 +1357,36 @@ In the following configuration, the text inside each available choice is used as
 <tr>
 <td><strong><code>value</code></strong></td>
 <td style="text-align: left"><code>number</code></td>
-<td style="text-align: left">The value of the slider&#39;s position.</td>
+<td style="text-align: left">The value that was chosen on the slider.</td>
 </tr>
 </tbody></table>
-<h2 id='aa-text-answer'>aa-text-answer</h2>
-<p><aa-text-answer></aa-text-answer></p>
+
+<table><thead>
+<tr>
+<th>event</th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>change</code></strong></td>
+<td style="text-align: left">Dispatched when the value of the slider changes.</td>
+</tr>
+</tbody></table>
+<h2 id='aa-text-answer'>aa-text-answer</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">&gt;&lt;/aa-text-answer&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-text-answer id="text1"></aa-text-answer>
+<br>
+<b>current value</b> <span id="text1value"></span>
+</p>
+
+<script>
+let text1 = document.getElementById("text1");
+let text1value = document.getElementById("text1value");
+text1.addEventListener("change", function(){
+  text1value.innerText = text1.value;
+})
+</script>
 
 <table><thead>
 <tr>
@@ -1363,7 +1418,91 @@ In the following configuration, the text inside each available choice is used as
 <td style="text-align: left">Dispatched when the value of the component changes.</td>
 </tr>
 </tbody></table>
-<h1 id='putting-it-all-together'>Putting it all together</h1><!-- # Errors
+<h1 id='putting-it-all-together'>Putting it all together</h1><h2 id='example-of-execution'>example of execution</h2>
+<p>The following example shows how an infinite loop that can be started and ended can be written with the executable HMTL components, and demonstrates the use of <a href="#aa-session"><code>aa-session</code></a>, <a href="#aa-sequence"><code>aa-sequence</code></a>, <a href="#aa-screen"><code>aa-screen</code></a>, <a href="#aa-function-random"><code>aa-function-random</code></a>, <a href="#aa-choose"><code>aa-choose</code></a>, <a href="#aa-when"><code>aa-when</code></a>, <a href="#aa-otherwise"><code>aa-otherwise</code></a>, <a href="#aa-when"><code>aa-when</code></a></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-session&gt;</span>
+        <span class="nt">&lt;template&gt;</span>
+
+            <span class="nt">&lt;aa-sequence&gt;</span>
+
+                <span class="c">&lt;!-- present an initial screen that prompts starting the process --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span> <span class="na">name=</span><span class="s">"screen1"</span><span class="nt">&gt;</span>
+                    Press next to run
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+
+                <span class="c">&lt;!-- the second screen contains the loop. 
+                Its button will allow us to stop it --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"stop"</span> <span class="na">name=</span><span class="s">"screen2"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;aa-sequence&gt;</span>
+
+                        <span class="c">&lt;!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd --&gt;</span>
+                        <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"rnd"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/aa-function-random&gt;</span>
+
+                        <span class="c">&lt;!-- when rnd is 1 insert 0, otherwise insert 1 --&gt;</span>
+                        <span class="nt">&lt;aa-choose&gt;</span>
+                            <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"rnd==1"</span><span class="nt">&gt;</span>0​<span class="nt">&lt;/aa-when&gt;</span>
+                            <span class="nt">&lt;aa-otherwise&gt;</span>1<span class="nt">&lt;/aa-otherwise&gt;</span>
+                        <span class="nt">&lt;/aa-choose&gt;</span>
+
+                        <span class="c">&lt;!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there --&gt;</span>
+                        <span class="nt">&lt;aa-jump</span> <span class="na">goto=</span><span class="s">"rnd"</span><span class="nt">&gt;&lt;/aa-jump&gt;</span>
+                        <span class="nt">&lt;aa-sequence&gt;</span>
+
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+                <span class="c">&lt;!-- the third and final screen confirms 
+                we are at the end of the outer sequence --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-hidden</span> <span class="na">name=</span><span class="s">"screen3"</span><span class="nt">&gt;</span> 
+                  The end. Reload the page to restart 
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+            <span class="nt">&lt;/aa-sequence&gt;</span>
+
+        <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p class="myexample">
+    <aa-session  id="printExampleSession">
+        <template>
+            <aa-sequence>
+                
+                <!-- present an initial screen that prompts starting the process -->
+                <aa-screen submit-button-text="next">
+                    Press next to run
+                </aa-screen>
+                
+                
+                <!-- the second screen contains the loop. Its button will allow us to stop it -->
+                <aa-screen submit-button-text="stop">
+                    <aa-sequence>
+
+                        <!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd -->
+                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
+
+                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
+                        <aa-choose>
+                            <aa-when test="rnd==1">0​</aa-when>
+                            <aa-otherwise>1</aa-otherwise>
+                        </aa-choose>
+
+                        <!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there -->
+                        <aa-jump goto="rnd"></aa-jump>
+                        <aa-sequence>
+                </aa-screen>
+
+                <!-- the third and final screen confirms we are at the end of the outer sequence -->
+                <aa-screen submit-button-hidden> The end. Reload the page to restart </aa-screen>
+            </aa-sequence>
+
+        </template>
+    </aa-session>
+</p>
+<!-- # Errors
 
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
