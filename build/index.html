@@ -20,8 +20,8 @@
 
 
     <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
-     <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> 
-     <!-- <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  -->
+    <!-- <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> -->
+     <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  
     
     
 
@@ -304,7 +304,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-056680d4.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-673674c2.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-1361b384.js"></script>
 
@@ -1310,7 +1310,22 @@ In the following configuration, the text inside each available choice is used as
 </tr>
 </tbody></table>
 <h2 id='aa-slider'>aa-slider</h2>
-<p><aa-slider></aa-slider></p>
+<p><code>aa-slider</code> implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.</p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-slider</span> <span class="na">name=</span><span class="s">"slider"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"100"</span> <span class="na">min-label=</span><span class="s">"min"</span> <span class="na">max-label=</span><span class="s">"max"</span> <span class="na">value=</span><span class="s">"50"</span> <span class="nt">&gt;&lt;/aa-slider&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-slider id="slider1" min="0" max="100" min-label="min" max-label="max" value="50"></aa-slider>
+<br>
+<b>current slider value:</b> <span id="slider1value"></span>
+</p>
+
+<script>
+let slider1 = document.getElementById("slider1");
+let slider1value = document.getElementById("slider1value");
+slider1.addEventListener("change", function(){
+  slider1value.innerText = slider1.value;
+})
+</script>
 
 <table><thead>
 <tr>
@@ -1320,6 +1335,16 @@ In the following configuration, the text inside each available choice is used as
 </tr>
 </thead><tbody>
 <tr>
+<td><strong><code>min-label</code></strong>,  <strong><code>max-label</code></strong></td>
+<td style="text-align: left"><code>string</code></td>
+<td style="text-align: left">Labels for the minimum and maximum values of the slider.</td>
+</tr>
+<tr>
+<td><strong><code>min</code></strong>,  <strong><code>max</code></strong></td>
+<td style="text-align: left"><code>number</code></td>
+<td style="text-align: left">The minimum and maximum numeric values of the range the slider covers.</td>
+</tr>
+<tr>
 <td><strong><code>name</code></strong></td>
 <td style="text-align: left"><code>string</code></td>
 <td style="text-align: left">A name to represent the value generated from the element.</td>
@@ -1327,11 +1352,36 @@ In the following configuration, the text inside each available choice is used as
 <tr>
 <td><strong><code>value</code></strong></td>
 <td style="text-align: left"><code>number</code></td>
-<td style="text-align: left">The value of the slider&#39;s position.</td>
+<td style="text-align: left">The value that was chosen on the slider.</td>
 </tr>
 </tbody></table>
-<h2 id='aa-text-answer'>aa-text-answer</h2>
-<p><aa-text-answer></aa-text-answer></p>
+
+<table><thead>
+<tr>
+<th>event</th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>change</code></strong></td>
+<td style="text-align: left">Dispatched when the value of the slider changes.</td>
+</tr>
+</tbody></table>
+<h2 id='aa-text-answer'>aa-text-answer</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">&gt;&lt;/aa-text-answer&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-text-answer id="text1"></aa-text-answer>
+<br>
+<b>current value</b> <span id="text1value"></span>
+</p>
+
+<script>
+let text1 = document.getElementById("text1");
+let text1value = document.getElementById("text1value");
+text1.addEventListener("change", function(){
+  text1value.innerText = text1.value;
+})
+</script>
 
 <table><thead>
 <tr>

@@ -949,17 +949,35 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 
 ## aa-slider
 
+``aa-slider`` implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.
 
-<aa-slider></aa-slider>
+```html
+<aa-slider name="slider" min="0" max="100" min-label="min" max-label="max" value="50" ></aa-slider>
+```
 
+<p class="myexample">
+<aa-slider id="slider1" min="0" max="100" min-label="min" max-label="max" value="50"></aa-slider>
+<br>
+<b>current slider value:</b> <span id="slider1value"></span>
+</p>
 
+<script>
+let slider1 = document.getElementById("slider1");
+let slider1value = document.getElementById("slider1value");
+slider1.addEventListener("change", function(){
+  slider1value.innerText = slider1.value;
+})
+</script>
  attribute | type  |  |
 |--------------|:-------------|:----------------------------------------------------------|
+__``min-label``__,  __``max-label``__ | ``string`` | Labels for the minimum and maximum values of the slider.
+__``min``__,  __``max``__ | ``number`` | The minimum and maximum numeric values of the range the slider covers.
 __``name``__| ``string`` | A name to represent the value generated from the element.
-__``value``__| ``number`` | The value of the slider's position.
+__``value``__| ``number`` | The value that was chosen on the slider.
 
-
-
+ event |  |
+|--------------|:-------------|:----------------------------------------------------------|
+__``change``__ | Dispatched when the value of the slider changes.
 
 
 
@@ -967,10 +985,23 @@ __``value``__| ``number`` | The value of the slider's position.
 
 ## aa-text-answer
 
+```html
+<aa-text-answer name="text"></aa-text-answer>
+```
 
-<aa-text-answer></aa-text-answer>
+<p class="myexample">
+<aa-text-answer id="text1"></aa-text-answer>
+<br>
+<b>current value</b> <span id="text1value"></span>
+</p>
 
-
+<script>
+let text1 = document.getElementById("text1");
+let text1value = document.getElementById("text1value");
+text1.addEventListener("change", function(){
+  text1value.innerText = text1.value;
+})
+</script>
 
  attribute | type  |  |
 |--------------|:-------------|:----------------------------------------------------------|
