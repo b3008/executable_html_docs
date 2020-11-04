@@ -519,7 +519,6 @@ __``valueSubmit``__ |Dispatched when the `aa-screen`` button has been clicked.
 
 
 
-
 # Widget Components
 
 
@@ -1017,14 +1016,94 @@ __``change``__|  Dispatched when the value of the component changes.
 
 # Putting it all together
 
+## example of execution
 
+The following example shows how an infinite loop that can be started and ended can be written with the executable HMTL components, and demonstrates the use of [``aa-session``](#aa-session), [``aa-sequence``](#aa-sequence), [``aa-screen``](#aa-screen), [``aa-function-random``](#aa-function-random), [``aa-choose``](#aa-choose), [``aa-when``](#aa-when), [``aa-otherwise``](#aa-otherwise), [``aa-when``](#aa-when)
 
+```html
+    <aa-session>
+        <template>
 
+            <aa-sequence>
+                
+                <!-- present an initial screen that prompts starting the process -->
+                <aa-screen submit-button-text="next" name="screen1">
+                    Press next to run
+                </aa-screen>
+                
+                
+                <!-- the second screen contains the loop. 
+                Its button will allow us to stop it -->
+                <aa-screen submit-button-text="stop" name="screen2">
+                    <aa-sequence>
 
+                        <!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd -->
+                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
 
+                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
+                        <aa-choose>
+                            <aa-when test="rnd==1">0​</aa-when>
+                            <aa-otherwise>1</aa-otherwise>
+                        </aa-choose>
 
+                        <!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there -->
+                        <aa-jump goto="rnd"></aa-jump>
+                        <aa-sequence>
+                
+                </aa-screen>
 
+                <!-- the third and final screen confirms 
+                we are at the end of the outer sequence -->
+                <aa-screen submit-button-hidden name="screen3"> 
+                  The end. Reload the page to restart 
+                </aa-screen>
 
+            </aa-sequence>
+
+        </template>
+    </aa-session>
+```
+
+<p class="myexample">
+    <aa-session  id="printExampleSession">
+        <template>
+            <aa-sequence>
+                
+                <!-- present an initial screen that prompts starting the process -->
+                <aa-screen submit-button-text="next">
+                    Press next to run
+                </aa-screen>
+                
+                
+                <!-- the second screen contains the loop. Its button will allow us to stop it -->
+                <aa-screen submit-button-text="stop">
+                    <aa-sequence>
+
+                        <!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd -->
+                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
+
+                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
+                        <aa-choose>
+                            <aa-when test="rnd==1">0​</aa-when>
+                            <aa-otherwise>1</aa-otherwise>
+                        </aa-choose>
+
+                        <!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there -->
+                        <aa-jump goto="rnd"></aa-jump>
+                        <aa-sequence>
+                </aa-screen>
+
+                <!-- the third and final screen confirms we are at the end of the outer sequence -->
+                <aa-screen submit-button-hidden> The end. Reload the page to restart </aa-screen>
+            </aa-sequence>
+
+        </template>
+    </aa-session>
+</p>
 
 
 

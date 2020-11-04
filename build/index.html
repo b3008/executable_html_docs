@@ -20,8 +20,8 @@
 
 
     <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
-    <!-- <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> -->
-     <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  
+     <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> 
+     <!--  <script type="module" src="http://127.0.0.1:50638/src/index.js"></script>  -->
     
     
 
@@ -409,6 +409,11 @@
           </li>
           <li>
             <a href="#putting-it-all-together" class="toc-h1 toc-link" data-title="Putting it all together">Putting it all together</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#example-of-execution" class="toc-h2 toc-link" data-title="example of execution">example of execution</a>
+                  </li>
+              </ul>
           </li>
       </ul>
     </div>
@@ -1413,7 +1418,91 @@ text1.addEventListener("change", function(){
 <td style="text-align: left">Dispatched when the value of the component changes.</td>
 </tr>
 </tbody></table>
-<h1 id='putting-it-all-together'>Putting it all together</h1><!-- # Errors
+<h1 id='putting-it-all-together'>Putting it all together</h1><h2 id='example-of-execution'>example of execution</h2>
+<p>The following example shows how an infinite loop that can be started and ended can be written with the executable HMTL components, and demonstrates the use of <a href="#aa-session"><code>aa-session</code></a>, <a href="#aa-sequence"><code>aa-sequence</code></a>, <a href="#aa-screen"><code>aa-screen</code></a>, <a href="#aa-function-random"><code>aa-function-random</code></a>, <a href="#aa-choose"><code>aa-choose</code></a>, <a href="#aa-when"><code>aa-when</code></a>, <a href="#aa-otherwise"><code>aa-otherwise</code></a>, <a href="#aa-when"><code>aa-when</code></a></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-session&gt;</span>
+        <span class="nt">&lt;template&gt;</span>
+
+            <span class="nt">&lt;aa-sequence&gt;</span>
+
+                <span class="c">&lt;!-- present an initial screen that prompts starting the process --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span> <span class="na">name=</span><span class="s">"screen1"</span><span class="nt">&gt;</span>
+                    Press next to run
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+
+                <span class="c">&lt;!-- the second screen contains the loop. 
+                Its button will allow us to stop it --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"stop"</span> <span class="na">name=</span><span class="s">"screen2"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;aa-sequence&gt;</span>
+
+                        <span class="c">&lt;!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd --&gt;</span>
+                        <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"rnd"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/aa-function-random&gt;</span>
+
+                        <span class="c">&lt;!-- when rnd is 1 insert 0, otherwise insert 1 --&gt;</span>
+                        <span class="nt">&lt;aa-choose&gt;</span>
+                            <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"rnd==1"</span><span class="nt">&gt;</span>0​<span class="nt">&lt;/aa-when&gt;</span>
+                            <span class="nt">&lt;aa-otherwise&gt;</span>1<span class="nt">&lt;/aa-otherwise&gt;</span>
+                        <span class="nt">&lt;/aa-choose&gt;</span>
+
+                        <span class="c">&lt;!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there --&gt;</span>
+                        <span class="nt">&lt;aa-jump</span> <span class="na">goto=</span><span class="s">"rnd"</span><span class="nt">&gt;&lt;/aa-jump&gt;</span>
+                        <span class="nt">&lt;aa-sequence&gt;</span>
+
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+                <span class="c">&lt;!-- the third and final screen confirms 
+                we are at the end of the outer sequence --&gt;</span>
+                <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-hidden</span> <span class="na">name=</span><span class="s">"screen3"</span><span class="nt">&gt;</span> 
+                  The end. Reload the page to restart 
+                <span class="nt">&lt;/aa-screen&gt;</span>
+
+            <span class="nt">&lt;/aa-sequence&gt;</span>
+
+        <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/aa-session&gt;</span>
+</code></pre></div>
+<p class="myexample">
+    <aa-session  id="printExampleSession">
+        <template>
+            <aa-sequence>
+                
+                <!-- present an initial screen that prompts starting the process -->
+                <aa-screen submit-button-text="next">
+                    Press next to run
+                </aa-screen>
+                
+                
+                <!-- the second screen contains the loop. Its button will allow us to stop it -->
+                <aa-screen submit-button-text="stop">
+                    <aa-sequence>
+
+                        <!-- generate an integer value between 1 and 2, 
+                        storing it in the variable rnd -->
+                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
+
+                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
+                        <aa-choose>
+                            <aa-when test="rnd==1">0​</aa-when>
+                            <aa-otherwise>1</aa-otherwise>
+                        </aa-choose>
+
+                        <!-- go back to the point in the inner sequence that generates rnd, 
+                        and the sequence will continue from there -->
+                        <aa-jump goto="rnd"></aa-jump>
+                        <aa-sequence>
+                </aa-screen>
+
+                <!-- the third and final screen confirms we are at the end of the outer sequence -->
+                <aa-screen submit-button-hidden> The end. Reload the page to restart </aa-screen>
+            </aa-sequence>
+
+        </template>
+    </aa-session>
+</p>
+<!-- # Errors
 
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
