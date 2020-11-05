@@ -96,7 +96,7 @@ An opening tag can also contain __attributes__. Attributes further define detail
 __Paragraph ``<p>`` :  ``<> -->
 
 
-# Executable HTML
+# Executable HTML Components
 
 Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.
 
@@ -1014,11 +1014,18 @@ __``change``__|  Dispatched when the value of the component changes.
 
 
 
+
+
+
 # Putting it all together
 
-## example of execution
+## Example of execution
 
 The following example shows how an infinite loop that can be started and ended can be written with the executable HMTL components, and demonstrates the use of [``aa-session``](#aa-session), [``aa-sequence``](#aa-sequence), [``aa-screen``](#aa-screen), [``aa-function-random``](#aa-function-random), [``aa-choose``](#aa-choose), [``aa-when``](#aa-when), [``aa-otherwise``](#aa-otherwise), [``aa-when``](#aa-when)
+
+Pointless as this example may seem, it indicates the freedom the author has to use the custom components within and as containers for HTML, and allow their Ambulator Assessment document to be very customizable.
+
+
 
 ```html
     <aa-session>
@@ -1028,7 +1035,8 @@ The following example shows how an infinite loop that can be started and ended c
                 
                 <!-- present an initial screen that prompts starting the process -->
                 <aa-screen submit-button-text="next" name="screen1">
-                    Press next to run
+                    <p>Press next to run. <br> 
+                    You might have to chase after the stop button.</p>        
                 </aa-screen>
                 
                 
@@ -1037,14 +1045,17 @@ The following example shows how an infinite loop that can be started and ended c
                 <aa-screen submit-button-text="stop" name="screen2">
                     <aa-sequence>
 
-                        <!-- generate an integer value between 1 and 2, 
+                        <!-- generate an integer value between 1 and 3, 
                         storing it in the variable rnd -->
-                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
+                        <aa-function-random name="rnd" min="1" max="3"></aa-function-random>
 
-                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
+                        <!-- when rnd is 1 insert 😜, 
+                             when rnd is 2 insert 🍕, 
+                             otherwise insert 🎉 -->
                         <aa-choose>
-                            <aa-when test="rnd==1">0​</aa-when>
-                            <aa-otherwise>1</aa-otherwise>
+                            <aa-when test="rnd==1"><span style="font-size:20px">😜</span>​</aa-when>
+                            <aa-when test="rnd==2"><span style="font-size:20px">🍕</span><aa-when>
+                            <aa-otherwise><span style="font-size:20px">🎉</span></aa-otherwise>
                         </aa-choose>
 
                         <!-- go back to the point in the inner sequence that generates rnd, 
@@ -1057,7 +1068,7 @@ The following example shows how an infinite loop that can be started and ended c
                 <!-- the third and final screen confirms 
                 we are at the end of the outer sequence -->
                 <aa-screen submit-button-hidden name="screen3"> 
-                  The end. Reload the page to restart 
+                  <p>The end. Reload the page to restart</h2>
                 </aa-screen>
 
             </aa-sequence>
@@ -1067,42 +1078,116 @@ The following example shows how an infinite loop that can be started and ended c
 ```
 
 <p class="myexample">
-    <aa-session  id="printExampleSession">
-        <template>
-            <aa-sequence>
-                
-                <!-- present an initial screen that prompts starting the process -->
-                <aa-screen submit-button-text="next">
-                    Press next to run
-                </aa-screen>
-                
-                
-                <!-- the second screen contains the loop. Its button will allow us to stop it -->
-                <aa-screen submit-button-text="stop">
-                    <aa-sequence>
+<aa-session  id="printExampleSession">
+<template>
+<aa-sequence>
+  <!-- present an initial screen that prompts starting the process -->
+<aa-screen submit-button-text="next">
+<p style="background:none">Press next to run. 
+<br>
+You might have to chase after the stop button.</p>
+</aa-screen>
 
-                        <!-- generate an integer value between 1 and 2, 
-                        storing it in the variable rnd -->
-                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
 
-                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
-                        <aa-choose>
-                            <aa-when test="rnd==1">0​</aa-when>
-                            <aa-otherwise>1</aa-otherwise>
-                        </aa-choose>
+<!-- the second screen contains the loop. Its button will allow us to stop it -->
+<aa-screen submit-button-text="stop">
+<aa-sequence>
 
-                        <!-- go back to the point in the inner sequence that generates rnd, 
-                        and the sequence will continue from there -->
-                        <aa-jump goto="rnd"></aa-jump>
-                        <aa-sequence>
-                </aa-screen>
+<!-- generate an integer value between 1 and 3, 
+storing it in the variable rnd -->
+<aa-function-random name="rnd" min="1" max="3"></aa-function-random>
 
-                <!-- the third and final screen confirms we are at the end of the outer sequence -->
-                <aa-screen submit-button-hidden> The end. Reload the page to restart </aa-screen>
-            </aa-sequence>
+<!-- when rnd is 1 insert 0, otherwise insert 1 -->
 
-        </template>
-    </aa-session>
+<aa-choose style="font-size:30px">
+    <aa-when test="rnd==1"><span style="font-size:20px">&#128540</span></aa-when>
+    <aa-when test="rnd==2"><span style="font-size:20px">&#127881</span></aa=when>
+    <aa-otherwise><span style="font-size:20px">&#127829</span></aa-otherwise>
+</aa-choose>
+
+<!-- go back to the point in the inner sequence that generates rnd, 
+and the sequence will continue from there -->
+<aa-jump goto="rnd"></aa-jump>
+<aa-sequence>
+</aa-screen>
+
+<!-- the third and final screen confirms we are at the end of the outer sequence -->
+<aa-screen submit-button-hidden> 
+<p style="background:none">The end. Reload the page to restart </p>
+</aa-screen>
+</aa-sequence>
+</template>
+</aa-session>
+</p>
+
+
+
+
+
+
+
+
+
+# Composing a questionnaire
+
+
+The following example demonstrates  a questionnaire that allows participants to report with regard to social encounters.
+It consists of the following sections:
+
+## 1. Participant number and gender 
+
+ The participant inputs an identification number (``pNum``) they have been given. They also report their gender. This only happens once, subsequent uses of the questionnaire retain the value and don't require it again. So it is only displayed if the participant number is not already known.
+ 
+ ```html
+<aa-choose>
+  <aa-when test="participantNumber==null">
+      <!-- if not, then present a screen that asks for it-->
+      <aa-screen name="idScreen" submit-button-text="Next">
+          <p>
+              Welcome!
+              This is the first time you use  this phone to log in.
+              <aa-label>Please enter your participant number</aa-label>
+              <aa-text-answer type="number" name="pNum" label="participant number">
+              </aa-text-answer>
+          </p>
+          <p>
+              <aa-label>Please indicate your gender:</aa-label>
+              <aa-multiple-choice name="gender">
+                  <aa-choice-item> Male </aa-choice-item>
+                  <aa-choice-item> Female </aa-choice-item>
+              </aa-multiple-choice>
+          </p>
+      </aa-screen>
+  </aa-when>
+  <!-- if participantNumber already had a value,  aa-choose will quietly terminate. -->
+</aa-choose>
+```
+
+<p class="myexample">
+<aa-session><template>      
+<aa-choose>
+    <aa-when test="1==1">
+              
+<aa-screen name="idScreen" submit-button-text="Next">
+<p>
+  Welcome!
+  This is the first time you use  this phone to log in.
+  <aa-label>Please enter your participant number</aa-label>
+  <aa-text-answer type="number" name="pNum" label="participant number">
+  </aa-text-answer>
+</p>
+<p>
+  <aa-label>Please indicate your gender:</aa-label>
+  <aa-multiple-choice name="gender">
+      <aa-choice-item> Male </aa-choice-item>
+      <aa-choice-item> Female </aa-choice-item>
+  </aa-multiple-choice>
+</p>
+</aa-screen>
+</aa-when>
+
+</aa-choose>
+</template></aa-session>
 </p>
 
 
@@ -1115,3 +1200,579 @@ The following example shows how an infinite loop that can be started and ended c
 
 
 
+## 2. Context of interaction 
+ 
+ The second section concerns the context in which the interaction took place. This includes a brief textual description of the interaction (``description``), and questions about its time (``time_of_interacton``),  duration (``length_of_interaction``), location (``place_of_interaction``), medium (``how_of_interaction``), presensce of others (``others_present``) and alcolhol consumption (``drinks``).
+
+```html
+<aa-screen name="context" submit-button-text="Next">
+    <p>
+        Welcome back
+        to the social interactions study!
+        <aa-label>Brief description of interaction:</aa-label>
+        <aa-text-answer name="description" label="description of interaction">
+        </aa-text-answer>
+    </p>
+    <p>
+        <aa-label>What time did the interaction start?</aa-label>
+        (Report your interactions as soon as possible!)
+        <aa-text-answer name="time_of_interaction" type="time" label="time of interaction">
+        </aa-text-answer>
+    </p>
+    <p>
+        <aa-label> How long did the interaction last?</aa-label>
+        (in minutes)
+        <aa-text-answer name="length_of_interaction" type="number"
+            label="length of interaction (minutes)">
+        </aa-text-answer>
+    </p>
+
+    <p>
+        <aa-label> Where did the interaction occur?</aa-label>
+        <aa-multiple-choice name="place_of_interaction">
+            <aa-choice-item value="1"> Student home/own home </aa-choice-item>
+            <aa-choice-item value="2"> Family home </aa-choice-item>
+            <aa-choice-item value="3"> Work/School </aa-choice-item>
+            <aa-choice-item value="4"> Recreation (cafe, cinema, etc) </aa-choice-item>
+            <aa-choice-item> Other </aa-choice-item>
+        </aa-multiple-choice>
+    </p>
+    <p>
+        <aa-label> How?</aa-label>
+        <aa-multiple-choice name="how_of_interaction" single-value>
+            <aa-choice-item value="1"> In person (face-to-face) </aa-choice-item>
+            <aa-choice-item value="2"> Per telephone </aa-choice-item>
+            <aa-choice-item value="3"> Via video (e.g. Skype) </aa-choice-item>
+        </aa-multiple-choice>
+    </p>
+
+    <p>
+        <aa-label> Who was present?</aa-label>
+        <aa-multiple-choice name="others_present" single-value>
+            <aa-choice-item value="1">One other </aa-choice-item>
+            <aa-choice-item value="2"> Multiple people, primary other </aa-choice-item>
+            <aa-choice-item value="3"> Multiple people, no primary other </aa-choice-item>
+        </aa-multiple-choice>
+    </p>
+
+    <p>
+        <aa-label> How many alcoholic drinks were consumed?</aa-label>
+        (within 3hrs before or during the interaction)
+        <aa-text-answer type="number" name="drinks" label="number of drinks">
+        </aa-text-answer>
+    </p>
+
+</aa-screen>
+```
+
+<p class="myexample">
+<aa-session><template>
+      <aa-screen name="context" submit-button-text="Next">
+
+<p>
+    Welcome back
+    to the social interactions study!
+    <aa-label>Brief description of interaction:</aa-label>
+    <aa-text-answer name="description" label="description of interaction">
+    </aa-text-answer>
+</p>
+<p>
+    <aa-label>What time did the interaction start?</aa-label>
+    (Report your interactions as soon as possible!)
+    <aa-text-answer name="time_of_interaction" type="time" label="time of interaction">
+    </aa-text-answer>
+</p>
+<p>
+    <aa-label> How long did the interaction last?</aa-label>
+    (in minutes)
+    <aa-text-answer name="length_of_interaction" type="number"
+        label="length of interaction (minutes)">
+    </aa-text-answer>
+</p>
+
+<p>
+    <aa-label> Where did the interaction occur?</aa-label>
+    <aa-multiple-choice name="place_of_interaction">
+        <aa-choice-item value="1"> Student home/own home </aa-choice-item>
+        <aa-choice-item value="2"> Family home </aa-choice-item>
+        <aa-choice-item value="3"> Work/School </aa-choice-item>
+        <aa-choice-item value="4"> Recreation (cafe, cinema, etc) </aa-choice-item>
+        <aa-choice-item> Other </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+<p>
+    <aa-label> How?</aa-label>
+    <aa-multiple-choice name="how_of_interaction" single-value>
+        <aa-choice-item value="1"> In person (face-to-face) </aa-choice-item>
+        <aa-choice-item value="2"> Per telephone </aa-choice-item>
+        <aa-choice-item value="3"> Via video (e.g. Skype) </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+
+<p>
+    <aa-label> Who was present?</aa-label>
+    <aa-multiple-choice name="others_present" single-value>
+        <aa-choice-item value="1">One other </aa-choice-item>
+        <aa-choice-item value="2"> Multiple people, primary other </aa-choice-item>
+        <aa-choice-item value="3"> Multiple people, no primary other </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+
+<p>
+    <aa-label> How many alcoholic drinks were consumed?</aa-label>
+    (within 3hrs before or during the interaction)
+    <aa-text-answer type="number" name="drinks" label="number of drinks">
+    </aa-text-answer>
+</p>
+
+</aa-screen>
+</template></aa-session>
+</p>
+
+
+
+## 3. About the primary other.
+
+ If a primary other was present, a subsequennt question asks who it was. If no primary other was present, it does not appear.
+
+```html
+<aa-choose>
+    <aa-when test="others_present!=3">
+        <aa-screen name="partner" submit-button-text="Next">
+            <aa-label> Who was the (primary) other?</aa-label>
+            <aa-multiple-choice name="partsex">
+                <aa-choice-item>Male</aa-choice-item>
+                <aa-choice-item>Female</aa-choice-item>
+            </aa-multiple-choice>
+
+            <aa-multiple-choice style="margin-top:40px;" name="relation1">
+                <aa-choice-item value="1">Supervisor/teacher</aa-choice-item>
+                <aa-choice-item value="2">Co-worker/fellow student</aa-choice-item>
+                <aa-choice-item value="3">Supervisee</aa-choice-item>
+                <aa-choice-item value="4">Acquaintance</aa-choice-item>
+                <aa-choice-item value="5">Friend</aa-choice-item>
+                <aa-choice-item value="6">Romantic partner</aa-choice-item>
+                <aa-choice-item value="7">Father/mother</aa-choice-item>
+                <aa-choice-item value="8">Brother/sister</aa-choice-item>
+                <aa-choice-item value="9">Other</aa-choice-item>
+            </aa-multiple-choice>
+        </aa-screen>
+    </aa-when>
+</aa-choose>
+```
+
+<p class="myexample">
+<aa-session><template>
+<aa-choose>
+<aa-when test="1==1">
+<aa-screen name="partner" submit-button-text="Next">
+    <aa-label> Who was the (primary) other?</aa-label>
+    <aa-multiple-choice name="partsex">
+        <aa-choice-item>Male</aa-choice-item>
+        <aa-choice-item>Female</aa-choice-item>
+    </aa-multiple-choice>
+
+  <aa-multiple-choice style="margin-top:40px;" name="relation1">
+      <aa-choice-item value="1">Supervisor/teacher</aa-choice-item>
+      <aa-choice-item value="2">Co-worker/fellow student</aa-choice-item>
+      <aa-choice-item value="3">Supervisee</aa-choice-item>
+      <aa-choice-item value="4">Acquaintance</aa-choice-item>
+      <aa-choice-item value="5">Friend</aa-choice-item>
+      <aa-choice-item value="6">Romantic partner</aa-choice-item>
+      <aa-choice-item value="7">Father/mother</aa-choice-item>
+      <aa-choice-item value="8">Brother/sister</aa-choice-item>
+      <aa-choice-item value="9">Other</aa-choice-item>
+  </aa-multiple-choice>
+</aa-screen>
+</aa-when>
+</aa-choose>
+</template>
+</aa-session>
+</p>
+
+
+
+
+
+
+
+
+
+```html
+<aa-session  name="ecr"><template>
+
+<aa-sequence>
+    <!--  first, check to see if  the pNum variable 
+          already has a value-->
+    <aa-choose>
+        <aa-when test="participantNumber==null">
+            <!-- if not, then present a screen that asks for it-->
+            <aa-screen name="idScreen" submit-button-text="Next">
+                <p>
+                    Welcome!
+                    This is the first time you use  this phone to log in.
+                    <aa-label>Please enter your participant number</aa-label>
+                    <aa-text-answer type="number" name="pNum" label="participant number">
+                    </aa-text-answer>
+                </p>
+                <p>
+                    <aa-label>Please indicate your gender:</aa-label>
+                    <aa-multiple-choice name="gender">
+                        <aa-choice-item> Male </aa-choice-item>
+                        <aa-choice-item> Female </aa-choice-item>
+                    </aa-multiple-choice>
+                </p>
+            </aa-screen>
+        </aa-when>
+        <!-- if participantNumber already had a value,  aa-choose will quietly terminate. -->
+    </aa-choose>
+
+
+    <!--proceed to the next screen-->
+    <aa-screen name="context" submit-button-text="Next">
+
+        <p>
+            Welcome back
+            to the social interactions study!
+            <aa-label>Brief description of interaction:</aa-label>
+            <aa-text-answer name="description" label="description of interaction">
+            </aa-text-answer>
+        </p>
+        <p>
+            <aa-label>What time did the interaction start?</aa-label>
+            (Report your interactions as soon as possible!)
+            <aa-text-answer name="time_of_interaction" type="time" label="time of interaction">
+            </aa-text-answer>
+        </p>
+        <p>
+            <aa-label> How long did the interaction last?</aa-label>
+            (in minutes)
+            <aa-text-answer name="length_of_interaction" type="number"
+                label="length of interaction (minutes)">
+            </aa-text-answer>
+        </p>
+
+        <p>
+            <aa-label> Where did the interaction occur?</aa-label>
+            <aa-multiple-choice name="place_of_interaction">
+                <aa-choice-item value="1"> Student home/own home </aa-choice-item>
+                <aa-choice-item value="2"> Family home </aa-choice-item>
+                <aa-choice-item value="3"> Work/School </aa-choice-item>
+                <aa-choice-item value="4"> Recreation (cafe, cinema, etc) </aa-choice-item>
+                <aa-choice-item> Other </aa-choice-item>
+            </aa-multiple-choice>
+        </p>
+        <p>
+            <aa-label> How?</aa-label>
+            <aa-multiple-choice name="how_of_interaction" single-value>
+                <aa-choice-item value="1"> In person (face-to-face) </aa-choice-item>
+                <aa-choice-item value="2"> Per telephone </aa-choice-item>
+                <aa-choice-item value="3"> Via video (e.g. Skype) </aa-choice-item>
+            </aa-multiple-choice>
+        </p>
+
+        <p>
+            <aa-label> Who was present?</aa-label>
+            <aa-multiple-choice name="others_present" single-value>
+                <aa-choice-item value="1">One other </aa-choice-item>
+                <aa-choice-item value="2"> Multiple people, primary other </aa-choice-item>
+                <aa-choice-item value="3"> Multiple people, no primary other </aa-choice-item>
+            </aa-multiple-choice>
+        </p>
+
+        <p>
+            <aa-label> How many alcoholic drinks were consumed?</aa-label>
+            (within 3hrs before or during the interaction)
+            <aa-text-answer type="number" name="drinks" label="number of drinks">
+            </aa-text-answer>
+        </p>
+
+    </aa-screen>
+
+
+    <!-- if there was a primary other display a screen asking about them -->
+    <aa-choose>
+        <aa-when test="others_present!=3">
+            <aa-screen name="partner" submit-button-text="Next">
+                <aa-label> Who was the (primary) other?</aa-label>
+                <aa-multiple-choice name="partsex">
+                    <aa-choice-item>Male</aa-choice-item>
+                    <aa-choice-item>Female</aa-choice-item>
+                </aa-multiple-choice>
+
+                <aa-multiple-choice style="margin-top:40px;" name="relation1">
+                    <aa-choice-item value="1">Supervisor/teacher</aa-choice-item>
+                    <aa-choice-item value="2">Co-worker/fellow student</aa-choice-item>
+                    <aa-choice-item value="3">Supervisee</aa-choice-item>
+                    <aa-choice-item value="4">Acquaintance</aa-choice-item>
+                    <aa-choice-item value="5">Friend</aa-choice-item>
+                    <aa-choice-item value="6">Romantic partner</aa-choice-item>
+                    <aa-choice-item value="7">Father/mother</aa-choice-item>
+                    <aa-choice-item value="8">Brother/sister</aa-choice-item>
+                    <aa-choice-item value="9">Other</aa-choice-item>
+                </aa-multiple-choice>
+            </aa-screen>
+        </aa-when>
+    </aa-choose>
+
+
+
+
+
+
+    <!-- choose one set of behaviours out of 4
+at random
+-->
+
+    <aa-function-random min="1" max="4" name="random_choice">
+    </aa-function-random>
+
+
+    <aa-choose>
+        <aa-when test="random_choice==1">
+            <aa-screen name="behaviours1_screen">
+                <aa-label> Did you do any of the following?</aa-label>
+                (Multiple answers are possible)
+
+                <aa-checkboxes name="behaviours1">
+                    <aa-choice-item value="1">
+                        I listened attentively to the other(s)
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I tried to get the other(s)
+                        to do something else
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I let other(s) make plans or decisions
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I expressed the 'real me' instead
+                        of my public persona or 'image'
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I confronted the other(s) about
+                        something I did not like
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I expressed affection
+                        with words or gestures
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I spoke in a clear firm voice
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I withheld useful information
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I did not say how I felt
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I compromised about a decision
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I took the lead in
+                        planning/organizing a project or activity
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I avoided taking the lead
+                        or being responsible
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I ignored the other(s) comments
+                    </aa-choice-item>
+                </aa-checkboxes>
+            </aa-screen>
+        </aa-when>
+
+
+
+        <aa-when test="random_choice==2">
+            <aa-screen name="behaviours2_screen" submit-button-text="Next">
+                <aa-label> Did you do any of the following?</aa-label>
+                (Multiple answers are possible)
+                <aa-checkboxes name="behaviours2">
+                    <aa-choice-item value="1">
+                        I criticized the other(s)
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I smiled and laughed with the other(s)
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I spoke softly
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I made a sarcastic comment
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I expressed an opinion
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I complimented or praised the other person(s)
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I did not express disagreement when I thought it
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I gave incorrect information
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I got immediately to the point
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I made a concession to avoid unpleaseantness
+                    </aa-choice-item>
+                    <aa-choice-item value="1">
+                        I did not state my own views</aa-choice-item>
+                    <aa-choice-item value="1">
+                        I expressed the 'real me' instead of my public persona or 'image'
+                    </aa-choice-item>
+                </aa-checkboxes>
+            </aa-screen>
+        </aa-when>
+
+
+
+        <aa-when test="random_choice==3">
+            <aa-screen name="behaviours3_screen" submit-button-text="Next">
+                <aa-label> Did you do any of the following?</aa-label>
+                (Multiple answers are possible)
+
+                <aa-checkboxes name="behaviours3">
+                    <aa-choice-item value="1">I waited for the other person(s) to talk or act first
+                    </aa-choice-item>
+                    <aa-choice-item value="1">I stated strongly that I did not like or that I would not
+                        do
+                        something</aa-choice-item>
+                    <aa-choice-item value="1">I assigned someone to a task</aa-choice-item>
+                    <aa-choice-item value="1">I exchanged pleasantries</aa-choice-item>
+                    <aa-choice-item value="1">I did not say what was on my mind</aa-choice-item>
+                    <aa-choice-item value="1">I did not respond to the other(s) questions or comments
+                    </aa-choice-item>
+                    <aa-choice-item value="1">I made a suggestion</aa-choice-item>
+                    <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                        'image'</aa-choice-item>
+                    <aa-choice-item value="1">I showed sympathy</aa-choice-item>
+                    <aa-choice-item value="1">I did not say what I wanted directly</aa-choice-item>
+                    <aa-choice-item value="1">I discredited what someone said</aa-choice-item>
+                    <aa-choice-item value="1">I asked the other(s) to do something</aa-choice-item>
+                    <aa-choice-item value="1">I spoke favorably of someone who was not present
+                    </aa-choice-item>
+                </aa-checkboxes>
+            </aa-screen>
+        </aa-when>
+
+        <aa-otherwise>
+
+            <aa-screen name="behaviours4_screen" submit-button-text="Next">
+                <aa-label>Did you do any of the following?</aa-label>
+                (Multiple answers are possible)
+                <aa-checkboxes name="behaviours4">
+                    <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                        'image'</aa-choice-item>
+                    <aa-choice-item value="1">I showed impatience</aa-choice-item>
+                    <aa-choice-item value="1">I asked for a volunteer</aa-choice-item>
+                    <aa-choice-item value="1">I went along with the other(s)</aa-choice-item>
+                    <aa-choice-item value="1">I raised my voice</aa-choice-item>
+                    <aa-choice-item value="1">I gave information</aa-choice-item>
+                    <aa-choice-item value="1">I expressed reassurance</aa-choice-item>
+                    <aa-choice-item value="1">I gave in</aa-choice-item>
+                    <aa-choice-item value="1">I demanded that the other(s) do what I wanted
+                    </aa-choice-item>
+                    <aa-choice-item value="1">I set goals for the other(s) or for us</aa-choice-item>
+                    <aa-choice-item value="1">I pointed out to the other(s) where there was agreement
+                    </aa-choice-item>
+                    <aa-choice-item value="1">I spoke only when I was spoken to</aa-choice-item>
+                    </aa-choice-item>
+                </aa-checkboxes>
+            </aa-screen>
+
+        </aa-otherwise>
+
+
+    </aa-choose>
+
+
+    <aa-screen name="feelings">
+
+        <div>
+            <aa-label> How did you feel?</aa-label>
+            (0 = Not at all, 6 = Extremely)
+        </div>
+
+
+        <aa-label> Surprised</aa-label>
+        <aa-likert-scale name="surprised" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Worried/anxious</aa-label>
+        <aa-likert-scale name="worried" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Happy</aa-label>
+        <aa-likert-scale name="happy" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Frustrated</aa-label>
+        <aa-likert-scale name="frustrated" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Pleased</aa-label>
+        <aa-likert-scale name="pleased" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Angry/hostile</aa-label>
+        <aa-likert-scale name="angry" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Homesick</aa-label>
+        <aa-likert-scale name="homesick" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Enjoyment/fun</aa-label>
+        <aa-likert-scale name="enjoyment" items="7" start-item="0"></aa-likert-scale>
+
+
+        <aa-label> Joyful</aa-label>
+        <aa-likert-scale name="joyful" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Depressed/blue</aa-label>
+        <aa-likert-scale name="depressed" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Energized </aa-label>
+        <aa-likert-scale name="energized" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Ashamed </aa-label>
+        <aa-likert-scale name="ashamed" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Safe</aa-label>
+        <aa-likert-scale name="Safe" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Lonely</aa-label>
+        <aa-likert-scale name="lonely" items="7" start-item="0"></aa-likert-scale>
+
+        <aa-label> Disgusted by the other(s)</aa-label>
+        <aa-likert-scale name="disgusted" items="7" start-item="0"></aa-likert-scale>
+
+    </aa-screen>
+
+    <aa-choose>
+        <aa-when test="others_present!=3">
+            <aa-screen name="perceptions">
+                <div>
+                    <aa-label> Indicate how the (primary) other behaved towards you in this interaction
+                    </aa-label>
+                </div>
+                <aa-affect-grid style="margin-top:40px" top-left-label="Critical"
+                    top-label="Assured/Dominant" top-right-label="Engaging"
+                    left-label="Cold/Quarrelsome" right-label="Warm/Aggreeable"
+                    bottom-left-label="Withdrawn" bottom-label="Unassured/Submissive"
+                    bottom-right-label="Deferring" rows=11 columns=11>
+                </aa-affect-grid>
+            </aa-screen>
+        </aa-when>
+    </aa-choose>
+
+
+    <aa-screen submit-button-hidden="true" name="ending">
+        <h3>Thank you!</h3>
+        You can now close this window.
+    </aa-screen>
+
+</aa-sequence>
+
+</template></aa-session>
+
+```
