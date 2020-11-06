@@ -304,7 +304,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-673674c2.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-8a3416f9.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-1361b384.js"></script>
 
@@ -345,7 +345,7 @@
               </ul>
           </li>
           <li>
-            <a href="#executable-html" class="toc-h1 toc-link" data-title="Executable HTML">Executable HTML</a>
+            <a href="#executable-html-components" class="toc-h1 toc-link" data-title="Executable HTML Components">Executable HTML Components</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#aa-session" class="toc-h2 toc-link" data-title="aa-session">aa-session</a>
@@ -411,7 +411,27 @@
             <a href="#putting-it-all-together" class="toc-h1 toc-link" data-title="Putting it all together">Putting it all together</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#example-of-execution" class="toc-h2 toc-link" data-title="example of execution">example of execution</a>
+                    <a href="#example-of-execution" class="toc-h2 toc-link" data-title="Example of execution">Example of execution</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#composing-a-questionnaire" class="toc-h1 toc-link" data-title="Composing a questionnaire">Composing a questionnaire</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#1-participant-number-and-gender" class="toc-h2 toc-link" data-title="1. Participant number and gender">1. Participant number and gender</a>
+                  </li>
+                  <li>
+                    <a href="#2-context-of-interaction" class="toc-h2 toc-link" data-title="2. Context of interaction">2. Context of interaction</a>
+                  </li>
+                  <li>
+                    <a href="#3-about-the-primary-other" class="toc-h2 toc-link" data-title="3. About the primary other.">3. About the primary other.</a>
+                  </li>
+                  <li>
+                    <a href="#5-behaviours" class="toc-h2 toc-link" data-title="5. Behaviours">5. Behaviours</a>
+                  </li>
+                  <li>
+                    <a href="#6-feelings" class="toc-h2 toc-link" data-title="6. Feelings">6. Feelings</a>
                   </li>
               </ul>
           </li>
@@ -448,19 +468,21 @@ Welcome to the Ambulatory Assessment Components Reference! </p>
 and that a certain syntax is used to represent them. </p>
 <h2 id='hypertext-markup'>HyperText Markup</h2>
 <p>For example, Take a look at these two lines of text.</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code>Wikipedia is at www.wikipedia.org
 
 Wikipedia is <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.wikipedia.org"</span><span class="nt">&gt;</span>here<span class="nt">&lt;/a&gt;</span>
 </code></pre></div>
-<p>The first line contains a simple mention of a url. The second one contains themarkup <code>&lt;a href=&quot;...&quot;&gt;here&lt;/a&gt;</code> that tells the computer to display the content( the word <code>here</code> ) of that markup (<code>&lt;a&gt;</code>) as a clickable link, that links to the url contained in the attribute <code>href</code>.  <code>a</code> stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.</p>
-
-<p>The lines above are each displayed as:</p>
-
 <p class="myexample">
   Wikipedia is at www.wikipedia.org
   <br><br>
   Wikipedia is  <a href="www.wikipedia.org">here</a>
 </p>
+
+<p>The first line contains a simple mention of a url. The second one contains themarkup <code>&lt;a href=&quot;...&quot;&gt;here&lt;/a&gt;</code> that tells the computer to display the content( the word <code>here</code> ) of that markup (<code>&lt;a&gt;</code>) as a clickable link, that links to the url contained in the attribute <code>href</code>.  <code>a</code> stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.</p>
+
+<p>So in this case, the anchor instructs the browser to display what would otherwise be plain text, as a functional element of the interface.</p>
 <h2 id='tags-attributes-elements'>Tags, Attributes, Elements</h2>
 <p>In HTML, the annotation syntax is called <strong>HTML tag</strong>, which consists of two parts; an <strong><em>opening tag</em></strong>, e.g., <strong><code>&lt;a&gt;</code></strong>  and a corresponding <strong><em>closing tag</em></strong>, e.g, <strong><code>&lt;/a&gt;</code></strong>. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an <strong>HTML element</strong>. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.</p>
 
@@ -470,7 +492,7 @@ Wikipedia is <span class="nt">&lt;a</span> <span class="na">href=</span><span cl
 
 
 __Paragraph ``<p>`` :  ``<> -->
-<h1 id='executable-html'>Executable HTML</h1>
+<h1 id='executable-html-components'>Executable HTML Components</h1>
 <p>Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.</p>
 <h2 id='aa-session'>aa-session</h2>
 <p><code>aa-session</code> is the container element for the whole ambulatory assessment protocol. It should always have a <code>template</code> as an immediate child. <code>template</code> allows the browser to ignore the protocol content, so that <code>aa-session</code> can parse
@@ -538,6 +560,10 @@ __Paragraph ``<p>`` :  ``<> -->
 <!-- ``aa-sequence`` is an element that implements sequential execution. -->
 
 <p><code>aa-sequence</code> implements sequential insertion of each of its children into the document. Insertion of the next child can be triggered either by an event, or manually by calling its member method <code>.next()</code>. </p>
+
+<p>This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1 has been inserted in the document, and set a click event listener, that calls the</code>.next()<code>member function of</code>#sequence1``. Pressing the next&quot; button adds content as per the sequence.</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
   <span class="nt">&lt;template&gt;</span>
 
@@ -564,8 +590,6 @@ __Paragraph ``<p>`` :  ``<> -->
   <span class="p">})</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
-<p>This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1 has been inserted in the document, and set a click event listener, that calls the</code>.next()<code>member function of</code>#sequence1``. Pressing the next&quot; button adds content as per the sequence.</p>
-
 <p id="container1" class="myexample"></p>
 
 <!-- The following is a live example of a working sequence, which I want to be part of the natural
@@ -612,7 +636,7 @@ setTimeout(function(){
 
 <p>The sequence can also listen for an event called <code>endEvent</code>, which its children can dispatch to let it know that it should insert its next element.</p>
 
-<p><a href="#aa-screen"><code>aa-screen</code></a>, discussed below, is an element that simplifies managing <code>aa-sequence</code> in user interactions.</p>
+<p>We can ignore the <code>&lt;script&gt;</code> section of the example for now. <a href="#aa-screen"><code>aa-screen</code></a>, discussed below, is an element that simplifies managing an <code>aa-sequence</code> in user interactions.</p>
 
 <table><thead>
 <tr>
@@ -1152,26 +1176,33 @@ click on checkboxes to see how the value of the response item changes:
 </aa-multiple-choice>
 </p>
 <h2 id='aa-likert-scale'>aa-likert-scale</h2>
-<p><code>aa-likert-scale</code> is a preconfigured <a href="#aa-multiple-choice"><code>aa-multiple-choice</code></a> item that implements a 5-item or 7-item rating scale. It also supports labels at start, middle and end.</p>
+<p><code>aa-likert-scale</code> is a preconfigured <a href="#aa-multiple-choice"><code>aa-multiple-choice</code></a> item that implements a n-item rating scale. It also supports labels at start, middle and end, and allows the author to specify the number at which rating starts</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-label&gt;</span>scale 1:<span class="nt">&lt;/aa-label&gt;</span>
 <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"my5itemScale"</span> <span class="na">items=</span><span class="s">"5"</span>
   <span class="na">start-label=</span><span class="s">"start"</span> 
   <span class="na">middle-label=</span><span class="s">"middle"</span> 
   <span class="na">end-label=</span><span class="s">"end"</span> 
+  <span class="na">start-item=</span><span class="s">"0"</span>
   <span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
-
-<span class="nt">&lt;aa-label&gt;</span>scale 2:<span class="nt">&lt;/aa-label&gt;</span>
-<span class="nt">&lt;aa-likert-scale</span> <span class="na">items=</span><span class="s">"my7itemScale"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 </code></pre></div>
 <p class="myexample" id="aaLikertScaleContainer">
-<aa-label>scale1:</aa-label>
-  <aa-likert-scale id="likert1" name="my5itemScale" start-label="start" middle-label="middle" end-label="end" items="5"></aa-likert-scale>
-  <br>
-  <aa-label>scale 2:</aa-label>
-  <aa-likert-scale id="likert2" items="7"></aa-likert-scale>
 
+<aa-label>scale1:</aa-label>
+  <aa-likert-scale id="likert1" name="my5itemScale" start-label="start" middle-label="middle" end-label="end" items="5" start-item="0"></aa-likert-scale>
   <br>
   <b>value of scale 1:</b> <span id="likert1value"></span>
+  <br>
+</p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-label&gt;</span>scale 2:<span class="nt">&lt;/aa-label&gt;</span>
+<span class="nt">&lt;aa-likert-scale</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">name=</span><span class="s">"my7itemScale"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
+</code></pre></div>
+<p class="myexample">
+  <aa-label>scale 2:</aa-label>
+  <aa-likert-scale id="likert2" items="7"></aa-likert-scale>
   <br>
 <b>value of scale 2:</b> <span id="likert2value"></span>
 </p>
@@ -1228,6 +1259,8 @@ click on checkboxes to see how the value of the response item changes:
 <h2 id='aa-multiple-choice'>aa-multiple-choice</h2>
 <p><strong><code>aa-checkboxes</code></strong> implements a single response item, where each available choice is specified as a <a href="#aa-choice-item"><code>aa-choice-item</code></a>.
 In the following configuration, the text inside each available choice is used as the value that each <code>aa-choice-item</code> corresponds to.</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"choices"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;aa-choice-item&gt;</span> choice 1 <span class="nt">&lt;/aa-choice-item&gt;</span>
   <span class="nt">&lt;aa-choice-item&gt;</span> choice 2 <span class="nt">&lt;/aa-choice-item&gt;</span>
@@ -1254,6 +1287,8 @@ In the following configuration, the text inside each available choice is used as
 </script>
 
 <p>As is the case with <a href="#aa-checkboxes"><strong><code>aa-checkboxes</code></strong></a>, <code>aa-multiple-choice</code> features a <code>horizontal</code> attribute, and will report <code>value</code> attributes of <code>aa-choice-item</code> when specified.</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"choices"</span> <span class="na">horizontal</span><span class="nt">&gt;</span>
   <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span> choice 1 <span class="nt">&lt;/aa-choice-item&gt;</span>
   <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span> choice 2 <span class="nt">&lt;/aa-choice-item&gt;</span>
@@ -1316,7 +1351,14 @@ In the following configuration, the text inside each available choice is used as
 </tbody></table>
 <h2 id='aa-slider'>aa-slider</h2>
 <p><code>aa-slider</code> implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.</p>
-<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-slider</span> <span class="na">name=</span><span class="s">"slider"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"100"</span> <span class="na">min-label=</span><span class="s">"min"</span> <span class="na">max-label=</span><span class="s">"max"</span> <span class="na">value=</span><span class="s">"50"</span> <span class="nt">&gt;&lt;/aa-slider&gt;</span>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-slider</span> 
+  <span class="na">name=</span><span class="s">"slider"</span> 
+  <span class="na">min=</span><span class="s">"0"</span>  <span class="na">max=</span><span class="s">"100"</span> 
+  <span class="na">min-label=</span><span class="s">"min"</span> <span class="na">max-label=</span><span class="s">"max"</span> 
+  <span class="na">value=</span><span class="s">"50"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/aa-slider&gt;</span>
 </code></pre></div>
 <p class="myexample">
 <aa-slider id="slider1" min="0" max="100" min-label="min" max-label="max" value="50"></aa-slider>
@@ -1372,7 +1414,9 @@ slider1.addEventListener("change", function(){
 <td style="text-align: left">Dispatched when the value of the slider changes.</td>
 </tr>
 </tbody></table>
-<h2 id='aa-text-answer'>aa-text-answer</h2><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">&gt;&lt;/aa-text-answer&gt;</span>
+<h2 id='aa-text-answer'>aa-text-answer</h2>
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"text"</span><span class="nt">&gt;&lt;/aa-text-answer&gt;</span>
 </code></pre></div>
 <p class="myexample">
 <aa-text-answer id="text1"></aa-text-answer>
@@ -1418,8 +1462,12 @@ text1.addEventListener("change", function(){
 <td style="text-align: left">Dispatched when the value of the component changes.</td>
 </tr>
 </tbody></table>
-<h1 id='putting-it-all-together'>Putting it all together</h1><h2 id='example-of-execution'>example of execution</h2>
+<h1 id='putting-it-all-together'>Putting it all together</h1><h2 id='example-of-execution'>Example of execution</h2>
 <p>The following example shows how an infinite loop that can be started and ended can be written with the executable HMTL components, and demonstrates the use of <a href="#aa-session"><code>aa-session</code></a>, <a href="#aa-sequence"><code>aa-sequence</code></a>, <a href="#aa-screen"><code>aa-screen</code></a>, <a href="#aa-function-random"><code>aa-function-random</code></a>, <a href="#aa-choose"><code>aa-choose</code></a>, <a href="#aa-when"><code>aa-when</code></a>, <a href="#aa-otherwise"><code>aa-otherwise</code></a>, <a href="#aa-when"><code>aa-when</code></a></p>
+
+<p>Pointless as this example may seem, it indicates the freedom the author has to use the custom components within and as containers for HTML, and allow their Ambulator Assessment document to be very customizable.</p>
+
+<p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-session&gt;</span>
         <span class="nt">&lt;template&gt;</span>
 
@@ -1427,7 +1475,8 @@ text1.addEventListener("change", function(){
 
                 <span class="c">&lt;!-- present an initial screen that prompts starting the process --&gt;</span>
                 <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"next"</span> <span class="na">name=</span><span class="s">"screen1"</span><span class="nt">&gt;</span>
-                    Press next to run
+                    <span class="nt">&lt;p&gt;</span>Press next to run. <span class="nt">&lt;br&gt;</span> 
+                    You might have to chase after the stop button.<span class="nt">&lt;/p&gt;</span>        
                 <span class="nt">&lt;/aa-screen&gt;</span>
 
 
@@ -1436,14 +1485,17 @@ text1.addEventListener("change", function(){
                 <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-text=</span><span class="s">"stop"</span> <span class="na">name=</span><span class="s">"screen2"</span><span class="nt">&gt;</span>
                     <span class="nt">&lt;aa-sequence&gt;</span>
 
-                        <span class="c">&lt;!-- generate an integer value between 1 and 2, 
+                        <span class="c">&lt;!-- generate an integer value between 1 and 3, 
                         storing it in the variable rnd --&gt;</span>
-                        <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"rnd"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/aa-function-random&gt;</span>
+                        <span class="nt">&lt;aa-function-random</span> <span class="na">name=</span><span class="s">"rnd"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"3"</span><span class="nt">&gt;&lt;/aa-function-random&gt;</span>
 
-                        <span class="c">&lt;!-- when rnd is 1 insert 0, otherwise insert 1 --&gt;</span>
+                        <span class="c">&lt;!-- when rnd is 1 insert 😜, 
+                             when rnd is 2 insert 🍕, 
+                             otherwise insert 🎉 --&gt;</span>
                         <span class="nt">&lt;aa-choose&gt;</span>
-                            <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"rnd==1"</span><span class="nt">&gt;</span>0​<span class="nt">&lt;/aa-when&gt;</span>
-                            <span class="nt">&lt;aa-otherwise&gt;</span>1<span class="nt">&lt;/aa-otherwise&gt;</span>
+                            <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"rnd==1"</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">"font-size:20px"</span><span class="nt">&gt;</span>😜<span class="nt">&lt;/span&gt;</span>​<span class="nt">&lt;/aa-when&gt;</span>
+                            <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"rnd==2"</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">"font-size:20px"</span><span class="nt">&gt;</span>🍕<span class="nt">&lt;/span&gt;&lt;aa-when&gt;</span>
+                            <span class="nt">&lt;aa-otherwise&gt;&lt;span</span> <span class="na">style=</span><span class="s">"font-size:20px"</span><span class="nt">&gt;</span>🎉<span class="nt">&lt;/span&gt;&lt;/aa-otherwise&gt;</span>
                         <span class="nt">&lt;/aa-choose&gt;</span>
 
                         <span class="c">&lt;!-- go back to the point in the inner sequence that generates rnd, 
@@ -1456,7 +1508,7 @@ text1.addEventListener("change", function(){
                 <span class="c">&lt;!-- the third and final screen confirms 
                 we are at the end of the outer sequence --&gt;</span>
                 <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-hidden</span> <span class="na">name=</span><span class="s">"screen3"</span><span class="nt">&gt;</span> 
-                  The end. Reload the page to restart 
+                  <span class="nt">&lt;p&gt;</span>The end. Reload the page to restart<span class="nt">&lt;/h2&gt;</span>
                 <span class="nt">&lt;/aa-screen&gt;</span>
 
             <span class="nt">&lt;/aa-sequence&gt;</span>
@@ -1465,44 +1517,713 @@ text1.addEventListener("change", function(){
     <span class="nt">&lt;/aa-session&gt;</span>
 </code></pre></div>
 <p class="myexample">
-    <aa-session  id="printExampleSession">
-        <template>
-            <aa-sequence>
-                
-                <!-- present an initial screen that prompts starting the process -->
-                <aa-screen submit-button-text="next">
-                    Press next to run
-                </aa-screen>
-                
-                
-                <!-- the second screen contains the loop. Its button will allow us to stop it -->
-                <aa-screen submit-button-text="stop">
-                    <aa-sequence>
+<aa-session  id="printExampleSession">
+<template>
+<aa-sequence>
+  <!-- present an initial screen that prompts starting the process -->
+<aa-screen submit-button-text="next">
+<p style="background:none">Press next to run. 
+<br>
+You might have to chase after the stop button.</p>
+</aa-screen>
 
-                        <!-- generate an integer value between 1 and 2, 
-                        storing it in the variable rnd -->
-                        <aa-function-random name="rnd" min="1" max="2"></aa-function-random>
 
-                        <!-- when rnd is 1 insert 0, otherwise insert 1 -->
-                        <aa-choose>
-                            <aa-when test="rnd==1">0​</aa-when>
-                            <aa-otherwise>1</aa-otherwise>
-                        </aa-choose>
+<!-- the second screen contains the loop. Its button will allow us to stop it -->
+<aa-screen submit-button-text="stop">
+<aa-sequence>
 
-                        <!-- go back to the point in the inner sequence that generates rnd, 
-                        and the sequence will continue from there -->
-                        <aa-jump goto="rnd"></aa-jump>
-                        <aa-sequence>
-                </aa-screen>
+<!-- generate an integer value between 1 and 3, 
+storing it in the variable rnd -->
+<aa-function-random name="rnd" min="1" max="3"></aa-function-random>
 
-                <!-- the third and final screen confirms we are at the end of the outer sequence -->
-                <aa-screen submit-button-hidden> The end. Reload the page to restart </aa-screen>
-            </aa-sequence>
+<!-- when rnd is 1 insert 0, otherwise insert 1 -->
 
-        </template>
-    </aa-session>
+<aa-choose style="font-size:30px">
+    <aa-when test="rnd==1"><span style="font-size:20px">&#128540</span></aa-when>
+    <aa-when test="rnd==2"><span style="font-size:20px">&#127881</span></aa=when>
+    <aa-otherwise><span style="font-size:20px">&#127829</span></aa-otherwise>
+</aa-choose>
+
+<!-- go back to the point in the inner sequence that generates rnd, 
+and the sequence will continue from there -->
+<aa-jump goto="rnd"></aa-jump>
+<aa-sequence>
+</aa-screen>
+
+<!-- the third and final screen confirms we are at the end of the outer sequence -->
+<aa-screen submit-button-hidden> 
+<p style="background:none">The end. Reload the page to restart </p>
+</aa-screen>
+</aa-sequence>
+</template>
+</aa-session>
 </p>
-<!-- # Errors
+<h1 id='composing-a-questionnaire'>Composing a questionnaire</h1>
+<p>The following example demonstrates  a questionnaire that allows participants to report with regard to social encounters.
+It consists of the following sections:</p>
+<h2 id='1-participant-number-and-gender'>1. Participant number and gender</h2>
+<p>The participant inputs an identification number (<code>pNum</code>) they have been given. They also report their gender. </p>
+
+<p>This only happens once, subsequent uses of the questionnaire retain the value and don&#39;t require it again. So it is only displayed if the participant number is not already known.</p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-choose&gt;</span>
+  <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"participantNumber==null"</span><span class="nt">&gt;</span>
+      <span class="c">&lt;!-- if not, then present a screen that asks for it--&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"idScreen"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;p&gt;</span>
+              Welcome!
+              This is the first time you use  this phone to log in.
+              <span class="nt">&lt;aa-label&gt;</span>Please enter your participant number<span class="nt">&lt;/aa-label&gt;</span>
+              <span class="nt">&lt;aa-text-answer</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">name=</span><span class="s">"pNum"</span> <span class="na">label=</span><span class="s">"participant number"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;/aa-text-answer&gt;</span>
+          <span class="nt">&lt;/p&gt;</span>
+          <span class="nt">&lt;p&gt;</span>
+              <span class="nt">&lt;aa-label&gt;</span>Please indicate your gender:<span class="nt">&lt;/aa-label&gt;</span>
+              <span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"gender"</span><span class="nt">&gt;</span>
+                  <span class="nt">&lt;aa-choice-item&gt;</span> Male <span class="nt">&lt;/aa-choice-item&gt;</span>
+                  <span class="nt">&lt;aa-choice-item&gt;</span> Female <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+          <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/aa-screen&gt;</span>
+  <span class="nt">&lt;/aa-when&gt;</span>
+  <span class="c">&lt;!-- if participantNumber already had a value,  aa-choose will quietly terminate. --&gt;</span>
+<span class="nt">&lt;/aa-choose&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-session><template>      
+<aa-choose>
+    <aa-when test="1==1">
+              
+<aa-screen name="idScreen" submit-button-text="Next">
+<p>
+  Welcome!
+  This is the first time you use  this phone to log in.
+  <aa-label>Please enter your participant number</aa-label>
+  <aa-text-answer type="number" name="pNum" label="participant number">
+  </aa-text-answer>
+</p>
+
+<p>
+  <aa-label>Please indicate your gender:</aa-label>
+  <aa-multiple-choice name="gender">
+      <aa-choice-item> Male </aa-choice-item>
+      <aa-choice-item> Female </aa-choice-item>
+  </aa-multiple-choice>
+</p>
+
+<p></aa-screen>
+</aa-when></p>
+
+<p></aa-choose>
+</template></aa-session>
+</p></p>
+<h2 id='2-context-of-interaction'>2. Context of interaction</h2>
+<p>The second section concerns the context in which the interaction took place. This includes a brief textual description of the interaction (<code>description</code>), and questions about its time (<code>time_of_interacton</code>),  duration (<code>length_of_interaction</code>), location (<code>place_of_interaction</code>), medium (<code>how_of_interaction</code>), presensce of others (<code>others_present</code>) and alcolhol consumption (<code>drinks</code>).</p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"context"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        Welcome back
+        to the social interactions study!
+        <span class="nt">&lt;aa-label&gt;</span>Brief description of interaction:<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">label=</span><span class="s">"description of interaction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/aa-text-answer&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span>What time did the interaction start?<span class="nt">&lt;/aa-label&gt;</span>
+        (Report your interactions as soon as possible!)
+        <span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"time_of_interaction"</span> <span class="na">type=</span><span class="s">"time"</span> <span class="na">label=</span><span class="s">"time of interaction"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/aa-text-answer&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span> How long did the interaction last?<span class="nt">&lt;/aa-label&gt;</span>
+        (in minutes)
+        <span class="nt">&lt;aa-text-answer</span> <span class="na">name=</span><span class="s">"length_of_interaction"</span> <span class="na">type=</span><span class="s">"number"</span>
+            <span class="na">label=</span><span class="s">"length of interaction (minutes)"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/aa-text-answer&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span> Where did the interaction occur?<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"place_of_interaction"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span> Student home/own home <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span> Family home <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span> Work/School <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span> Recreation (cafe, cinema, etc) <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item&gt;</span> Other <span class="nt">&lt;/aa-choice-item&gt;</span>
+        <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span> How?<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"how_of_interaction"</span> <span class="na">single-value</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span> In person (face-to-face) <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span> Per telephone <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span> Via video (e.g. Skype) <span class="nt">&lt;/aa-choice-item&gt;</span>
+        <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span> Who was present?<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"others_present"</span> <span class="na">single-value</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>One other <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span> Multiple people, primary other <span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span> Multiple people, no primary other <span class="nt">&lt;/aa-choice-item&gt;</span>
+        <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;aa-label&gt;</span> How many alcoholic drinks were consumed?<span class="nt">&lt;/aa-label&gt;</span>
+        (within 3hrs before or during the interaction)
+        <span class="nt">&lt;aa-text-answer</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">name=</span><span class="s">"drinks"</span> <span class="na">label=</span><span class="s">"number of drinks"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/aa-text-answer&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;/aa-screen&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-session><template>
+      <aa-screen name="context" submit-button-text="Next">
+
+<p>
+    Welcome back
+    to the social interactions study!
+    <aa-label>Brief description of interaction:</aa-label>
+    <aa-text-answer name="description" label="description of interaction">
+    </aa-text-answer>
+</p>
+
+<p>
+    <aa-label>What time did the interaction start?</aa-label>
+    (Report your interactions as soon as possible!)
+    <aa-text-answer name="time_of_interaction" type="time" label="time of interaction">
+    </aa-text-answer>
+</p>
+
+<p>
+    <aa-label> How long did the interaction last?</aa-label>
+    (in minutes)
+    <aa-text-answer name="length_of_interaction" type="number"
+        label="length of interaction (minutes)">
+    </aa-text-answer>
+</p>
+
+<p>
+    <aa-label> Where did the interaction occur?</aa-label>
+    <aa-multiple-choice name="place_of_interaction">
+        <aa-choice-item value="1"> Student home/own home </aa-choice-item>
+        <aa-choice-item value="2"> Family home </aa-choice-item>
+        <aa-choice-item value="3"> Work/School </aa-choice-item>
+        <aa-choice-item value="4"> Recreation (cafe, cinema, etc) </aa-choice-item>
+        <aa-choice-item> Other </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+
+<p>
+    <aa-label> How?</aa-label>
+    <aa-multiple-choice name="how_of_interaction" single-value>
+        <aa-choice-item value="1"> In person (face-to-face) </aa-choice-item>
+        <aa-choice-item value="2"> Per telephone </aa-choice-item>
+        <aa-choice-item value="3"> Via video (e.g. Skype) </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+
+<p>
+    <aa-label> Who was present?</aa-label>
+    <aa-multiple-choice name="others_present" single-value>
+        <aa-choice-item value="1">One other </aa-choice-item>
+        <aa-choice-item value="2"> Multiple people, primary other </aa-choice-item>
+        <aa-choice-item value="3"> Multiple people, no primary other </aa-choice-item>
+    </aa-multiple-choice>
+</p>
+
+<p>
+    <aa-label> How many alcoholic drinks were consumed?</aa-label>
+    (within 3hrs before or during the interaction)
+    <aa-text-answer type="number" name="drinks" label="number of drinks">
+    </aa-text-answer>
+</p>
+
+<p></aa-screen>
+</template></aa-session>
+</p></p>
+<h2 id='3-about-the-primary-other'>3. About the primary other.</h2>
+<p>If a primary other was present, a subsequennt question asks who it was. If no primary other was present, it does not appear.</p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-choose&gt;</span>
+    <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"others_present!=3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"partner"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span> <span class="nt">&gt;</span>
+            <span class="nt">&lt;aa-label&gt;</span> Who was the (primary) other?<span class="nt">&lt;/aa-label&gt;</span>
+            <span class="nt">&lt;aa-multiple-choice</span> <span class="na">name=</span><span class="s">"partsex"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;aa-choice-item&gt;</span>Male<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item&gt;</span>Female<span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+
+            <span class="nt">&lt;aa-multiple-choice</span> <span class="na">style=</span><span class="s">"margin-top:40px;"</span> <span class="na">name=</span><span class="s">"relation1"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>Supervisor/teacher<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>Co-worker/fellow student<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"3"</span><span class="nt">&gt;</span>Supervisee<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"4"</span><span class="nt">&gt;</span>Acquaintance<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"5"</span><span class="nt">&gt;</span>Friend<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"6"</span><span class="nt">&gt;</span>Romantic partner<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"7"</span><span class="nt">&gt;</span>Father/mother<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"8"</span><span class="nt">&gt;</span>Brother/sister<span class="nt">&lt;/aa-choice-item&gt;</span>
+                <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"9"</span><span class="nt">&gt;</span>Other<span class="nt">&lt;/aa-choice-item&gt;</span>
+            <span class="nt">&lt;/aa-multiple-choice&gt;</span>
+        <span class="nt">&lt;/aa-screen&gt;</span>
+    <span class="nt">&lt;/aa-when&gt;</span>
+<span class="nt">&lt;/aa-choose&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-session><template>
+<aa-choose>
+<aa-when test="1==1">
+<aa-screen name="partner" submit-button-text="Next" autohide=false>
+    <aa-label> Who was the (primary) other?</aa-label>
+    <aa-multiple-choice name="partsex">
+        <aa-choice-item>Male</aa-choice-item>
+        <aa-choice-item>Female</aa-choice-item>
+    </aa-multiple-choice>
+
+  <aa-multiple-choice style="margin-top:40px;" name="relation1">
+      <aa-choice-item value="1">Supervisor/teacher</aa-choice-item>
+      <aa-choice-item value="2">Co-worker/fellow student</aa-choice-item>
+      <aa-choice-item value="3">Supervisee</aa-choice-item>
+      <aa-choice-item value="4">Acquaintance</aa-choice-item>
+      <aa-choice-item value="5">Friend</aa-choice-item>
+      <aa-choice-item value="6">Romantic partner</aa-choice-item>
+      <aa-choice-item value="7">Father/mother</aa-choice-item>
+      <aa-choice-item value="8">Brother/sister</aa-choice-item>
+      <aa-choice-item value="9">Other</aa-choice-item>
+  </aa-multiple-choice>
+</aa-screen>
+</aa-when>
+</aa-choose>
+</template>
+</aa-session>
+</p>
+<h2 id='5-behaviours'>5. Behaviours</h2>
+<p>The protocol calls on the participant to select a number of behaviours they displayed. The available options are grouped in 4 segments, which mix different options together, and only one of those segments is displayed at each sampling session. The choice of the segment to display happens at random.</p>
+
+<p>So we create a variable <code>random_choice</code> with a random value betwee 1 and 4, and set up an <a href="#aa-choose"><code>aa-choose</code></a> element with 3 <a href="#aa-when"><code>aa-when</code></a> children for values or <code>random_choice</code> between 1 and 3, and an <a href="#aa-otherwise"><code>aa-otherwise</code></a> child for the remaining value of <code>random_choice</code>
+Each of these elements contains a corresponding segment of the list of behaviours, and participants can select all which apply. </p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-function-random</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"4"</span> <span class="na">name=</span><span class="s">"random_choice"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/aa-function-random&gt;</span>
+
+<span class="nt">&lt;aa-choose&gt;</span>
+</code></pre></div>
+<p>This is the one of three <a href="#aa-when"><code>aa-when</code></a>, for <code>random_choice==1</code> with its corresponding <a href="#aa-screen"><code>aa-screen</code></a></p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"random_choice==1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"behaviours1_screen"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;aa-label&gt;</span> Did you do any of the following?<span class="nt">&lt;/aa-label&gt;</span>
+          (Multiple answers are possible)
+
+          <span class="nt">&lt;aa-checkboxes</span> <span class="na">name=</span><span class="s">"behaviours1"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I listened attentively to the other(s)
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I tried to get the other(s) to do something else
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I let other(s) make plans or decisions
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I expressed the 'real me' instead of my public persona or 'image'
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I confronted the other(s) about something I did not like
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I expressed affection with words or gestures
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I spoke in a clear firm voice
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I withheld useful information
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I did not say how I felt
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I compromised about a decision
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I took the lead in planning/organizing a project or activity
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I avoided taking the lead or being responsible
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                I ignored the other(s) comments
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+          <span class="nt">&lt;/aa-checkboxes&gt;</span>
+      <span class="nt">&lt;/aa-screen&gt;</span>
+    <span class="nt">&lt;/aa-when&gt;</span>
+</code></pre></div>
+<p class="myexample">
+
+<aa-screen name="behaviours1_screen" submit-button-text="Next" autohide=false>
+<aa-label> Did you do any of the following?</aa-label>
+(Multiple answers are possible)
+
+<aa-checkboxes name="behaviours1">
+    <aa-choice-item value="1">
+        I listened attentively to the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I tried to get the other(s)
+        to do something else
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I let other(s) make plans or decisions
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed the 'real me' instead
+        of my public persona or 'image'
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I confronted the other(s) about
+        something I did not like
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed affection
+        with words or gestures
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I spoke in a clear firm voice
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I withheld useful information
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not say how I felt
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I compromised about a decision
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I took the lead in
+        planning/organizing a project or activity
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I avoided taking the lead
+        or being responsible
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I ignored the other(s) comments
+    </aa-choice-item>
+</aa-checkboxes>
+</aa-screen>
+
+</p>
+
+<p>This is the second of three <a href="#aa-when"><code>aa-when</code></a>, for <code>random_choice==2</code> with its corresponding <a href="#aa-screen"><code>aa-screen</code></a></p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>  <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"random_choice==2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"behaviours2_screen"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span> <span class="na">autohide=</span><span class="s">false</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;aa-label&gt;</span> Did you do any of the following?<span class="nt">&lt;/aa-label&gt;</span>
+          (Multiple answers are possible)
+          <span class="nt">&lt;aa-checkboxes</span> <span class="na">name=</span><span class="s">"behaviours2"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I criticized the other(s)
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I smiled and laughed with the other(s)
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I spoke softly
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I made a sarcastic comment
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I expressed an opinion
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I complimented or praised the other person(s)
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I did not express disagreement when I thought it
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I gave incorrect information
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I got immediately to the point
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I made a concession to avoid unpleaseantness
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I did not state my own views<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                  I expressed the 'real me' instead of my public persona or 'image'
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+          <span class="nt">&lt;/aa-checkboxes&gt;</span>
+      <span class="nt">&lt;/aa-screen&gt;</span>
+  <span class="nt">&lt;/aa-when&gt;</span>
+</code></pre></div>
+<p class="myexample">
+
+<aa-screen name="behaviours2_screen" submit-button-text="Next" autohide=false>
+<aa-label> Did you do any of the following?</aa-label>
+(Multiple answers are possible)
+<aa-checkboxes name="behaviours2">
+    <aa-choice-item value="1">
+        I criticized the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I smiled and laughed with the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I spoke softly
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I made a sarcastic comment
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed an opinion
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I complimented or praised the other person(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not express disagreement when I thought it
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I gave incorrect information
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I got immediately to the point
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I made a concession to avoid unpleaseantness
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not state my own views</aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed the 'real me' instead of my public persona or 'image'
+    </aa-choice-item>
+</aa-checkboxes>
+</aa-screen>
+
+</p>
+
+<p>This is the third of three <a href="#aa-when"><code>aa-when</code></a>, for <code>random_choice==2</code> with its corresponding <a href="#aa-screen"><code>aa-screen</code></a></p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>  <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"random_choice==3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"behaviours3_screen"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;aa-label&gt;</span> Did you do any of the following?<span class="nt">&lt;/aa-label&gt;</span>
+          (Multiple answers are possible)
+
+          <span class="nt">&lt;aa-checkboxes</span> <span class="na">name=</span><span class="s">"behaviours3"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I waited for the other person(s) to talk or act first
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I stated strongly that I did not like or that I would not
+                  do
+                  something<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I assigned someone to a task<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I exchanged pleasantries<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I did not say what was on my mind<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I did not respond to the other(s) questions or comments
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I made a suggestion<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I expressed the 'real me' instead of my public persona or
+                  'image'<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I showed sympathy<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I did not say what I wanted directly<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I discredited what someone said<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I asked the other(s) to do something<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I spoke favorably of someone who was not present
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+          <span class="nt">&lt;/aa-checkboxes&gt;</span>
+      <span class="nt">&lt;/aa-screen&gt;</span>
+  <span class="nt">&lt;/aa-when&gt;</span>
+</code></pre></div>
+<p class="myexample">
+<aa-screen name="behaviours3_screen" submit-button-text="Next" autohide=false>
+  <aa-label> Did you do any of the following?</aa-label>
+  (Multiple answers are possible)
+
+  <aa-checkboxes name="behaviours3">
+      <aa-choice-item value="1">I waited for the other person(s) to talk or act first
+      </aa-choice-item>
+      <aa-choice-item value="1">I stated strongly that I did not like or that I would not
+          do
+          something</aa-choice-item>
+      <aa-choice-item value="1">I assigned someone to a task</aa-choice-item>
+      <aa-choice-item value="1">I exchanged pleasantries</aa-choice-item>
+      <aa-choice-item value="1">I did not say what was on my mind</aa-choice-item>
+      <aa-choice-item value="1">I did not respond to the other(s) questions or comments
+      </aa-choice-item>
+      <aa-choice-item value="1">I made a suggestion</aa-choice-item>
+      <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+          'image'</aa-choice-item>
+      <aa-choice-item value="1">I showed sympathy</aa-choice-item>
+      <aa-choice-item value="1">I did not say what I wanted directly</aa-choice-item>
+      <aa-choice-item value="1">I discredited what someone said</aa-choice-item>
+      <aa-choice-item value="1">I asked the other(s) to do something</aa-choice-item>
+      <aa-choice-item value="1">I spoke favorably of someone who was not present
+      </aa-choice-item>
+  </aa-checkboxes>
+</aa-screen>
+</p>
+
+<p>And the <a href="#aa-otherwise"><code>aa-otherwise</code></a> child of <a href="#aa-choose"><code>aa-choose</code></a> contains the last set of behaviours. We could have just as well used an additional <code>&lt;aa-when test=&quot;random_choice==4&quot;&gt;</code> instead.
+We make sure to also use the closing tag <code>&lt;/aa-choose&gt;</code> at the end.</p>
+
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>  <span class="nt">&lt;aa-otherwise&gt;</span>
+
+      <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"behaviours4_screen"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;aa-label&gt;</span>Did you do any of the following?<span class="nt">&lt;/aa-label&gt;</span>
+          (Multiple answers are possible)
+          <span class="nt">&lt;aa-checkboxes</span> <span class="na">name=</span><span class="s">"behaviours4"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I expressed the 'real me' instead of my public persona or
+                  'image'<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I showed impatience<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I asked for a volunteer<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I went along with the other(s)<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I raised my voice<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I gave information<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I expressed reassurance<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I gave in<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I demanded that the other(s) do what I wanted
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I set goals for the other(s) or for us<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I pointed out to the other(s) where there was agreement
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;aa-choice-item</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>I spoke only when I was spoken to<span class="nt">&lt;/aa-choice-item&gt;</span>
+              <span class="nt">&lt;/aa-choice-item&gt;</span>
+          <span class="nt">&lt;/aa-checkboxes&gt;</span>
+      <span class="nt">&lt;/aa-screen&gt;</span>
+  <span class="nt">&lt;/aa-otherwise&gt;</span>
+
+
+<span class="nt">&lt;/aa-choose&gt;</span>
+</code></pre></div>
+<p class="myexample">
+
+<aa-screen name="behaviours4_screen" submit-button-text="Next" autohide=false>
+          <aa-label>Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
+          <aa-checkboxes name="behaviours4">
+              <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                  'image'</aa-choice-item>
+              <aa-choice-item value="1">I showed impatience</aa-choice-item>
+              <aa-choice-item value="1">I asked for a volunteer</aa-choice-item>
+              <aa-choice-item value="1">I went along with the other(s)</aa-choice-item>
+              <aa-choice-item value="1">I raised my voice</aa-choice-item>
+              <aa-choice-item value="1">I gave information</aa-choice-item>
+              <aa-choice-item value="1">I expressed reassurance</aa-choice-item>
+              <aa-choice-item value="1">I gave in</aa-choice-item>
+              <aa-choice-item value="1">I demanded that the other(s) do what I wanted
+              </aa-choice-item>
+              <aa-choice-item value="1">I set goals for the other(s) or for us</aa-choice-item>
+              <aa-choice-item value="1">I pointed out to the other(s) where there was agreement
+              </aa-choice-item>
+              <aa-choice-item value="1">I spoke only when I was spoken to</aa-choice-item>
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+</p>
+<h2 id='6-feelings'>6. Feelings</h2>
+<p>The next part of the questionnaire asks participants to rate</p>
+
+<p><aa-likert-scale name="surprised" items="12" start-item="0"></aa-likert-scale></p>
+<div class="highlight"><pre class="highlight plaintext"><code>
+
+    &lt;aa-screen name="feelings"&gt;
+
+        &lt;div&gt;
+            &lt;aa-label&gt; How did you feel?&lt;/aa-label&gt;
+            (0 = Not at all, 6 = Extremely)
+        &lt;/div&gt;
+
+
+        &lt;aa-label&gt; Surprised&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="surprised" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Worried/anxious&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="worried" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Happy&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="happy" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Frustrated&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="frustrated" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Pleased&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="pleased" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Angry/hostile&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="angry" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Homesick&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="homesick" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Enjoyment/fun&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="enjoyment" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+
+        &lt;aa-label&gt; Joyful&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="joyful" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Depressed/blue&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="depressed" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Energized &lt;/aa-label&gt;
+        &lt;aa-likert-scale name="energized" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Ashamed &lt;/aa-label&gt;
+        &lt;aa-likert-scale name="ashamed" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Safe&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="Safe" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Lonely&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="lonely" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+        &lt;aa-label&gt; Disgusted by the other(s)&lt;/aa-label&gt;
+        &lt;aa-likert-scale name="disgusted" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+
+    &lt;/aa-screen&gt;
+
+    &lt;aa-choose&gt;
+        &lt;aa-when test="others_present!=3"&gt;
+            &lt;aa-screen name="perceptions"&gt;
+                &lt;div&gt;
+                    &lt;aa-label&gt; Indicate how the (primary) other behaved towards you in this interaction
+                    &lt;/aa-label&gt;
+                &lt;/div&gt;
+                &lt;aa-affect-grid style="margin-top:40px" top-left-label="Critical"
+                    top-label="Assured/Dominant" top-right-label="Engaging"
+                    left-label="Cold/Quarrelsome" right-label="Warm/Aggreeable"
+                    bottom-left-label="Withdrawn" bottom-label="Unassured/Submissive"
+                    bottom-right-label="Deferring" rows=11 columns=11&gt;
+                &lt;/aa-affect-grid&gt;
+            &lt;/aa-screen&gt;
+        &lt;/aa-when&gt;
+    &lt;/aa-choose&gt;
+
+
+    &lt;aa-screen submit-button-hidden="true" name="ending"&gt;
+        &lt;h3&gt;Thank you!&lt;/h3&gt;
+        You can now close this window.
+    &lt;/aa-screen&gt;
+
+&lt;/aa-sequence&gt;
+
+&lt;/template&gt;&lt;/aa-session&gt;
+
+</code></pre></div><!-- # Errors
 
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
