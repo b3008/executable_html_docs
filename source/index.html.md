@@ -61,22 +61,25 @@ and that a certain syntax is used to represent them.
 
 For example, Take a look at these two lines of text.
 
+<p class="sticktoexample"></p>
+
 ```html
 Wikipedia is at www.wikipedia.org
 
 Wikipedia is <a href="http://www.wikipedia.org">here</a>
 ```
 
-
-The first line contains a simple mention of a url. The second one contains themarkup ``<a href="...">here</a>`` that tells the computer to display the content( the word ``here`` ) of that markup (``<a>``) as a clickable link, that links to the url contained in the attribute ``href``.  ``a`` stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.
-
-The lines above are each displayed as:
-
 <p class="myexample">
   Wikipedia is at www.wikipedia.org
   <br><br>
   Wikipedia is  <a href="www.wikipedia.org">here</a>
 </p>
+
+
+The first line contains a simple mention of a url. The second one contains themarkup ``<a href="...">here</a>`` that tells the computer to display the content( the word ``here`` ) of that markup (``<a>``) as a clickable link, that links to the url contained in the attribute ``href``.  ``a`` stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.
+
+So in this case, the anchor instructs the browser to display what would otherwise be plain text, as a functional element of the interface.
+
 
 
 ## Tags, Attributes, Elements
@@ -181,9 +184,11 @@ __``sessionReady``__|  Dispatched when ``aa-session`` has finished initializing.
 
 ``aa-sequence`` implements sequential insertion of each of its children into the document. Insertion of the next child can be triggered either by an event, or manually by calling its member method ``.next()``. 
 
+This example illustrates triggering a sequence through a button. We listen for the ``sessionReady`` event to make sure ``#button1 has been inserted in the document, and set a click event listener, that calls the ``.next()`` member function of ``#sequence1``. Pressing the next" button adds content as per the sequence.
 
 
 
+<p class="sticktoexample"></p>
 
 ```html
 <aa-session>
@@ -212,8 +217,6 @@ __``sessionReady``__|  Dispatched when ``aa-session`` has finished initializing.
   })
 </script>
 ```
-
-This example illustrates triggering a sequence through a button. We listen for the ``sessionReady`` event to make sure ``#button1 has been inserted in the document, and set a click event listener, that calls the ``.next()`` member function of ``#sequence1``. Pressing the next" button adds content as per the sequence.
 
 
 <p id="container1" class="myexample"></p>
@@ -264,7 +267,7 @@ setTimeout(function(){
 
 The sequence can also listen for an event called ``endEvent``, which its children can dispatch to let it know that it should insert its next element.
 
-[``aa-screen``](#aa-screen), discussed below, is an element that simplifies managing ``aa-sequence`` in user interactions.
+We can ignore the `<script>` section of the example for now. [``aa-screen``](#aa-screen), discussed below, is an element that simplifies managing an ``aa-sequence`` in user interactions.
 
 
  attribute | type   |  |
@@ -810,31 +813,44 @@ The question the user is answering with the response item is oftentimes called "
 
 ## aa-likert-scale
 
-``aa-likert-scale`` is a preconfigured [``aa-multiple-choice``](#aa-multiple-choice) item that implements a 5-item or 7-item rating scale. It also supports labels at start, middle and end.
+``aa-likert-scale`` is a preconfigured [``aa-multiple-choice``](#aa-multiple-choice) item that implements a n-item rating scale. It also supports labels at start, middle and end, and allows the author to specify the number at which rating starts
 
+
+<p class="sticktoexample"></p>
 ```html
 <aa-label>scale 1:</aa-label>
 <aa-likert-scale name="my5itemScale" items="5"
   start-label="start" 
   middle-label="middle" 
   end-label="end" 
+  start-item="0"
   ></aa-likert-scale>
-
-<aa-label>scale 2:</aa-label>
-<aa-likert-scale items="my7itemScale"></aa-likert-scale>
 ```
-<p class="myexample" id="aaLikertScaleContainer">
-<aa-label>scale1:</aa-label>
-  <aa-likert-scale id="likert1" name="my5itemScale" start-label="start" middle-label="middle" end-label="end" items="5"></aa-likert-scale>
-  <br>
-  <aa-label>scale 2:</aa-label>
-  <aa-likert-scale id="likert2" items="7"></aa-likert-scale>
 
+<p class="myexample" id="aaLikertScaleContainer">
+
+<aa-label>scale1:</aa-label>
+  <aa-likert-scale id="likert1" name="my5itemScale" start-label="start" middle-label="middle" end-label="end" items="5" start-item="0"></aa-likert-scale>
   <br>
   <b>value of scale 1:</b> <span id="likert1value"></span>
   <br>
+</p>
+
+
+<p class="sticktoexample"></p>
+
+```html
+<aa-label>scale 2:</aa-label>
+<aa-likert-scale items="7" name="my7itemScale"></aa-likert-scale>
+```
+
+<p class="myexample">
+  <aa-label>scale 2:</aa-label>
+  <aa-likert-scale id="likert2" items="7"></aa-likert-scale>
+  <br>
 <b>value of scale 2:</b> <span id="likert2value"></span>
 </p>
+
 
 <script>
   let likert1 = document.getElementById("likert1");
@@ -872,6 +888,9 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 __``aa-checkboxes``__ implements a single response item, where each available choice is specified as a [``aa-choice-item``](#aa-choice-item).
 In the following configuration, the text inside each available choice is used as the value that each `aa-choice-item` corresponds to.
 
+
+<p class="sticktoexample"></p>
+
 ```html
 <aa-multiple-choice name="choices">
   <aa-choice-item> choice 1 </aa-choice-item>
@@ -901,6 +920,8 @@ In the following configuration, the text inside each available choice is used as
 
 
 As is the case with [__``aa-checkboxes``__](#aa-checkboxes), ``aa-multiple-choice`` features a ``horizontal`` attribute, and will report ``value`` attributes of ``aa-choice-item`` when specified.
+
+<p class="sticktoexample"></p>
 
 ```html
 <aa-multiple-choice name="choices" horizontal>
@@ -950,8 +971,15 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 
 ``aa-slider`` implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.
 
+<p class="sticktoexample"></p>
+
 ```html
-<aa-slider name="slider" min="0" max="100" min-label="min" max-label="max" value="50" ></aa-slider>
+<aa-slider 
+  name="slider" 
+  min="0"  max="100" 
+  min-label="min" max-label="max" 
+  value="50">
+</aa-slider>
 ```
 
 <p class="myexample">
@@ -984,9 +1012,12 @@ __``change``__ | Dispatched when the value of the slider changes.
 
 ## aa-text-answer
 
+<p class="sticktoexample"></p>
+
 ```html
 <aa-text-answer name="text"></aa-text-answer>
 ```
+
 
 <p class="myexample">
 <aa-text-answer id="text1"></aa-text-answer>
@@ -1026,6 +1057,7 @@ The following example shows how an infinite loop that can be started and ended c
 Pointless as this example may seem, it indicates the freedom the author has to use the custom components within and as containers for HTML, and allow their Ambulator Assessment document to be very customizable.
 
 
+<p class="sticktoexample"></p>
 
 ```html
     <aa-session>
@@ -1136,8 +1168,14 @@ It consists of the following sections:
 
 ## 1. Participant number and gender 
 
- The participant inputs an identification number (``pNum``) they have been given. They also report their gender. This only happens once, subsequent uses of the questionnaire retain the value and don't require it again. So it is only displayed if the participant number is not already known.
+ The participant inputs an identification number (``pNum``) they have been given. They also report their gender. 
  
+ This only happens once, subsequent uses of the questionnaire retain the value and don't require it again. So it is only displayed if the participant number is not already known.
+ 
+
+
+<p class="sticktoexample"></p>
+
  ```html
 <aa-choose>
   <aa-when test="participantNumber==null">
@@ -1162,7 +1200,6 @@ It consists of the following sections:
   <!-- if participantNumber already had a value,  aa-choose will quietly terminate. -->
 </aa-choose>
 ```
-
 <p class="myexample">
 <aa-session><template>      
 <aa-choose>
@@ -1203,6 +1240,8 @@ It consists of the following sections:
 ## 2. Context of interaction 
  
  The second section concerns the context in which the interaction took place. This includes a brief textual description of the interaction (``description``), and questions about its time (``time_of_interacton``),  duration (``length_of_interaction``), location (``place_of_interaction``), medium (``how_of_interaction``), presensce of others (``others_present``) and alcolhol consumption (``drinks``).
+
+<p class="sticktoexample"></p>
 
 ```html
 <aa-screen name="context" submit-button-text="Next">
@@ -1335,10 +1374,12 @@ It consists of the following sections:
 
  If a primary other was present, a subsequennt question asks who it was. If no primary other was present, it does not appear.
 
+
+<p class="sticktoexample"></p>
 ```html
 <aa-choose>
     <aa-when test="others_present!=3">
-        <aa-screen name="partner" submit-button-text="Next">
+        <aa-screen name="partner" submit-button-text="Next" >
             <aa-label> Who was the (primary) other?</aa-label>
             <aa-multiple-choice name="partsex">
                 <aa-choice-item>Male</aa-choice-item>
@@ -1365,7 +1406,7 @@ It consists of the following sections:
 <aa-session><template>
 <aa-choose>
 <aa-when test="1==1">
-<aa-screen name="partner" submit-button-text="Next">
+<aa-screen name="partner" submit-button-text="Next" autohide=false>
     <aa-label> Who was the (primary) other?</aa-label>
     <aa-multiple-choice name="partsex">
         <aa-choice-item>Male</aa-choice-item>
@@ -1395,301 +1436,372 @@ It consists of the following sections:
 
 
 
+## 5. Behaviours
 
+The protocol calls on the participant to select a number of behaviours they displayed. The available options are grouped in 4 segments, which mix different options together, and only one of those segments is displayed at each sampling session. The choice of the segment to display happens at random.
+
+So we create a variable ``random_choice`` with a random value betwee 1 and 4, and set up an [``aa-choose``](#aa-choose) element with 3 [``aa-when``](#aa-when) children for values or ``random_choice`` between 1 and 3, and an [``aa-otherwise``](#aa-otherwise) child for the remaining value of ``random_choice``
+Each of these elements contains a corresponding segment of the list of behaviours, and participants can select all which apply. 
 
 
 ```html
-<aa-session  name="ecr"><template>
+<aa-function-random min="1" max="4" name="random_choice">
+</aa-function-random>
 
-<aa-sequence>
-    <!--  first, check to see if  the pNum variable 
-          already has a value-->
-    <aa-choose>
-        <aa-when test="participantNumber==null">
-            <!-- if not, then present a screen that asks for it-->
-            <aa-screen name="idScreen" submit-button-text="Next">
-                <p>
-                    Welcome!
-                    This is the first time you use  this phone to log in.
-                    <aa-label>Please enter your participant number</aa-label>
-                    <aa-text-answer type="number" name="pNum" label="participant number">
-                    </aa-text-answer>
-                </p>
-                <p>
-                    <aa-label>Please indicate your gender:</aa-label>
-                    <aa-multiple-choice name="gender">
-                        <aa-choice-item> Male </aa-choice-item>
-                        <aa-choice-item> Female </aa-choice-item>
-                    </aa-multiple-choice>
-                </p>
-            </aa-screen>
-        </aa-when>
-        <!-- if participantNumber already had a value,  aa-choose will quietly terminate. -->
-    </aa-choose>
+<aa-choose>
+```
 
+This is the one of three [``aa-when``](#aa-when), for ``random_choice==1`` with its corresponding [``aa-screen``](#aa-screen)
 
-    <!--proceed to the next screen-->
-    <aa-screen name="context" submit-button-text="Next">
+<p class="sticktoexample"></p>
 
-        <p>
-            Welcome back
-            to the social interactions study!
-            <aa-label>Brief description of interaction:</aa-label>
-            <aa-text-answer name="description" label="description of interaction">
-            </aa-text-answer>
-        </p>
-        <p>
-            <aa-label>What time did the interaction start?</aa-label>
-            (Report your interactions as soon as possible!)
-            <aa-text-answer name="time_of_interaction" type="time" label="time of interaction">
-            </aa-text-answer>
-        </p>
-        <p>
-            <aa-label> How long did the interaction last?</aa-label>
-            (in minutes)
-            <aa-text-answer name="length_of_interaction" type="number"
-                label="length of interaction (minutes)">
-            </aa-text-answer>
-        </p>
+```html
+    <aa-when test="random_choice==1">
+      <aa-screen name="behaviours1_screen" submit-button-text="Next">
+          <aa-label> Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
 
-        <p>
-            <aa-label> Where did the interaction occur?</aa-label>
-            <aa-multiple-choice name="place_of_interaction">
-                <aa-choice-item value="1"> Student home/own home </aa-choice-item>
-                <aa-choice-item value="2"> Family home </aa-choice-item>
-                <aa-choice-item value="3"> Work/School </aa-choice-item>
-                <aa-choice-item value="4"> Recreation (cafe, cinema, etc) </aa-choice-item>
-                <aa-choice-item> Other </aa-choice-item>
-            </aa-multiple-choice>
-        </p>
-        <p>
-            <aa-label> How?</aa-label>
-            <aa-multiple-choice name="how_of_interaction" single-value>
-                <aa-choice-item value="1"> In person (face-to-face) </aa-choice-item>
-                <aa-choice-item value="2"> Per telephone </aa-choice-item>
-                <aa-choice-item value="3"> Via video (e.g. Skype) </aa-choice-item>
-            </aa-multiple-choice>
-        </p>
+          <aa-checkboxes name="behaviours1">
+              <aa-choice-item value="1">
+                I listened attentively to the other(s)
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I tried to get the other(s) to do something else
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I let other(s) make plans or decisions
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I expressed the 'real me' instead of my public persona or 'image'
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I confronted the other(s) about something I did not like
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I expressed affection with words or gestures
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I spoke in a clear firm voice
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I withheld useful information
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I did not say how I felt
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I compromised about a decision
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I took the lead in planning/organizing a project or activity
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I avoided taking the lead or being responsible
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                I ignored the other(s) comments
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+    </aa-when>
+```
 
-        <p>
-            <aa-label> Who was present?</aa-label>
-            <aa-multiple-choice name="others_present" single-value>
-                <aa-choice-item value="1">One other </aa-choice-item>
-                <aa-choice-item value="2"> Multiple people, primary other </aa-choice-item>
-                <aa-choice-item value="3"> Multiple people, no primary other </aa-choice-item>
-            </aa-multiple-choice>
-        </p>
+<p class="myexample">
 
-        <p>
-            <aa-label> How many alcoholic drinks were consumed?</aa-label>
-            (within 3hrs before or during the interaction)
-            <aa-text-answer type="number" name="drinks" label="number of drinks">
-            </aa-text-answer>
-        </p>
+<aa-screen name="behaviours1_screen" submit-button-text="Next" autohide=false>
+<aa-label> Did you do any of the following?</aa-label>
+(Multiple answers are possible)
 
-    </aa-screen>
+<aa-checkboxes name="behaviours1">
+    <aa-choice-item value="1">
+        I listened attentively to the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I tried to get the other(s)
+        to do something else
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I let other(s) make plans or decisions
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed the 'real me' instead
+        of my public persona or 'image'
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I confronted the other(s) about
+        something I did not like
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed affection
+        with words or gestures
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I spoke in a clear firm voice
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I withheld useful information
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not say how I felt
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I compromised about a decision
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I took the lead in
+        planning/organizing a project or activity
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I avoided taking the lead
+        or being responsible
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I ignored the other(s) comments
+    </aa-choice-item>
+</aa-checkboxes>
+</aa-screen>
 
-
-    <!-- if there was a primary other display a screen asking about them -->
-    <aa-choose>
-        <aa-when test="others_present!=3">
-            <aa-screen name="partner" submit-button-text="Next">
-                <aa-label> Who was the (primary) other?</aa-label>
-                <aa-multiple-choice name="partsex">
-                    <aa-choice-item>Male</aa-choice-item>
-                    <aa-choice-item>Female</aa-choice-item>
-                </aa-multiple-choice>
-
-                <aa-multiple-choice style="margin-top:40px;" name="relation1">
-                    <aa-choice-item value="1">Supervisor/teacher</aa-choice-item>
-                    <aa-choice-item value="2">Co-worker/fellow student</aa-choice-item>
-                    <aa-choice-item value="3">Supervisee</aa-choice-item>
-                    <aa-choice-item value="4">Acquaintance</aa-choice-item>
-                    <aa-choice-item value="5">Friend</aa-choice-item>
-                    <aa-choice-item value="6">Romantic partner</aa-choice-item>
-                    <aa-choice-item value="7">Father/mother</aa-choice-item>
-                    <aa-choice-item value="8">Brother/sister</aa-choice-item>
-                    <aa-choice-item value="9">Other</aa-choice-item>
-                </aa-multiple-choice>
-            </aa-screen>
-        </aa-when>
-    </aa-choose>
-
-
-
-
+</p>
 
 
-    <!-- choose one set of behaviours out of 4
-at random
--->
-
-    <aa-function-random min="1" max="4" name="random_choice">
-    </aa-function-random>
-
-
-    <aa-choose>
-        <aa-when test="random_choice==1">
-            <aa-screen name="behaviours1_screen">
-                <aa-label> Did you do any of the following?</aa-label>
-                (Multiple answers are possible)
-
-                <aa-checkboxes name="behaviours1">
-                    <aa-choice-item value="1">
-                        I listened attentively to the other(s)
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I tried to get the other(s)
-                        to do something else
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I let other(s) make plans or decisions
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I expressed the 'real me' instead
-                        of my public persona or 'image'
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I confronted the other(s) about
-                        something I did not like
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I expressed affection
-                        with words or gestures
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I spoke in a clear firm voice
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I withheld useful information
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I did not say how I felt
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I compromised about a decision
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I took the lead in
-                        planning/organizing a project or activity
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I avoided taking the lead
-                        or being responsible
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I ignored the other(s) comments
-                    </aa-choice-item>
-                </aa-checkboxes>
-            </aa-screen>
-        </aa-when>
+This is the second of three [``aa-when``](#aa-when), for ``random_choice==2`` with its corresponding [``aa-screen``](#aa-screen)
 
 
 
-        <aa-when test="random_choice==2">
-            <aa-screen name="behaviours2_screen" submit-button-text="Next">
-                <aa-label> Did you do any of the following?</aa-label>
-                (Multiple answers are possible)
-                <aa-checkboxes name="behaviours2">
-                    <aa-choice-item value="1">
-                        I criticized the other(s)
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I smiled and laughed with the other(s)
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I spoke softly
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I made a sarcastic comment
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I expressed an opinion
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I complimented or praised the other person(s)
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I did not express disagreement when I thought it
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I gave incorrect information
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I got immediately to the point
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I made a concession to avoid unpleaseantness
-                    </aa-choice-item>
-                    <aa-choice-item value="1">
-                        I did not state my own views</aa-choice-item>
-                    <aa-choice-item value="1">
-                        I expressed the 'real me' instead of my public persona or 'image'
-                    </aa-choice-item>
-                </aa-checkboxes>
-            </aa-screen>
-        </aa-when>
+<p class="sticktoexample"></p>
+
+```html      
+  <aa-when test="random_choice==2">
+      <aa-screen name="behaviours2_screen" submit-button-text="Next" autohide=false>
+          <aa-label> Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
+          <aa-checkboxes name="behaviours2">
+              <aa-choice-item value="1">
+                  I criticized the other(s)
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I smiled and laughed with the other(s)
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I spoke softly
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I made a sarcastic comment
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I expressed an opinion
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I complimented or praised the other person(s)
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I did not express disagreement when I thought it
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I gave incorrect information
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I got immediately to the point
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I made a concession to avoid unpleaseantness
+              </aa-choice-item>
+              <aa-choice-item value="1">
+                  I did not state my own views</aa-choice-item>
+              <aa-choice-item value="1">
+                  I expressed the 'real me' instead of my public persona or 'image'
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+  </aa-when>
+```
+
+<p class="myexample">
+
+<aa-screen name="behaviours2_screen" submit-button-text="Next" autohide=false>
+<aa-label> Did you do any of the following?</aa-label>
+(Multiple answers are possible)
+<aa-checkboxes name="behaviours2">
+    <aa-choice-item value="1">
+        I criticized the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I smiled and laughed with the other(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I spoke softly
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I made a sarcastic comment
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed an opinion
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I complimented or praised the other person(s)
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not express disagreement when I thought it
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I gave incorrect information
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I got immediately to the point
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I made a concession to avoid unpleaseantness
+    </aa-choice-item>
+    <aa-choice-item value="1">
+        I did not state my own views</aa-choice-item>
+    <aa-choice-item value="1">
+        I expressed the 'real me' instead of my public persona or 'image'
+    </aa-choice-item>
+</aa-checkboxes>
+</aa-screen>
+
+</p>
+
+
+This is the third of three [``aa-when``](#aa-when), for ``random_choice==2`` with its corresponding [``aa-screen``](#aa-screen)
+
+<p class="sticktoexample"></p>
+
+```html
+  <aa-when test="random_choice==3">
+      <aa-screen name="behaviours3_screen" submit-button-text="Next">
+          <aa-label> Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
+
+          <aa-checkboxes name="behaviours3">
+              <aa-choice-item value="1">I waited for the other person(s) to talk or act first
+              </aa-choice-item>
+              <aa-choice-item value="1">I stated strongly that I did not like or that I would not
+                  do
+                  something</aa-choice-item>
+              <aa-choice-item value="1">I assigned someone to a task</aa-choice-item>
+              <aa-choice-item value="1">I exchanged pleasantries</aa-choice-item>
+              <aa-choice-item value="1">I did not say what was on my mind</aa-choice-item>
+              <aa-choice-item value="1">I did not respond to the other(s) questions or comments
+              </aa-choice-item>
+              <aa-choice-item value="1">I made a suggestion</aa-choice-item>
+              <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                  'image'</aa-choice-item>
+              <aa-choice-item value="1">I showed sympathy</aa-choice-item>
+              <aa-choice-item value="1">I did not say what I wanted directly</aa-choice-item>
+              <aa-choice-item value="1">I discredited what someone said</aa-choice-item>
+              <aa-choice-item value="1">I asked the other(s) to do something</aa-choice-item>
+              <aa-choice-item value="1">I spoke favorably of someone who was not present
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+  </aa-when>
+```
+
+<p class="myexample">
+<aa-screen name="behaviours3_screen" submit-button-text="Next" autohide=false>
+  <aa-label> Did you do any of the following?</aa-label>
+  (Multiple answers are possible)
+
+  <aa-checkboxes name="behaviours3">
+      <aa-choice-item value="1">I waited for the other person(s) to talk or act first
+      </aa-choice-item>
+      <aa-choice-item value="1">I stated strongly that I did not like or that I would not
+          do
+          something</aa-choice-item>
+      <aa-choice-item value="1">I assigned someone to a task</aa-choice-item>
+      <aa-choice-item value="1">I exchanged pleasantries</aa-choice-item>
+      <aa-choice-item value="1">I did not say what was on my mind</aa-choice-item>
+      <aa-choice-item value="1">I did not respond to the other(s) questions or comments
+      </aa-choice-item>
+      <aa-choice-item value="1">I made a suggestion</aa-choice-item>
+      <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+          'image'</aa-choice-item>
+      <aa-choice-item value="1">I showed sympathy</aa-choice-item>
+      <aa-choice-item value="1">I did not say what I wanted directly</aa-choice-item>
+      <aa-choice-item value="1">I discredited what someone said</aa-choice-item>
+      <aa-choice-item value="1">I asked the other(s) to do something</aa-choice-item>
+      <aa-choice-item value="1">I spoke favorably of someone who was not present
+      </aa-choice-item>
+  </aa-checkboxes>
+</aa-screen>
+</p>
+
+
+And the [``aa-otherwise``](#aa-otherwise) child of [``aa-choose``](#aa-choose) contains the last set of behaviours. We could have just as well used an additional ``<aa-when test="random_choice==4">`` instead.
+We make sure to also use the closing tag ``</aa-choose>`` at the end.
+
+
+<p class="sticktoexample"></p>
+
+```html
+  <aa-otherwise>
+
+      <aa-screen name="behaviours4_screen" submit-button-text="Next">
+          <aa-label>Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
+          <aa-checkboxes name="behaviours4">
+              <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                  'image'</aa-choice-item>
+              <aa-choice-item value="1">I showed impatience</aa-choice-item>
+              <aa-choice-item value="1">I asked for a volunteer</aa-choice-item>
+              <aa-choice-item value="1">I went along with the other(s)</aa-choice-item>
+              <aa-choice-item value="1">I raised my voice</aa-choice-item>
+              <aa-choice-item value="1">I gave information</aa-choice-item>
+              <aa-choice-item value="1">I expressed reassurance</aa-choice-item>
+              <aa-choice-item value="1">I gave in</aa-choice-item>
+              <aa-choice-item value="1">I demanded that the other(s) do what I wanted
+              </aa-choice-item>
+              <aa-choice-item value="1">I set goals for the other(s) or for us</aa-choice-item>
+              <aa-choice-item value="1">I pointed out to the other(s) where there was agreement
+              </aa-choice-item>
+              <aa-choice-item value="1">I spoke only when I was spoken to</aa-choice-item>
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+  </aa-otherwise>
+
+
+</aa-choose>
+```
+
+<p class="myexample">
+
+<aa-screen name="behaviours4_screen" submit-button-text="Next" autohide=false>
+          <aa-label>Did you do any of the following?</aa-label>
+          (Multiple answers are possible)
+          <aa-checkboxes name="behaviours4">
+              <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
+                  'image'</aa-choice-item>
+              <aa-choice-item value="1">I showed impatience</aa-choice-item>
+              <aa-choice-item value="1">I asked for a volunteer</aa-choice-item>
+              <aa-choice-item value="1">I went along with the other(s)</aa-choice-item>
+              <aa-choice-item value="1">I raised my voice</aa-choice-item>
+              <aa-choice-item value="1">I gave information</aa-choice-item>
+              <aa-choice-item value="1">I expressed reassurance</aa-choice-item>
+              <aa-choice-item value="1">I gave in</aa-choice-item>
+              <aa-choice-item value="1">I demanded that the other(s) do what I wanted
+              </aa-choice-item>
+              <aa-choice-item value="1">I set goals for the other(s) or for us</aa-choice-item>
+              <aa-choice-item value="1">I pointed out to the other(s) where there was agreement
+              </aa-choice-item>
+              <aa-choice-item value="1">I spoke only when I was spoken to</aa-choice-item>
+              </aa-choice-item>
+          </aa-checkboxes>
+      </aa-screen>
+</p>
+
+
+## 6. Feelings
+
+The next part of the questionnaire asks participants to rate
+
+
+ <aa-likert-scale name="surprised" items="12" start-item="0"></aa-likert-scale>
 
 
 
-        <aa-when test="random_choice==3">
-            <aa-screen name="behaviours3_screen" submit-button-text="Next">
-                <aa-label> Did you do any of the following?</aa-label>
-                (Multiple answers are possible)
-
-                <aa-checkboxes name="behaviours3">
-                    <aa-choice-item value="1">I waited for the other person(s) to talk or act first
-                    </aa-choice-item>
-                    <aa-choice-item value="1">I stated strongly that I did not like or that I would not
-                        do
-                        something</aa-choice-item>
-                    <aa-choice-item value="1">I assigned someone to a task</aa-choice-item>
-                    <aa-choice-item value="1">I exchanged pleasantries</aa-choice-item>
-                    <aa-choice-item value="1">I did not say what was on my mind</aa-choice-item>
-                    <aa-choice-item value="1">I did not respond to the other(s) questions or comments
-                    </aa-choice-item>
-                    <aa-choice-item value="1">I made a suggestion</aa-choice-item>
-                    <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
-                        'image'</aa-choice-item>
-                    <aa-choice-item value="1">I showed sympathy</aa-choice-item>
-                    <aa-choice-item value="1">I did not say what I wanted directly</aa-choice-item>
-                    <aa-choice-item value="1">I discredited what someone said</aa-choice-item>
-                    <aa-choice-item value="1">I asked the other(s) to do something</aa-choice-item>
-                    <aa-choice-item value="1">I spoke favorably of someone who was not present
-                    </aa-choice-item>
-                </aa-checkboxes>
-            </aa-screen>
-        </aa-when>
-
-        <aa-otherwise>
-
-            <aa-screen name="behaviours4_screen" submit-button-text="Next">
-                <aa-label>Did you do any of the following?</aa-label>
-                (Multiple answers are possible)
-                <aa-checkboxes name="behaviours4">
-                    <aa-choice-item value="1">I expressed the 'real me' instead of my public persona or
-                        'image'</aa-choice-item>
-                    <aa-choice-item value="1">I showed impatience</aa-choice-item>
-                    <aa-choice-item value="1">I asked for a volunteer</aa-choice-item>
-                    <aa-choice-item value="1">I went along with the other(s)</aa-choice-item>
-                    <aa-choice-item value="1">I raised my voice</aa-choice-item>
-                    <aa-choice-item value="1">I gave information</aa-choice-item>
-                    <aa-choice-item value="1">I expressed reassurance</aa-choice-item>
-                    <aa-choice-item value="1">I gave in</aa-choice-item>
-                    <aa-choice-item value="1">I demanded that the other(s) do what I wanted
-                    </aa-choice-item>
-                    <aa-choice-item value="1">I set goals for the other(s) or for us</aa-choice-item>
-                    <aa-choice-item value="1">I pointed out to the other(s) where there was agreement
-                    </aa-choice-item>
-                    <aa-choice-item value="1">I spoke only when I was spoken to</aa-choice-item>
-                    </aa-choice-item>
-                </aa-checkboxes>
-            </aa-screen>
-
-        </aa-otherwise>
-
-
-    </aa-choose>
+```
 
 
     <aa-screen name="feelings">

@@ -505,6 +505,7 @@ html, body {
     background-color: rgba(0,0,0,0.05);
     padding: 3px;
     border-radius: 3px;
+
     @extend %break-words;
     @extend %code-font;
 
@@ -569,8 +570,11 @@ html, body {
 p.myexample{
   background-color: rgba(0,0,0,0.1);
   margin:20px;
-  max-width:740px;
+  margin-top:0px;
+  max-width:720px;
   border-radius:10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius:0px;
   border:solid thin rgba(0,0,0,0.05);
   padding:24px;
 }
@@ -694,7 +698,29 @@ p.myexample{
   max-width:720px;
   border-radius:10px;
   margin:20px;
+  
 }
+
+
+.sticktoexample + .highlight
+ {
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:0px;
+  margin-bottom:0px
+}
+
+.sticktoexample + div.highlight .highlight.html.tab-html
+ {
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:0px;
+
+  margin:0px;
+}
+
+div.highlight .highlight.html.tab-html{
+  margin:0px;
+}
+
 
 .copy-clipboard {
   float: right;
