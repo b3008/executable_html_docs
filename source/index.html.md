@@ -122,7 +122,7 @@ Executable HTML Components help the author of HTML content prescribe the way pie
 
 
 
-## aa-session
+## &lt;aa-session>
 
 
  ``aa-session`` is the container element for the whole ambulatory assessment protocol. It should always have a ``template`` as an immediate child. ``template`` allows the browser to ignore the protocol content, so that ``aa-session`` can parse
@@ -177,7 +177,7 @@ __``sessionReady``__|  Dispatched when ``aa-session`` has finished initializing.
 
 
 
-## aa-sequence
+## &lt;aa-sequence>
 
 
 <!-- ``aa-sequence`` is an element that implements sequential execution. -->
@@ -289,7 +289,7 @@ __``endEvent``__ | Dispatched when `aa-sequence`` has reached the end.
 
 
 
-## aa-jump
+## &lt;aa-jump>
 
 The ``aa-jump`` element is a child of ``aa-sequence``. An author can use it to instruct the sequence to continue its execution from a specific child. 
 
@@ -303,7 +303,7 @@ __``goto``__| ``string`` | The name of the child of the ``aa-sequence`` that wil
 
 
 
-## aa-variable
+## &lt;aa-variable>
 
 ``aa-variable`` allows the html author to declare named variables and assign values to them. Each variable and its value is stored in LocalStorage, and is available to all other aa-elements as well.
 
@@ -341,13 +341,13 @@ __``value``__ | ``string``  ``number``  ``boolean`` | The value that the variabl
 
 
 
-## aa-function- *
+## &lt;aa-function- *>
 
 
 A set of functions allow the author to assign the result of a function to a named variable. For now, only ``aa-function-random`` exists.
 
 
-### aa-function-random
+### &lt;aa-function-random>
 
 ``aa-fuction-random`` generates a random integer between its ``min`` and ``max`` attributes and assigns it to a variable with the name of its ``name`` attribute
 
@@ -385,7 +385,7 @@ __``max``__ | ``number`` | The upper boundary of the random number to be generat
 
 
 
-## aa-choose, aa-when, aa-otherwise
+## &lt;aa-choose>, &lt;aa-when>, &lt;aa-otherwise>
 
 
 ```html
@@ -438,7 +438,7 @@ __``test``__| ``string`` | A conditional statement that is evaluated by the ``aa
 
 
 
-## aa-screen
+## &lt;aa-screen>
 
 
 
@@ -527,7 +527,7 @@ __``valueSubmit``__ |Dispatched when the `aa-screen`` button has been clicked.
 
 
 
-## aa-affect-grid
+## &lt;aa-affect-grid>
 
 
 The Affect Grid is a scale designed as a quick means of assesing affect along two dimensions. Its implementation as ``<aa-affect-grid>`` allows the author to label boundaries along the x and y axes, as well as the number of rows and columns. ``<aa-affect-grid>`` scales to the width of its container.
@@ -617,7 +617,7 @@ __``change``__| Dispatched when a different selection is made in ``aa-affect-gri
 
 
 
-## aa-checkboxes
+## &lt;aa-checkboxes>
 
 __``aa-checkboxes``__ implements a multiple response item, where each available choice is specified as a [``aa-choice-item``](#aa-choice-item).
 
@@ -701,7 +701,7 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 
 
 
-## aa-choice-item
+## &lt;aa-choice-item>
 
 ``<aa-choice-item>`` is an element that implements an available choice for ``<aa-checkboxes>`` and ``<aa-multiple-choice>``. The value corresponding to the chosen item is specified by the ``value`` attribute. If no ``value`` attribute is supplied, the content of the element is taken as its value.
 
@@ -758,7 +758,7 @@ __``value``__| ``any`` | A value that corresponds to choosing this element. If n
 
 
 
-## aa-geolocation
+## &lt;aa-geolocation>
 
 ``<aa-geolocation>`` queries the browser for the user's GPS location. As a result, a permission request might be triggered to access the user's location.
 
@@ -782,7 +782,7 @@ __``value``__| ``any`` | The user's longitude and latitude as provided by the br
 
 
 
-## aa-label
+## &lt;aa-label>
 
 The question the user is answering with the response item is oftentimes called "label". Though it is not necessary for the author to use this element, it is provided as a way to annotate the text that specifically serves this purpose, so an author might write for example:``<aa-label>How do you feel?</aa-label>`` to let others that process the html protocol, know that ``How do you feel`` is a label. It styles its content as bold.
 
@@ -811,7 +811,7 @@ The question the user is answering with the response item is oftentimes called "
 
 
 
-## aa-likert-scale
+## &lt;aa-likert-scale>
 
 ``aa-likert-scale`` is a preconfigured [``aa-multiple-choice``](#aa-multiple-choice) item that implements a n-item rating scale. It also supports labels at start, middle and end, and allows the author to specify the number at which rating starts
 
@@ -883,7 +883,7 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 
 
 
-## aa-multiple-choice
+## &lt;aa-multiple-choice>
 
 __``aa-checkboxes``__ implements a single response item, where each available choice is specified as a [``aa-choice-item``](#aa-choice-item).
 In the following configuration, the text inside each available choice is used as the value that each `aa-choice-item` corresponds to.
@@ -967,7 +967,7 @@ __``change``__ | Dispatched when a selection in the group of choices changes.
 
 
 
-## aa-slider
+## &lt;aa-slider>
 
 ``aa-slider`` implements a Visual Analog Scale (VAS), with labels for minimum and maximum values.
 
@@ -1010,12 +1010,21 @@ __``change``__ | Dispatched when the value of the slider changes.
 
 
 
-## aa-text-answer
+## &lt;aa-text-answer>
+
+
+This is a classic text field. It can take the form of a single line text input or of a text area if the attribute ``long`` is used. Supports several input types
 
 <p class="sticktoexample"></p>
 
 ```html
 <aa-text-answer name="text"></aa-text-answer>
+
+<aa-text-answer long></aa-text-answer>
+
+
+<aa-text-answer type="number"></aa-text-answer>
+
 ```
 
 
@@ -1023,6 +1032,17 @@ __``change``__ | Dispatched when the value of the slider changes.
 <aa-text-answer id="text1"></aa-text-answer>
 <br>
 <b>current value</b> <span id="text1value"></span>
+</p>
+
+<aa-text-answer id="text2" long></aa-text-answer>
+<br>
+<b>current value</b> <span id="text2value"></span>
+</p>
+
+
+<aa-text-answer id="text3" type="number"></aa-text-answer>
+<br>
+<b>current value</b> <span id="text3value"></span>
 </p>
 
 <script>
@@ -1036,7 +1056,10 @@ text1.addEventListener("change", function(){
  attribute | type  |  |
 |--------------|:-------------|:----------------------------------------------------------|
 __``name``__| ``string`` | A name to represent the value generated from the element.
-__``value``__| ``string`` | The contents of the textfield
+__``value``__| ``string`` | The contents of the textfield.
+__``label``__| ``string`` | A text label that can act as a prompt for the user.
+__``long``__| ``boolean`` | Renders a text area, which supports multiple lines of text.
+
 
  event |   |
 |--------------|:-------------|:----------------------------------------------------------|

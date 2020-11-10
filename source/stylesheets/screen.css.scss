@@ -34,6 +34,8 @@ html, body {
   background-color: $main-bg;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
+
+  scroll-behavior: smooth;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -166,7 +168,8 @@ html, body {
   }
 
   .toc-list-h2 {
-    display: none;
+    //removed by nikos
+    // display: none;
     background-color: $nav-subitem-bg;
     font-weight: 500;
   }
@@ -186,7 +189,8 @@ html, body {
   }
   
   .toc-list-h4 {
-    display: none;
+    //removed by nikos
+    // display: none;
     background-color: $nav-subitem-bg;
   }
   
@@ -338,6 +342,7 @@ html, body {
 // This is all the stuff with the light background in the left half of the page
 
 .content {
+  width:100%;
   // fixes webkit rendering bug for some: see #538
   -webkit-transform: translateZ(0);
   // to place content above the dark box
@@ -585,6 +590,7 @@ p.myexample{
 }
 
 .content {
+  
   &>div.highlight {
     clear:none;
   }
@@ -686,6 +692,12 @@ p.myexample{
 
   %right-col + %left-col {
     margin-top: $main-padding;
+  }
+
+  p.myexample{
+    width:auto;
+    margin:20px;
+    margin-top:0px;
   }
 }
 
