@@ -20,7 +20,7 @@
 
 
     <script type="module" src="https://b3008.github.io/executable_HTML/dist/paper-polymer.js"></script>
-    <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script> 
+    <script type="module" src="https://b3008.github.io/executable_HTML/src/index.js"></script>
     <!-- <script type="module" src="http://127.0.0.1:50638/src/index.js"></script> -->
     
     
@@ -337,7 +337,7 @@
                     <a href="#hypertext-markup" class="toc-h2 toc-link" data-title="HyperText Markup">HyperText Markup</a>
                   </li>
                   <li>
-                    <a href="#tags-attributes-elements" class="toc-h2 toc-link" data-title="Tags, Attributes, Elements">Tags, Attributes, Elements</a>
+                    <a href="#tags-attributes-elements-nodes" class="toc-h2 toc-link" data-title="Tags, Attributes, Elements, Nodes">Tags, Attributes, Elements, Nodes</a>
                   </li>
                   <li>
                     <a href="#parents-and-children" class="toc-h2 toc-link" data-title="Parents and Children">Parents and Children</a>
@@ -433,7 +433,19 @@
                   <li>
                     <a href="#6-feelings" class="toc-h2 toc-link" data-title="6. Feelings">6. Feelings</a>
                   </li>
+                  <li>
+                    <a href="#7-perceptions" class="toc-h2 toc-link" data-title="7. Perceptions">7. Perceptions</a>
+                  </li>
+                  <li>
+                    <a href="#8-ending-screen" class="toc-h2 toc-link" data-title="8. Ending screen">8. Ending screen</a>
+                  </li>
               </ul>
+          </li>
+          <li>
+            <a href="#data-submission" class="toc-h1 toc-link" data-title="Data submission">Data submission</a>
+          </li>
+          <li>
+            <a href="#publications-and-source-code" class="toc-h1 toc-link" data-title="Publications and Source Code">Publications and Source Code</a>
           </li>
       </ul>
     </div>
@@ -483,15 +495,25 @@ Wikipedia is <span class="nt">&lt;a</span> <span class="na">href=</span><span cl
 <p>The first line contains a simple mention of a url. The second one contains themarkup <code>&lt;a href=&quot;...&quot;&gt;here&lt;/a&gt;</code> that tells the computer to display the content( the word <code>here</code> ) of that markup (<code>&lt;a&gt;</code>) as a clickable link, that links to the url contained in the attribute <code>href</code>.  <code>a</code> stands for Anchor. An anchor is a piece of text which marks the beginning and/or the end of a hypertext link.</p>
 
 <p>So in this case, the anchor instructs the browser to display what would otherwise be plain text, as a functional element of the interface.</p>
-<h2 id='tags-attributes-elements'>Tags, Attributes, Elements</h2>
+<h2 id='tags-attributes-elements-nodes'>Tags, Attributes, Elements, Nodes</h2>
 <p>In HTML, the annotation syntax is called <strong>HTML tag</strong>, which consists of two parts; an <strong><em>opening tag</em></strong>, e.g., <strong><code>&lt;a&gt;</code></strong>  and a corresponding <strong><em>closing tag</em></strong>, e.g, <strong><code>&lt;/a&gt;</code></strong>. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an <strong>HTML element</strong>. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.</p>
 
 <p>An opening tag can also contain <strong>attributes</strong>. Attributes further define details about the element, e.g. in <code>&lt;a href=&quot;htttp://www.wikipedia.org&gt;here&lt;/a&gt;</code>, the attribute <code>href</code> defines the url, which this anchor element links to.</p>
+
+<p>Any particular instance of an element in a web page, constitutes a <strong>node</strong> on that page. For example:</p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"paragraph1"</span><span class="nt">&gt;</span> this is my first paragraph<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">paragraphi2"</span><span class="nt">&gt;</span> this is my second paragraph<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>
+<p><code>paragraph1</code> and <code>paragraph2</code> are two different nodes of the same element</p>
 <h2 id='parents-and-children'>Parents and Children</h2>
-<!-- #### Further examples
-
-
-__Paragraph ``<p>`` :  ``<> -->
+<p>Nodes in an HTML document might be nested, i.e one node might contain another.</p>
+<div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"paragraph1"</span><span class="nt">&gt;</span> 
+  this is a paragraph that contains a 
+  <span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">"link1"</span> <span class="na">href=</span><span class="s">"http://wikipedia.org"</span><span class="nt">&gt;</span> link to wikipedia<span class="nt">&lt;/a&gt;</span> 
+  and some more text
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>
+<p>In this case, <code>link1</code> is a child of <code>paragraph1</code> and <code>paragraph1</code> is the parent of <code>link1</code></p>
 <h1 id='executable-html-components'>Executable HTML Components</h1>
 <p>Executable HTML Components help the author of HTML content prescribe the way pieces of HTML are inserted into the document, without necessitating the use of JavaScript by the author.</p>
 <h2 id='lt-aa-session-gt'>&lt;aa-session&gt;</h2>
@@ -561,7 +583,7 @@ __Paragraph ``<p>`` :  ``<> -->
 
 <p><code>aa-sequence</code> implements sequential insertion of each of its children into the document. Insertion of the next child can be triggered either by an event, or manually by calling its member method <code>.next()</code>. </p>
 
-<p>This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1 has been inserted in the document, and set a click event listener, that calls the</code>.next()<code>member function of</code>#sequence1``. Pressing the next&quot; button adds content as per the sequence.</p>
+<p>This example illustrates triggering a sequence through a button. We listen for the <code>sessionReady</code> event to make sure <code>#button1</code> has been inserted in the document, and set a click event listener, that calls the <code>.next()</code> member function of <code>#sequence1</code>. Pressing the next&quot; button adds content as per the sequence.</p>
 
 <p class="sticktoexample"></p>
 <div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;aa-session&gt;</span>
@@ -2163,95 +2185,196 @@ We make sure to also use the closing tag <code>&lt;/aa-choose&gt;</code> at the 
       </aa-screen>
 </p>
 <h2 id='6-feelings'>6. Feelings</h2>
-<p>The next part of the questionnaire asks participants to rate</p>
+<p>The next part of the questionnaire asks participants to rate feelings they might have had</p>
 
-<p><aa-likert-scale name="surprised" items="12" start-item="0"></aa-likert-scale></p>
-<div class="highlight"><pre class="highlight plaintext"><code>
+<p class="sticktoexample"></p>
+<div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"feelings"</span> <span class="na">submit-button-text=</span><span class="s">"Next"</span><span class="nt">&gt;</span>
 
-    &lt;aa-screen name="feelings"&gt;
-
-        &lt;div&gt;
-            &lt;aa-label&gt; How did you feel?&lt;/aa-label&gt;
+        <span class="nt">&lt;div&gt;</span>
+            <span class="nt">&lt;aa-label&gt;</span> How did you feel?<span class="nt">&lt;/aa-label&gt;</span>
             (0 = Not at all, 6 = Extremely)
-        &lt;/div&gt;
+        <span class="nt">&lt;/div&gt;</span>
 
 
-        &lt;aa-label&gt; Surprised&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="surprised" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Surprised<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"surprised"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Worried/anxious&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="worried" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Worried/anxious<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"worried"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Happy&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="happy" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Happy<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"happy"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Frustrated&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="frustrated" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Frustrated<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"frustrated"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Pleased&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="pleased" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Pleased<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"pleased"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Angry/hostile&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="angry" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Angry/hostile<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"angry"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Homesick&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="homesick" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Homesick<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"homesick"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-        &lt;aa-label&gt; Enjoyment/fun&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="enjoyment" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-
-        &lt;aa-label&gt; Joyful&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="joyful" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Depressed/blue&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="depressed" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Energized &lt;/aa-label&gt;
-        &lt;aa-likert-scale name="energized" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Ashamed &lt;/aa-label&gt;
-        &lt;aa-likert-scale name="ashamed" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Safe&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="Safe" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Lonely&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="lonely" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-        &lt;aa-label&gt; Disgusted by the other(s)&lt;/aa-label&gt;
-        &lt;aa-likert-scale name="disgusted" items="7" start-item="0"&gt;&lt;/aa-likert-scale&gt;
-
-    &lt;/aa-screen&gt;
-
-    &lt;aa-choose&gt;
-        &lt;aa-when test="others_present!=3"&gt;
-            &lt;aa-screen name="perceptions"&gt;
-                &lt;div&gt;
-                    &lt;aa-label&gt; Indicate how the (primary) other behaved towards you in this interaction
-                    &lt;/aa-label&gt;
-                &lt;/div&gt;
-                &lt;aa-affect-grid style="margin-top:40px" top-left-label="Critical"
-                    top-label="Assured/Dominant" top-right-label="Engaging"
-                    left-label="Cold/Quarrelsome" right-label="Warm/Aggreeable"
-                    bottom-left-label="Withdrawn" bottom-label="Unassured/Submissive"
-                    bottom-right-label="Deferring" rows=11 columns=11&gt;
-                &lt;/aa-affect-grid&gt;
-            &lt;/aa-screen&gt;
-        &lt;/aa-when&gt;
-    &lt;/aa-choose&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Enjoyment/fun<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"enjoyment"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
 
-    &lt;aa-screen submit-button-hidden="true" name="ending"&gt;
-        &lt;h3&gt;Thank you!&lt;/h3&gt;
-        You can now close this window.
-    &lt;/aa-screen&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Joyful<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"joyful"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-&lt;/aa-sequence&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Depressed/blue<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"depressed"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-&lt;/template&gt;&lt;/aa-session&gt;
+        <span class="nt">&lt;aa-label&gt;</span> Energized <span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"energized"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
 
-</code></pre></div><!-- # Errors
+        <span class="nt">&lt;aa-label&gt;</span> Ashamed <span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"ashamed"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
+
+        <span class="nt">&lt;aa-label&gt;</span> Safe<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"Safe"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
+
+        <span class="nt">&lt;aa-label&gt;</span> Lonely<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"lonely"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
+
+        <span class="nt">&lt;aa-label&gt;</span> Disgusted by the other(s)<span class="nt">&lt;/aa-label&gt;</span>
+        <span class="nt">&lt;aa-likert-scale</span> <span class="na">name=</span><span class="s">"disgusted"</span> <span class="na">items=</span><span class="s">"7"</span> <span class="na">start-item=</span><span class="s">"0"</span><span class="nt">&gt;&lt;/aa-likert-scale&gt;</span>
+
+    <span class="nt">&lt;/aa-screen&gt;</span>
+</code></pre></div>
+<p class="myexample">
+
+   <aa-screen name="feelings" submit-button-text="Next">
+
+  
+  <aa-label> How did you feel?</aa-label>
+  (0 = Not at all, 6 = Extremely)
+
+
+
+  <aa-label> Surprised</aa-label>
+  <aa-likert-scale name="surprised" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Worried/anxious</aa-label>
+  <aa-likert-scale name="worried" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Happy</aa-label>
+  <aa-likert-scale name="happy" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Frustrated</aa-label>
+  <aa-likert-scale name="frustrated" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Pleased</aa-label>
+  <aa-likert-scale name="pleased" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Angry/hostile</aa-label>
+  <aa-likert-scale name="angry" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Homesick</aa-label>
+  <aa-likert-scale name="homesick" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Enjoyment/fun</aa-label>
+  <aa-likert-scale name="enjoyment" items="7" start-item="0"></aa-likert-scale>
+
+
+  <aa-label> Joyful</aa-label>
+  <aa-likert-scale name="joyful" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Depressed/blue</aa-label>
+  <aa-likert-scale name="depressed" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Energized </aa-label>
+  <aa-likert-scale name="energized" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Ashamed </aa-label>
+  <aa-likert-scale name="ashamed" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Safe</aa-label>
+  <aa-likert-scale name="Safe" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Lonely</aa-label>
+  <aa-likert-scale name="lonely" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Disgusted by the other(s)</aa-label>
+  <aa-likert-scale name="disgusted" items="7" start-item="0"></aa-likert-scale>
+
+</aa-screen>
+
+
+</p>
+<h2 id='7-perceptions'>7. Perceptions</h2>
+<p>If others were reported present, the participant is asked to indicate how they perceived their behaviour
+on an affect grid.</p>
+
+<p class="sticktoexample"></p> 
+<div class="highlight"><pre class="highlight html tab-html"><code>    <span class="nt">&lt;aa-choose&gt;</span>
+        <span class="nt">&lt;aa-when</span> <span class="na">test=</span><span class="s">"others_present!=3"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;aa-screen</span> <span class="na">name=</span><span class="s">"perceptions"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div&gt;</span>
+                    <span class="nt">&lt;aa-label&gt;</span> 
+                      Indicate how the (primary) other behaved towards you 
+                      in this interaction
+                    <span class="nt">&lt;/aa-label&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;aa-affect-grid</span> <span class="na">style=</span><span class="s">"margin-top:40px"</span> <span class="na">top-left-label=</span><span class="s">"Critical"</span>
+                    <span class="na">top-label=</span><span class="s">"Assured/Dominant"</span> <span class="na">top-right-label=</span><span class="s">"Engaging"</span>
+                    <span class="na">left-label=</span><span class="s">"Cold/Quarrelsome"</span> <span class="na">right-label=</span><span class="s">"Warm/Aggreeable"</span>
+                    <span class="na">bottom-left-label=</span><span class="s">"Withdrawn"</span> <span class="na">bottom-label=</span><span class="s">"Unassured/Submissive"</span>
+                    <span class="na">bottom-right-label=</span><span class="s">"Deferring"</span> <span class="na">rows=</span><span class="s">11</span> <span class="na">columns=</span><span class="s">11</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;/aa-affect-grid&gt;</span>
+            <span class="nt">&lt;/aa-screen&gt;</span>
+        <span class="nt">&lt;/aa-when&gt;</span>
+    <span class="nt">&lt;/aa-choose&gt;</span>
+</code></pre></div>
+<p class="myexample">
+   <aa-screen name="perceptions">
+   
+   
+ <aa-label> Indicate how the (primary) other behaved towards you in this interaction
+ </aa-label>
+
+
+  <aa-affect-grid style="margin-top:40px" top-left-label="Critical"
+      top-label="Assured/Dominant" top-right-label="Engaging"
+      left-label="Cold/Quarrelsome" right-label="Warm/Aggreeable"
+      bottom-left-label="Withdrawn" bottom-label="Unassured/Submissive"
+      bottom-right-label="Deferring" rows=11 columns=11>
+  </aa-affect-grid>
+
+
+   </aa-screen>
+</p>
+<h2 id='8-ending-screen'>8. Ending screen</h2>
+<p>The questionnaire has reached its end, so we inform the participant with a final screen.</p>
+
+<p class="sticktoexample"></p> 
+<div class="highlight"><pre class="highlight html tab-html"><code>  <span class="nt">&lt;aa-screen</span> <span class="na">submit-button-hidden=</span><span class="s">"true"</span> <span class="na">name=</span><span class="s">"ending"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;h3&gt;</span>Thank you!<span class="nt">&lt;/h3&gt;</span>
+     You can now close this window.
+  <span class="nt">&lt;/aa-screen&gt;</span>
+</code></pre></div>
+<p class="myexample">
+  
+  <aa-screen submit-button-hidden="true" name="ending">
+     Thank you!
+     You can now close this window.
+  </aa-screen>
+
+  
+</p>
+
+<p style="height:50px"></p>
+<h1 id='data-submission'>Data submission</h1>
+<p>So far, in the examples above whe&#39;ve been able to see what types of data are created by various components. But how can those be submitted eventually to a place of storage?</p>
+
+<p>More to be written here.</p>
+<h1 id='publications-and-source-code'>Publications and Source Code</h1>
+<p>A publication detailing the rationale for the construction of these compoenents can be found at <a href="https://link.springer.com/article/10.3758/s13428-018-1148-y">Behavior Research Methods</a></p>
+
+<p>The source code is open and can be found at <a href="https://github.com/b3008/executable_HTML">github</a></p>
+<!-- # Errors
 
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.

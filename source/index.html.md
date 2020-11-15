@@ -20,7 +20,6 @@ code_clipboard: true
 
 
 
-
 <br><br>
 Welcome to the Ambulatory Assessment Components Reference! 
 
@@ -82,21 +81,39 @@ So in this case, the anchor instructs the browser to display what would otherwis
 
 
 
-## Tags, Attributes, Elements
+## Tags, Attributes, Elements, Nodes
 
 In HTML, the annotation syntax is called __HTML tag__, which consists of two parts; an __*opening tag*__, e.g., __``<a>``__  and a corresponding __*closing tag*__, e.g, __``</a>``__. The part of the text that consists of an opening tag, its corresponding closing tag, and the contents inbetween is called an __HTML element__. The HTML tag marks the start and end of the HTML element. The text inbetween  the start and end tag is the content. As such, sometimes an element is referred to as a container.
 
 An opening tag can also contain __attributes__. Attributes further define details about the element, e.g. in ``<a href="htttp://www.wikipedia.org>here</a>``, the attribute ``href`` defines the url, which this anchor element links to.
 
+Any particular instance of an element in a web page, constitutes a __node__ on that page. For example:
+
+
+
+
+```html
+<p id="paragraph1"> this is my first paragraph</p>
+<p id=paragraphi2"> this is my second paragraph</p>
+```
+
+``paragraph1`` and ``paragraph2`` are two different nodes of the same element
 
 
 ## Parents and Children
 
+Nodes in an HTML document might be nested, i.e one node might contain another.
 
-<!-- #### Further examples
+```html
+<p id="paragraph1"> 
+  this is a paragraph that contains a 
+  <a id="link1" href="http://wikipedia.org"> link to wikipedia</a> 
+  and some more text
+</p>
+```
 
+In this case, ``link1`` is a child of ``paragraph1`` and ``paragraph1`` is the parent of ``link1``
 
-__Paragraph ``<p>`` :  ``<> -->
 
 
 # Executable HTML Components
@@ -184,7 +201,7 @@ __``sessionReady``__|  Dispatched when ``aa-session`` has finished initializing.
 
 ``aa-sequence`` implements sequential insertion of each of its children into the document. Insertion of the next child can be triggered either by an event, or manually by calling its member method ``.next()``. 
 
-This example illustrates triggering a sequence through a button. We listen for the ``sessionReady`` event to make sure ``#button1 has been inserted in the document, and set a click event listener, that calls the ``.next()`` member function of ``#sequence1``. Pressing the next" button adds content as per the sequence.
+This example illustrates triggering a sequence through a button. We listen for the ``sessionReady`` event to make sure ``#button1`` has been inserted in the document, and set a click event listener, that calls the ``.next()`` member function of ``#sequence1``. Pressing the next" button adds content as per the sequence.
 
 
 
@@ -1817,17 +1834,15 @@ We make sure to also use the closing tag ``</aa-choose>`` at the end.
 
 ## 6. Feelings
 
-The next part of the questionnaire asks participants to rate
+The next part of the questionnaire asks participants to rate feelings they might have had
 
 
- <aa-likert-scale name="surprised" items="12" start-item="0"></aa-likert-scale>
+ 
 
+<p class="sticktoexample"></p>
 
-
-```
-
-
-    <aa-screen name="feelings">
+```html
+    <aa-screen name="feelings" submit-button-text="Next">
 
         <div>
             <aa-label> How did you feel?</aa-label>
@@ -1882,12 +1897,87 @@ The next part of the questionnaire asks participants to rate
         <aa-likert-scale name="disgusted" items="7" start-item="0"></aa-likert-scale>
 
     </aa-screen>
+```
 
+<p class="myexample">
+
+   <aa-screen name="feelings" submit-button-text="Next">
+
+  
+  <aa-label> How did you feel?</aa-label>
+  (0 = Not at all, 6 = Extremely)
+
+
+
+  <aa-label> Surprised</aa-label>
+  <aa-likert-scale name="surprised" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Worried/anxious</aa-label>
+  <aa-likert-scale name="worried" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Happy</aa-label>
+  <aa-likert-scale name="happy" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Frustrated</aa-label>
+  <aa-likert-scale name="frustrated" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Pleased</aa-label>
+  <aa-likert-scale name="pleased" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Angry/hostile</aa-label>
+  <aa-likert-scale name="angry" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Homesick</aa-label>
+  <aa-likert-scale name="homesick" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Enjoyment/fun</aa-label>
+  <aa-likert-scale name="enjoyment" items="7" start-item="0"></aa-likert-scale>
+
+
+  <aa-label> Joyful</aa-label>
+  <aa-likert-scale name="joyful" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Depressed/blue</aa-label>
+  <aa-likert-scale name="depressed" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Energized </aa-label>
+  <aa-likert-scale name="energized" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Ashamed </aa-label>
+  <aa-likert-scale name="ashamed" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Safe</aa-label>
+  <aa-likert-scale name="Safe" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Lonely</aa-label>
+  <aa-likert-scale name="lonely" items="7" start-item="0"></aa-likert-scale>
+
+  <aa-label> Disgusted by the other(s)</aa-label>
+  <aa-likert-scale name="disgusted" items="7" start-item="0"></aa-likert-scale>
+
+</aa-screen>
+
+
+</p>
+
+
+
+## 7. Perceptions
+
+If others were reported present, the participant is asked to indicate how they perceived their behaviour
+on an affect grid.
+
+
+<p class="sticktoexample"></p> 
+
+```html
     <aa-choose>
         <aa-when test="others_present!=3">
             <aa-screen name="perceptions">
                 <div>
-                    <aa-label> Indicate how the (primary) other behaved towards you in this interaction
+                    <aa-label> 
+                      Indicate how the (primary) other behaved towards you 
+                      in this interaction
                     </aa-label>
                 </div>
                 <aa-affect-grid style="margin-top:40px" top-left-label="Critical"
@@ -1899,15 +1989,65 @@ The next part of the questionnaire asks participants to rate
             </aa-screen>
         </aa-when>
     </aa-choose>
-
-
-    <aa-screen submit-button-hidden="true" name="ending">
-        <h3>Thank you!</h3>
-        You can now close this window.
-    </aa-screen>
-
-</aa-sequence>
-
-</template></aa-session>
-
 ```
+
+<p class="myexample">
+   <aa-screen name="perceptions">
+   
+   
+ <aa-label> Indicate how the (primary) other behaved towards you in this interaction
+ </aa-label>
+
+
+  <aa-affect-grid style="margin-top:40px" top-left-label="Critical"
+      top-label="Assured/Dominant" top-right-label="Engaging"
+      left-label="Cold/Quarrelsome" right-label="Warm/Aggreeable"
+      bottom-left-label="Withdrawn" bottom-label="Unassured/Submissive"
+      bottom-right-label="Deferring" rows=11 columns=11>
+  </aa-affect-grid>
+
+
+   </aa-screen>
+</p>
+
+
+
+## 8. Ending screen
+
+The questionnaire has reached its end, so we inform the participant with a final screen.
+
+<p class="sticktoexample"></p> 
+
+```html
+  <aa-screen submit-button-hidden="true" name="ending">
+     <h3>Thank you!</h3>
+     You can now close this window.
+  </aa-screen>
+```
+<p class="myexample">
+  
+  <aa-screen submit-button-hidden="true" name="ending">
+     Thank you!
+     You can now close this window.
+  </aa-screen>
+
+  
+</p>
+
+<p style="height:50px"></p>
+
+
+
+# Data submission
+
+So far, in the examples above whe've been able to see what types of data are created by various components. But how can those be submitted eventually to a place of storage?
+
+More to be written here.
+
+
+# Publications and Source Code
+
+A publication detailing the rationale for the construction of these compoenents can be found at [Behavior Research Methods](https://link.springer.com/article/10.3758/s13428-018-1148-y)
+
+The source code is open and can be found at [github](https://github.com/b3008/executable_HTML)
+
